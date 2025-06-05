@@ -1,21 +1,26 @@
+from dao.clientes import Cliente, Clientes
+
 class View:
 
     #==== Classe Cliente ====
     @staticmethod
     def cliente_listar():
-        pass
+        return Clientes.listar()
 
     @staticmethod
-    def cliente_inserir():
-        pass
+    def cliente_inserir(id, nome, email, fone):
+        x = Cliente(id, nome, email, fone)
+        Clientes.inserir(x)
 
     @staticmethod
-    def cliente_atualizar():
-        pass
+    def cliente_atualizar(id, nome, email, fone):
+        x = Cliente(id, nome, email, fone)
+        Clientes.atualizar(x)
 
     @staticmethod
-    def cliente_excluir():
-        pass
+    def cliente_excluir(id):
+        x = Clientes.listar_id(id)
+        Clientes.excluir(x)
 
     #===== Classe Produto ======
     @staticmethod

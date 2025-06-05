@@ -3,6 +3,7 @@ from dao.produtos import Produtos, Produto
 from dao.categorias import Categorias, Categoria
 from dao.vendas import Vendas, Venda
 from dao.vendaitems import VendaItems, VendaItem
+from views import View
 
 class UI:
     carrinho = None
@@ -88,36 +89,38 @@ class UI:
 
             else: print("Opção inválida!")
 
-    #======CRUD Cliente======
+    #====== CRUD Cliente ======
     @staticmethod
     def cliente_listar():
         print()
-        clientes = Clientes.listar()
-        for c in clientes:
-            print(c)
+        for c in View.cliente.listar(): print(c)
+            
         
     @staticmethod
     def cliente_inserir():
+        print()
         nome = input("Digite o nome do cliente:")
         email = input("Digite o email do cliente:")
         fone = input("Digite o telefone do cliente:")
-        x = Cliente(0,nome,email,fone)
-        Clientes.inserir(x)
+        View.cliente_inserir(0,nome,email,fone)
+       
 
     @staticmethod
     def cliente_atualizar():
+        print()
         id = int(input("Digite o ID o cliente que deseja atualizar: "))
         nome = input("Informe o novo nome: ")
         email = input("Informe o novo e-mail: ")
         fone = input("Informe o novo fone: ")        
-        x = Cliente(id, nome, email, fone)
-        Clientes.atualizar(x)
+        View.cliente_atualizar(id, nome, email, fone)
+      
 
     @staticmethod
     def cliente_excluir():
+        print()
         id = int(input("Digite o ID o cliente que deseja excluir: "))
-        x = Clientes.listar_id(id)
-        Clientes.excluir(x)
+        View.cliente_excluir(id)
+       
 
     #====== CRUD Produto======
 
