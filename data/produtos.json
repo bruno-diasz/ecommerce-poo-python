@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "desc": "Iphone 15",
+        "preco": 4000.0,
+        "estoque": 4,
+        "categoriaID": 0
+    },
+    {
+        "id": 2,
+        "desc": "Samsung S26",
+        "preco": 2300.0,
+        "estoque": 10,
+        "categoriaID": 0
+    }
+]
