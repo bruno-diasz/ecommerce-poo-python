@@ -99,7 +99,7 @@ class UI:
         nome = input("Digite o nome do cliente:")
         email = input("Digite o email do cliente:")
         fone = input("Digite o telefone do cliente:")
-        View.cliente_inserir(0,nome,email,fone)
+        View.cliente_inserir(nome,email,fone)
        
     @staticmethod
     def cliente_atualizar():
@@ -130,7 +130,7 @@ class UI:
         desc = input("Digite a descrição do produto:")
         preco = float(input("Digite o preço do produto:"))
         estoq = int(input("Digite a quantidade em estoque:"))
-        View.produto_inserir(0, desc, preco, estoq)
+        View.produto_inserir(desc, preco, estoq)
         
     @staticmethod
     def produto_atualizar():
@@ -159,7 +159,7 @@ class UI:
     @staticmethod
     def categoria_inserir():
         desc = input("Digite a descrição do produto:")
-        View.categoria_inserir(0, desc)
+        View.categoria_inserir(desc)
 
     @staticmethod
     def categoria_atualizar():
