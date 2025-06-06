@@ -1,30 +1,44 @@
 [
     {
         "id": 1,
-        "qtd": 2,
-        "preco": 8000.0,
-        "idVenda": 1,
+        "qtd": 1,
+        "preco": 4000.0,
+        "idVenda": 7,
         "idProduto": 1
     },
     {
         "id": 2,
-        "qtd": 5,
-        "preco": 11500.0,
-        "idVenda": 1,
+        "qtd": 1,
+        "preco": 2300.0,
+        "idVenda": 7,
         "idProduto": 2
     },
     {
         "id": 3,
-        "qtd": 6,
-        "preco": 24000.0,
-        "idVenda": 2,
+        "qtd": 1,
+        "preco": 4000.0,
+        "idVenda": 9,
         "idProduto": 1
     },
     {
         "id": 4,
         "qtd": 1,
         "preco": 4000.0,
-        "idVenda": 3,
+        "idVenda": 11,
+        "idProduto": 1
+    },
+    {
+        "id": 5,
+        "qtd": 1,
+        "preco": 4000.0,
+        "idVenda": 12,
+        "idProduto": 1
+    },
+    {
+        "id": 6,
+        "qtd": 4,
+        "preco": 16000.0,
+        "idVenda": 13,
         "idProduto": 1
     }
 ]
