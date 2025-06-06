@@ -1,89 +1,99 @@
 from views import View
+from getpass import getpass
 
 class UI:
     carrinho = None
+    usr = None
 
-    @staticmethod
-    def menu() -> int:
-        print("\n#================ LOGIN =================#")
-        print("Selecione o tipo de login: \n")
-        print("1. Admin | 2. Cliente | 9. Sair")
-        usr = input("\n- Digite o número da opção desejada: ")
+    @classmethod
+    def menu(cls) -> int:
+        
+        if cls.usr is None: #O usuario está deslogado!
+            usr_op = "1"
+
+            print("\n#================ MENU VISITANTE =================#")
+            print("Bem vindo: \n")
+            print("1. Entrar | 2. Criar conta | 9. Encerrar")
+            op = usr_op + input("\n- Digite o número da opção desejada: ") 
+
             
-        if usr == "1":
+            return int(op)
+
+            
+        if cls.usr.email == "admin": #O Usuario é o adm!
+            usr_op = "2"
+
             print("\n#================== MENU ADMIN ===================#")
             print("Selecione o item que quer editar\n")
             print("1. Cliente | 2. Produto | 3. Categoria | 9. Sair\n")
-            op = usr+input("- Digite o número da opção desejada: ")
+            op = usr_op + input("- Digite o número da opção desejada: ") 
 
-            if op == "11":
+            if op == "21":
                 print("\n#====================== CLIENTE ======================#")
-                print("Selecione uma das opções:\n")
-                print("1. Listar    | 2. Inserir | 3. Atualizar | 4. Excluir\n")
+                print(f"Selecione uma das opções abaixo:\n")
+                print("1. Listar | 2. Inserir | 3. Atualizar | 4. Excluir\n")
                 op += input("- Digite o número da opção desejada: ")
 
-            elif op == "12":
+            elif op == "22":
                 print("\n#====================== PRODUTO ======================#")
-                print("Selecione uma das opções:\n")
-                print("1. Listar    | 2. Inserir | 3. Atualizar | 4. Excluir\n")
+                print("Selecione uma das opções abaixo:\n")
+                print("1. Listar | 2. Inserir | 3. Atualizar | 4. Excluir\n")
                 op += input("- Digite o número da opção desejada: ")
 
-            elif op == "13":
+            elif op == "23":
                 print("\n#===================== CATEGORIA =====================#")
-                print("Selecione uma das opções:\n")
-                print("1. Listar    | 2. Inserir | 3. Atualizar | 4. Excluir\n")
+                print("Selecione uma das opções abaixo:\n")
+                print("1. Listar | 2. Inserir | 3. Atualizar | 4. Excluir\n")
                 op += input("- Digite o número da opção desejada: ")
 
-            
-
-            elif op =="19":
-                return 9
 
             return int(op)
         
-        elif usr == "2":
+        else:# está logado, e não é o adm
+            usr_op = "3"
+
             print("\n#======================== MENU CLIENTE ========================#")
-            print("Selecione o item que quer editar\n")
+            print(f"Oi, {cls.usr.nome}! Que bom te ver por aqui 😄\n")
             print("1. Iniciar carrinho de compras | 2. Listar as compras")
             print("3. Listar carrinho de compras  | 4. Inserir produto no carrinho")
             print("5. Confirmar compra            | 9. Sair\n")
 
-            op = usr+input("- Digite o número da opção desejada: ")
-            if op == "29":
-                return 9
+            op = usr_op + input("- Digite o número da opção desejada: ")
 
             return int(op)
         
-        elif usr =="9":
-            return 9
+        
         
     @staticmethod
     def main():
         while True:
             op = UI.menu()
+            
+            if op == 11: UI.cliente_autenticar()
+            elif op== 29 or op == 39: UI.cliente_logout()
 
-            if op == 111: UI.cliente_listar()
-            elif op == 112: UI.cliente_inserir()
-            elif op == 113: UI.cliente_atualizar()
-            elif op == 114: UI.cliente_excluir()
+            elif op == 12 or op == 212 : UI.cliente_inserir(op)
+            elif op == 211: UI.cliente_listar()
+            elif op == 213: UI.cliente_atualizar()
+            elif op == 214: UI.cliente_excluir()
 
-            elif op == 121: UI.produto_listar()
-            elif op == 122: UI.produto_inserir()
-            elif op == 123: UI.produto_atualizar()
-            elif op == 124: UI.produto_excluir()
+            elif op == 221: UI.produto_listar()
+            elif op == 222: UI.produto_inserir()
+            elif op == 223: UI.produto_atualizar()
+            elif op == 224: UI.produto_excluir()
 
-            elif op == 131: UI.categoria_listar()
-            elif op == 132: UI.categoria_inserir()
-            elif op == 133: UI.categoria_atualizar()
-            elif op == 134: UI.categoria_excluir()
+            elif op == 231: UI.categoria_listar()
+            elif op == 232: UI.categoria_inserir()
+            elif op == 233: UI.categoria_atualizar()
+            elif op == 234: UI.categoria_excluir()
 
-            elif op == 21: UI.venda_iniciar()
-            elif op == 22: UI.venda_listar()
-            elif op == 23: UI.venda_listar_carrinho()
-            elif op == 24: UI.venda_inserir_item()
-            elif op == 25: UI.venda_confirmar()
+            elif op == 31: UI.venda_iniciar()
+            elif op == 32: UI.venda_listar()
+            elif op == 33: UI.venda_listar_carrinho()
+            elif op == 34: UI.venda_inserir_item()
+            elif op == 35: UI.venda_confirmar()
 
-            elif op == 9 : print("\nSistema Encerrado!!! Até Mais🤙️"); break
+            elif op == 19 : print("\nSistema Encerrado!!! Até Mais🤙️"); break
 
             else: print("Opção inválida!")
 
@@ -94,12 +104,20 @@ class UI:
         for c in View.cliente_listar(): print(c)
             
     @staticmethod
-    def cliente_inserir():
+    def cliente_inserir(op):
         print()
-        nome = input("Digite o nome do cliente:")
-        email = input("Digite o email do cliente:")
-        fone = input("Digite o telefone do cliente:")
-        View.cliente_inserir(nome,email,fone)
+        if op == 12:
+            nome = input("Digite seu nome: ")
+            email = input("Digite seu email: ")
+            fone = input("Digite seu telefone: ")
+            senha = getpass("Digite sua senha: ")
+        if op == 212:
+            nome = input("Digite o nome do cliente: ")
+            email = input("Digite o email do cliente: ")
+            fone = input("Digite o telefone do cliente: ")
+            senha = getpass("Digite a senha do cliente: ")
+        
+        View.cliente_inserir(nome,email,fone,senha)
        
     @staticmethod
     def cliente_atualizar():
@@ -108,14 +126,32 @@ class UI:
         nome = input("Informe o novo nome: ")
         email = input("Informe o novo e-mail: ")
         fone = input("Informe o novo fone: ")        
-        View.cliente_atualizar(id, nome, email, fone)
+        senha = getpass("Digite a senha: ")
+
+        View.cliente_atualizar(id,nome,email,fone,senha)
       
     @staticmethod
     def cliente_excluir():
         print()
         id = int(input("Digite o ID o cliente que deseja excluir: "))
         View.cliente_excluir(id)
-       
+    
+    @classmethod
+    def cliente_autenticar(cls):
+        print()
+        email = input("Digite seu email: ")
+        senha = getpass("Digite sua senha: ")
+        usr = View.cliente_autenticar(email, senha)
+        if usr is None:
+            print("\n*** Credenciais inválidas! ❌️")
+        else:
+            print("\n*** Login efetuado com sucesso! ✅️")
+            cls.usr = usr
+
+    @classmethod
+    def cliente_logout(cls):
+        cls.usr = None
+        print("\n*** Logout efetuado com sucesso! ✅️")
 
     #====== CRUD Produto======
 

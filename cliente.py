@@ -1,10 +1,10 @@
 class Cliente:
-    def __init__(self, id:int, nome:str, email:str, fone:str):
+    def __init__(self, id:int, nome:str, email:str, fone:str, senha:str):
         self.id = id #Chamando setter
         self.nome = nome #Chamando setter
         self.email= email #Chamando setter
         self.fone = fone #Chamando setter
-
+        self.senha = senha #Chamando setter
     #Getters e setters
     @property
     def id(self) -> int:
@@ -45,9 +45,20 @@ class Cliente:
              raise TypeError("O fone de ser uma string")
         self.__fone = valor
 
+    @property
+    def senha(self) -> str:
+        return self.__senha
+    
+    @senha.setter 
+    def senha(self, senha:str):
+        tamanho = len(senha) 
+        if tamanho < 4:
+            raise ValueError("A senha deve ter pelo menos 4 caracteres")
+        self.__senha = senha
+
     #Metodos da instancia
     def __str__(self):
         return f"{self.id}. {self.nome} - {self.email} - {self.fone}"
     
     def to_dict(self):
-        return {"id":self.id, "nome":self.nome, "email":self.email, "fone":self.fone}
+        return {"id":self.id, "nome":self.nome, "email":self.email, "fone":self.fone, "senha":self.senha}

@@ -8,8 +8,8 @@ class View:
 
     #==== Classe Clientes ====
     @staticmethod
-    def cliente_inserir(nome:str, email:str, fone:str) -> None: #Create
-        x = Cliente(0, nome, email, fone)
+    def cliente_inserir(nome:str, email:str, fone:str, senha:str) -> None: #Create
+        x = Cliente(0, nome, email, fone, senha)
         Clientes.inserir(x)
 
     @staticmethod
@@ -25,6 +25,12 @@ class View:
     def cliente_excluir(id:int) -> None: #Delete
         x = Clientes.listar_id(id)
         Clientes.excluir(x)
+
+    def cliente_autenticar(email:str, senha:str)-> Cliente: 
+        clientes = Clientes.listar()
+        for c in clientes:
+            if c.email == email and c.senha == senha:
+                return c
 
     #===== Classe Produtos ======
     @staticmethod
