@@ -176,7 +176,7 @@ class UI:
     #======= Venda==========
     @classmethod
     def venda_iniciar(cls):
-        cls.carrinho = View.venda_iniciar(0)
+        cls.carrinho = View.venda_iniciar()
         print("\n*** Carrinho de compras iniciado com sucesso! ✅️")
         
     @classmethod    
