@@ -98,13 +98,9 @@ class UI:
             else: print("Opção inválida!")
 
     #====== CRUD Cliente ======
+
     @staticmethod
-    def cliente_listar():
-        print()
-        for c in View.cliente_listar(): print(c)
-            
-    @staticmethod
-    def cliente_inserir(op):
+    def cliente_inserir(op): #Create
         print()
         if op == 12:
             nome = input("Digite seu nome: ")
@@ -118,26 +114,30 @@ class UI:
             senha = getpass("Digite a senha do cliente: ")
         
         View.cliente_inserir(nome,email,fone,senha)
-       
+            
     @staticmethod
-    def cliente_atualizar():
+    def cliente_listar(): #Read
+        print()
+        for c in View.cliente_listar(): print(c)
+   
+    @staticmethod
+    def cliente_atualizar(): #Update
         print()
         id = int(input("Digite o ID o cliente que deseja atualizar: "))
         nome = input("Informe o novo nome: ")
         email = input("Informe o novo e-mail: ")
         fone = input("Informe o novo fone: ")        
         senha = getpass("Digite a senha: ")
-
         View.cliente_atualizar(id,nome,email,fone,senha)
       
     @staticmethod
-    def cliente_excluir():
+    def cliente_excluir(): #Delete
         print()
         id = int(input("Digite o ID o cliente que deseja excluir: "))
         View.cliente_excluir(id)
     
     @classmethod
-    def cliente_autenticar(cls):
+    def cliente_autenticar(cls): #Login
         print()
         email = input("Digite seu email: ")
         senha = getpass("Digite sua senha: ")
@@ -149,27 +149,27 @@ class UI:
             cls.usr = usr
 
     @classmethod
-    def cliente_logout(cls):
+    def cliente_logout(cls): #Logout
         cls.usr = None
         print("\n*** Logout efetuado com sucesso! ✅️")
 
     #====== CRUD Produto======
 
     @staticmethod
-    def produto_listar():
-        print()
-        for c in View.produto_listar():
-            print(c)
-        
-    @staticmethod
-    def produto_inserir():
+    def produto_inserir(): #Create
         desc = input("Digite a descrição do produto:")
         preco = float(input("Digite o preço do produto:"))
         estoq = int(input("Digite a quantidade em estoque:"))
         View.produto_inserir(desc, preco, estoq)
         
     @staticmethod
-    def produto_atualizar():
+    def produto_listar(): #Read
+        print()
+        for c in View.produto_listar():
+            print(c)
+        
+    @staticmethod
+    def produto_atualizar(): #Update
         id = int(input("Digite o ID do produto que deseja atualizar: "))
         desc = input("Digite a nova descrição:")
         preco = float(input("Digite o novo preço: "))
@@ -178,7 +178,7 @@ class UI:
         
 
     @staticmethod
-    def produto_excluir():
+    def produto_excluir(): #Delete
         id = int(input("Digite o ID do produto que deseja excluir: "))
         View.produto_excluir(id)
         
@@ -186,26 +186,25 @@ class UI:
     #====== CRUD Categoria======
 
     @staticmethod
-    def categoria_listar():
+    def categoria_inserir(): #Create
+        desc = input("Digite a descrição do produto:")
+        View.categoria_inserir(desc)
+        
+    @staticmethod
+    def categoria_listar(): #Read
         print()
         for c in View.categoria_listar():
             print(c)
-        
 
     @staticmethod
-    def categoria_inserir():
-        desc = input("Digite a descrição do produto:")
-        View.categoria_inserir(desc)
-
-    @staticmethod
-    def categoria_atualizar():
+    def categoria_atualizar(): #Update
         id = int(input("Digite o ID da categoria que deseja atualizar: "))
         desc = input("Digite a nova descrição:")
         View.categoria_atualizar(id, desc)
         
 
     @staticmethod
-    def categoria_excluir():
+    def categoria_excluir(): #Delete
         id = int(input("Digite o ID da categoria que deseja excluir: "))
         View.categoria_excluir(id)
 
@@ -247,7 +246,7 @@ class UI:
             print()
 
     @classmethod
-    def venda_listar_carrinho(cls):
+    def venda_listar_carrinho(cls): 
         if cls.carrinho is None: #Verificando se tem carrinho
             print("\n*** Você ainda não tem carrinho ⚠️")
             return
@@ -260,7 +259,7 @@ class UI:
                 print("    ",i)
 
     @classmethod
-    def venda_confirmar(cls):
+    def venda_confirmar(cls): 
         if cls.carrinho is None: #Verificando se tem carrinho
             print("\n*** Você ainda não tem carrinho ⚠️")
             return
