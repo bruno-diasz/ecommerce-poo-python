@@ -26,11 +26,18 @@ class View:
         x = Clientes.listar_id(id)
         Clientes.excluir(x)
 
+    @staticmethod
     def cliente_autenticar(email:str, senha:str)-> Cliente: 
-        clientes = Clientes.listar()
-        for c in clientes:
+        for c in Clientes.listar():
             if c.email == email and c.senha == senha:
                 return c
+    
+    @staticmethod
+    def admin_criar():
+        for cliente in Clientes.listar():
+            if cliente.email == "admin" : return
+        View.cliente_inserir("admin", "admin", "#","admin")    
+
 
     #===== Classe Produtos ======
     @staticmethod
@@ -51,6 +58,12 @@ class View:
     def produto_excluir(id:int) -> None: #Delete
         x = Produtos.listar_id(id)
         Produtos.excluir(x)
+
+    @staticmethod
+    def produto_reajuste(percentual:float)-> None:
+        for p in Produtos.listar():
+            p.preco += percentual/100*p.preco
+            Produtos.atualizar(p)
 
 
     #===== Classe Categorias ======
@@ -79,6 +92,8 @@ class View:
     def venda_listar() -> list[Venda]:
         return Vendas.listar()
     
+    
+    
 
     
     #===== Classe VendasItem =====
@@ -88,9 +103,10 @@ class View:
     
     #===== Venda Operações ======
     @staticmethod
-    def venda_iniciar() -> Venda:
+    def venda_iniciar(idCliente:int) -> Venda:
 
         x =  Venda(0) #Cria um carrinho
+        x.idCliente = idCliente
         Vendas.inserir(x) #Joga na lista
         return x #Retorna um carrinho para por no contexto
 
@@ -124,3 +140,9 @@ class View:
         carrinho.carrinho = False #Finaliza o carrinho
         Vendas.atualizar(carrinho) #Joga na memoria
         return None #Retorna vazio para aplicar novamente no carrinho
+
+    @staticmethod
+    def carregar_carrinho(clienteid) -> Venda:
+       for carrinho in Vendas.listar():
+           if carrinho.idCliente == clienteid and carrinho.carrinho: #Verifica se a venda é do cleinte e se a venda está no carrinho
+               return carrinho

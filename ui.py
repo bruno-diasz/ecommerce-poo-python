@@ -7,6 +7,7 @@ class UI:
 
     @classmethod
     def menu(cls) -> int:
+       
         
         if cls.usr is None: #O usuario está deslogado!
             usr_op = "1"
@@ -25,7 +26,7 @@ class UI:
 
             print("\n#================== MENU ADMIN ===================#")
             print("Selecione o item que quer editar\n")
-            print("1. Cliente | 2. Produto | 3. Categoria | 9. Sair\n")
+            print("1. Cliente | 2. Produto | 3. Categoria | 4. Pedidos | 9. Sair\n")
             op = usr_op + input("- Digite o número da opção desejada: ") 
 
             if op == "21":
@@ -37,13 +38,20 @@ class UI:
             elif op == "22":
                 print("\n#====================== PRODUTO ======================#")
                 print("Selecione uma das opções abaixo:\n")
-                print("1. Listar | 2. Inserir | 3. Atualizar | 4. Excluir\n")
+                print("1. Listar | 2. Inserir | 3. Atualizar | 4. Excluir")
+                print("5. Reajustar preço\n")
                 op += input("- Digite o número da opção desejada: ")
 
             elif op == "23":
                 print("\n#===================== CATEGORIA =====================#")
                 print("Selecione uma das opções abaixo:\n")
                 print("1. Listar | 2. Inserir | 3. Atualizar | 4. Excluir\n")
+                op += input("- Digite o número da opção desejada: ")
+
+            elif op == "24":
+                print("\n#===================== PEDIDOS =====================#")
+                print("Selecione uma das opções abaixo:\n")
+                print("1. Ver todas as compras\n")
                 op += input("- Digite o número da opção desejada: ")
 
 
@@ -67,6 +75,7 @@ class UI:
     @staticmethod
     def main():
         while True:
+            View.admin_criar()
             op = UI.menu()
             
             if op == 11: UI.cliente_autenticar()
@@ -81,14 +90,17 @@ class UI:
             elif op == 222: UI.produto_inserir()
             elif op == 223: UI.produto_atualizar()
             elif op == 224: UI.produto_excluir()
+            elif op == 225: UI.produto_reajuste()
 
             elif op == 231: UI.categoria_listar()
             elif op == 232: UI.categoria_inserir()
             elif op == 233: UI.categoria_atualizar()
             elif op == 234: UI.categoria_excluir()
 
+            elif op == 241: UI.venda_listar()
+
             elif op == 31: UI.venda_iniciar()
-            elif op == 32: UI.venda_listar()
+            elif op == 32: UI.venda_listar_usr()
             elif op == 33: UI.venda_listar_carrinho()
             elif op == 34: UI.venda_inserir_item()
             elif op == 35: UI.venda_confirmar()
@@ -147,6 +159,7 @@ class UI:
         else:
             print("\n*** Login efetuado com sucesso! ✅️")
             cls.usr = usr
+            cls.carrinho = View.carregar_carrinho(usr.id)
 
     @classmethod
     def cliente_logout(cls): #Logout
@@ -181,6 +194,11 @@ class UI:
     def produto_excluir(): #Delete
         id = int(input("Digite o ID do produto que deseja excluir: "))
         View.produto_excluir(id)
+
+    @staticmethod
+    def produto_reajuste():
+        percentual = float(input("Digite o percentual de reajuste: "))
+        View.produto_reajuste(percentual)
         
 
     #====== CRUD Categoria======
@@ -211,7 +229,7 @@ class UI:
     #======= Venda==========
     @classmethod
     def venda_iniciar(cls):
-        cls.carrinho = View.venda_iniciar()
+        cls.carrinho = View.venda_iniciar(cls.usr.id)
         print("\n*** Carrinho de compras iniciado com sucesso! ✅️")
         
     @classmethod    
@@ -244,6 +262,19 @@ class UI:
                 if i.idVenda == v.id:
                     print("    ",i)
             print()
+
+    @classmethod
+    def venda_listar_usr(cls):
+        print()
+        vendas = View.venda_listar()
+        items = View.vendaitem_listar()
+        for v in vendas:
+            if v.idCliente == cls.usr.id and not v.carrinho:
+                print(v)
+                for i in items:
+                    if i.idVenda == v.id:
+                        print("    ",i)
+                print()
 
     @classmethod
     def venda_listar_carrinho(cls): 

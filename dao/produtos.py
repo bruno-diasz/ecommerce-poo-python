@@ -48,14 +48,14 @@ class Produtos:
         lista_produtos = []
         for obj in cls.objetos:
             lista_produtos.append(obj.to_dict())
-        with open("comercio/data/produtos.json", mode="w") as arquivo:
+        with open("data/produtos.json", mode="w") as arquivo:
             json.dump(lista_produtos , arquivo, indent=4)
 
     @classmethod
     def abrir(cls):
         try:
             cls.objetos = []    
-            with open("comercio/data/produtos.json", mode="r") as arquivo:
+            with open("data/produtos.json", mode="r") as arquivo:
                 clientes_json = json.load(arquivo)
                 for obj in clientes_json:
                     c = Produto(obj["id"], obj["desc"], obj["preco"],obj["estoque"] )
