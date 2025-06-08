@@ -27,9 +27,9 @@ class VendaItem:
     @preco.setter
     def preco(self, valor:float):
         if not isinstance(valor, (float,int)):
-            raise TypeError("O valor o preco deve ser um número")
+            raise TypeError("O  preco deve ser um número")
         if valor < 0:
-            raise ValueError("O valor deve ser maior ou igual a zero")
+            raise ValueError("O preço deve ser maior ou igual a zero")
         self.__preco= valor
 
     @property

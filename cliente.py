@@ -34,6 +34,8 @@ class Cliente:
     def email(self, valor):
         if not isinstance(valor, str):
              raise TypeError("O email de ser uma string")
+        if "@" not in valor and valor != "admin":
+            raise ValueError("Formato de email inválido!")
         self.__email = valor
 
     @property
@@ -51,9 +53,8 @@ class Cliente:
     
     @senha.setter 
     def senha(self, senha:str):
-        tamanho = len(senha) 
-        if tamanho < 4:
-            raise ValueError("A senha deve ter pelo menos 4 caracteres")
+        if not isinstance(senha, str):
+            raise TypeError("O fone de ser uma string")
         self.__senha = senha
 
     #Metodos da instancia

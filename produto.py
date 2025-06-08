@@ -34,9 +34,9 @@ class Produto:
     @preco.setter
     def preco(self, valor:float):
         if not isinstance(valor, (float,int)):
-            raise TypeError("O valor o preco deve ser um número")
+            raise TypeError("O preco deve ser um número")
         if valor < 0:
-            raise ValueError("O valor deve ser maior ou igual a zero")
+            raise ValueError("O preco deve ser maior ou igual a zero")
         self.__preco= valor
 
     @property
@@ -64,7 +64,7 @@ class Produto:
 
     #Metodos
     def __str__(self):
-        
+
         return f"{self.id}. {self.descricao:<15}R$ {self.preco} - Estoque:{self.estoque} - categoriaID:{self.idCategoria} "
     
     def to_dict(self):

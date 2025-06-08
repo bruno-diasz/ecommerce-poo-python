@@ -9,15 +9,22 @@
     {
         "id": 2,
         "nome": "bruno",
-        "email": "bruno",
+        "email": "bruno@email.com",
+        "fone": "12345",
+        "senha": "12345"
+    },
+    {
+        "id": 3,
+        "nome": "",
+        "email": "teste@email.com",
         "fone": "12345",
         "senha": "1234"
     },
     {
-        "id": 3,
-        "nome": "paulo",
-        "email": "paulo",
-        "fone": "1293478",
+        "id": 4,
+        "nome": "bruno",
+        "email": "bruno@",
+        "fone": "1234",
         "senha": "1234"
     }
 ]

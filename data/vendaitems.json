@@ -2,57 +2,15 @@
     {
         "id": 1,
         "qtd": 1,
-        "preco": 650,
+        "preco": 792.0,
         "idVenda": 1,
-        "idProduto": 2
+        "idProduto": 1
     },
     {
         "id": 2,
         "qtd": 1,
-        "preco": 400,
-        "idVenda": 1,
-        "idProduto": 3
-    },
-    {
-        "id": 3,
-        "qtd": 1,
-        "preco": 800,
-        "idVenda": 2,
+        "preco": 792.0,
+        "idVenda": 6,
         "idProduto": 1
-    },
-    {
-        "id": 4,
-        "qtd": 1,
-        "preco": 800,
-        "idVenda": 3,
-        "idProduto": 1
-    },
-    {
-        "id": 5,
-        "qtd": 1,
-        "preco": 650,
-        "idVenda": 3,
-        "idProduto": 2
-    },
-    {
-        "id": 6,
-        "qtd": 2,
-        "preco": 1600,
-        "idVenda": 4,
-        "idProduto": 1
-    },
-    {
-        "id": 7,
-        "qtd": 5,
-        "preco": 3250,
-        "idVenda": 5,
-        "idProduto": 2
-    },
-    {
-        "id": 8,
-        "qtd": 1,
-        "preco": 400,
-        "idVenda": 4,
-        "idProduto": 3
     }
 ]

@@ -9,6 +9,21 @@ class View:
     #==== Classe Clientes ====
     @staticmethod
     def cliente_inserir(nome:str, email:str, fone:str, senha:str) -> None: #Create
+        #Regras email
+        if email == '':
+            raise ValueError("O email é obrigatório!")
+        for c in Clientes.listar():
+            if c.email == email:
+                raise ValueError("O email já está em uso!")
+            
+        #Regras senha
+        tamanho = len(senha) 
+        if tamanho < 4:
+            raise ValueError("A senha deve ter pelo menos 4 caracteres")
+        if senha == '':
+            raise ValueError("O senha é obrigatório!")
+       
+        #Criação e adição do objeto
         x = Cliente(0, nome, email, fone, senha)
         Clientes.inserir(x)
 
@@ -17,26 +32,42 @@ class View:
         return Clientes.listar()
 
     @staticmethod
-    def cliente_atualizar(id:int, nome:str, email:str, fone:str) -> None:  #Update
-        x = Cliente(id, nome, email, fone)
+    def cliente_atualizar(id:int, nome:str, email:str, fone:str, senha:str) -> None:  #Update
+        c = Clientes.listar_id(id)
+
+        #Regra de atualização
+        if c is None:
+            raise ValueError("Id de cliente não encontrado")
+        
+        x = Cliente(id, nome, email, fone, senha)
         Clientes.atualizar(x)
+        
 
     @staticmethod
     def cliente_excluir(id:int) -> None: #Delete
         x = Clientes.listar_id(id)
-        Clientes.excluir(x)
 
+        #Regra de exclusão
+        if x is None:
+            raise ValueError("Id de cliente não encontrado")
+        
+        Clientes.excluir(x)
+        
     @staticmethod
     def cliente_autenticar(email:str, senha:str)-> Cliente: 
         for c in Clientes.listar():
             if c.email == email and c.senha == senha:
                 return c
+        
+        raise ValueError("Credenciais inválidas!")
     
     @staticmethod
     def admin_criar():
         for cliente in Clientes.listar():
             if cliente.email == "admin" : return
-        View.cliente_inserir("admin", "admin", "#","admin")    
+        View.cliente_inserir("#", "admin", "#","admin")    
+     
+
 
 
     #===== Classe Produtos ======
@@ -50,14 +81,21 @@ class View:
         return Produtos.listar()
 
     @staticmethod
-    def produto_atualizar(id:int, desc:str, preco:float, estoq:int) -> None : #Update
+    def produto_atualizar(id:int, desc:str, preco:float, estoq:int) -> None: #Update
         x = Produto(id,desc,preco,estoq)
+        c = Produtos.listar_id(id)
+        if c is None:
+            raise ValueError("Produto não encontrado")
         Produtos.atualizar(x)
+       
 
     @staticmethod
     def produto_excluir(id:int) -> None: #Delete
         x = Produtos.listar_id(id)
+        if x is None:
+            raise ValueError("Produto não encontrado")
         Produtos.excluir(x)
+        
 
     @staticmethod
     def produto_reajuste(percentual:float)-> None:
@@ -79,13 +117,20 @@ class View:
     @staticmethod
     def categoria_atualizar(id:int, desc:str) -> None: #Update
         x = Categoria(id,desc)
+        c = Categorias.listar_id(id)
+        if c is None:
+            raise ValueError("Categoria não encontrado")
         Categorias.atualizar(x)
-
+        
+#Produto encontrado
     @staticmethod
     def categoria_excluir(id:int) -> None: #Delete
         x = Categorias.listar_id(id)
+        if x is None:
+            raise ValueError("Categoria não encontrado")
         Categorias.excluir(x)
-
+        
+#Produto encontrado
 
     #===== Classe Vendas =====
     @staticmethod
@@ -104,7 +149,9 @@ class View:
     #===== Venda Operações ======
     @staticmethod
     def venda_iniciar(idCliente:int) -> Venda:
-
+        for carrinho in Vendas.listar():
+           if carrinho.idCliente == idCliente and carrinho.carrinho: #Verifica se a venda é do cliente e se a venda está no carrinho
+               raise ValueError("Você ja tem um carrinho iniciado!")
         x =  Venda(0) #Cria um carrinho
         x.idCliente = idCliente
         Vendas.inserir(x) #Joga na lista
@@ -112,8 +159,12 @@ class View:
 
     @staticmethod
     def venda_inserir_item(item_id:int, qtd:int, id_carrinho:int) -> None:
-
+        
         item = Produtos.listar_id(item_id) #Pegando o produto da lista de produtos
+        if item is None:
+            raise ValueError("Id do produto não encontrado")
+        if qtd > item.estoque:
+            raise ValueError("Estoque insuficiente para compra")
         preco = item.preco*qtd #Escolhendo o preço
         venda = VendaItem(0,qtd,preco) #Montando o item de venda
         carrinho = Vendas.listar_id(id_carrinho) #Pegando o carrinho
@@ -125,6 +176,22 @@ class View:
 
         carrinho.total += preco #Adicionando valor ao total no carrinho
         Vendas.atualizar(carrinho)#SAlvando valor na persistencia
+
+    @staticmethod
+    def venda_excluir_item(item_id:int, qtd:int):
+        if qtd < 0:
+            raise ValueError("A quantidade não pode ser negativa")
+        if Produtos.listar_id(item_id) is None:
+            raise ValueError("O id do produto não foi encontrada")
+        for v in VendaItems.listar():
+            Vendas.listar_id(v.idVenda)
+            if v.idProduto == item_id :
+                
+                if v.qtd - qtd <= 0:
+                    VendaItems.excluir(v)
+                else:
+                    VendaItems.atualizar(v)
+        
 
     @staticmethod
     def venda_confirmar(carrinho_id:int) -> None:
@@ -144,5 +211,5 @@ class View:
     @staticmethod
     def carregar_carrinho(clienteid) -> Venda:
        for carrinho in Vendas.listar():
-           if carrinho.idCliente == clienteid and carrinho.carrinho: #Verifica se a venda é do cleinte e se a venda está no carrinho
+           if carrinho.idCliente == clienteid and carrinho.carrinho: #Verifica se a venda é do cliente e se a venda está no carrinho
                return carrinho

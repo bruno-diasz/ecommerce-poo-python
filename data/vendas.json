@@ -1,37 +1,58 @@
 [
     {
         "id": 1,
-        "data": "07/06/2025 14:38:43",
+        "data": "08/06/2025 15:56:54",
         "carrinho": false,
-        "total": 1050,
-        "idCliente": 3
+        "total": 792.0,
+        "idCliente": 4
     },
     {
         "id": 2,
-        "data": "07/06/2025 14:39:46",
+        "data": "08/06/2025 15:57:21",
         "carrinho": false,
-        "total": 800,
-        "idCliente": 3
+        "total": 0,
+        "idCliente": 4
     },
     {
         "id": 3,
-        "data": "07/06/2025 14:42:06",
+        "data": "08/06/2025 16:01:39",
         "carrinho": false,
-        "total": 1450,
-        "idCliente": 2
-    },
-    {
-        "id": 5,
-        "data": "07/06/2025 15:17:35",
-        "carrinho": true,
-        "total": 3250,
-        "idCliente": 3
+        "total": 0,
+        "idCliente": 4
     },
     {
         "id": 4,
-        "data": "07/06/2025 15:16:13",
+        "data": "08/06/2025 16:03:23",
         "carrinho": false,
-        "total": 2000,
-        "idCliente": 2
+        "total": 0,
+        "idCliente": 4
+    },
+    {
+        "id": 5,
+        "data": "08/06/2025 16:04:37",
+        "carrinho": false,
+        "total": 0,
+        "idCliente": 4
+    },
+    {
+        "id": 6,
+        "data": "08/06/2025 16:11:21",
+        "carrinho": false,
+        "total": 792.0,
+        "idCliente": 4
+    },
+    {
+        "id": 7,
+        "data": "08/06/2025 16:34:23",
+        "carrinho": false,
+        "total": 0,
+        "idCliente": 4
+    },
+    {
+        "id": 8,
+        "data": "08/06/2025 16:34:53",
+        "carrinho": false,
+        "total": 0,
+        "idCliente": 4
     }
 ]
