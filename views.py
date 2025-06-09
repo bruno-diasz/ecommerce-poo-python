@@ -165,11 +165,13 @@ class View:
         #Verificação de erros
         if item is None:
             raise ValueError("Id do produto não encontrado")
+        if qtd < 0:
+            raise ValueError("A quantidade não pode ser negativa")
         if qtd > item.estoque:
             raise ValueError("Estoque insuficiente para compra")
         
         carrinho = Vendas.listar_id(id_carrinho) #Pegando o carrinho
-        preco = item.preco*qtd #Calculando o preço
+        preco = item.preco*qtd #Calculando o preço do vendaitem
 
         
         #Verifica se o item ja está no carrinho caso esteja ele não cria um itemvenda novo so acrescenta
@@ -196,19 +198,31 @@ class View:
         Vendas.atualizar(carrinho)#SAlvando valor na persistencia
 
     @staticmethod
-    def venda_excluir_item(item_id:int, qtd:int):
+    def venda_excluir_item(item_id:int, qtd:int, id_carrinho:int) -> None:
+
+        item = Produtos.listar_id(item_id) #Pegando o produto da lista de produtos
+        carrinho = Vendas.listar_id(id_carrinho) #Pegando o carrinho
+        preco = item.preco*qtd #Calculando o preço do vendaitem
+
+        if item is None:
+            raise ValueError("Id do produto não encontrado")
         if qtd < 0:
             raise ValueError("A quantidade não pode ser negativa")
-        if Produtos.listar_id(item_id) is None:
-            raise ValueError("O id do produto não foi encontrada")
-        for v in VendaItems.listar():
-            Vendas.listar_id(v.idVenda)
-            if v.idProduto == item_id :
-                
-                if v.qtd - qtd <= 0:
-                    VendaItems.excluir(v)
-                else:
-                    VendaItems.atualizar(v)
+        
+
+        for i in VendaItems.listar():
+            if i.idProduto == item_id and i.idVenda == id_carrinho:
+                if i.qtd < qtd:
+                    raise ValueError(f"Produtos insuficiente no carrinho") #Verifica se tem o item em estoque
+                i.qtd -= qtd
+                i.preco -= preco #Adiciona o valor ao itemvenda
+                VendaItems.atualizar(i)#Atualiza o itemvenda na persistencia 
+
+                carrinho.total -= preco #Adicionando valor ao total no carrinho
+                Vendas.atualizar(carrinho)#SAlvando valor na persistencia
+                return
+            
+        
 
         #Metodo não concluido
         

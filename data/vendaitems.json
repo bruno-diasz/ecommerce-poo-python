@@ -5,5 +5,12 @@
         "preco": 3960.0,
         "idVenda": 1,
         "idProduto": 1
+    },
+    {
+        "id": 2,
+        "qtd": 0,
+        "preco": 0.0,
+        "idVenda": 2,
+        "idProduto": 2
     }
 ]

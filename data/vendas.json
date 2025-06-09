@@ -10,7 +10,7 @@
         "id": 2,
         "data": "09/06/2025 11:17:49",
         "carrinho": true,
-        "total": 0,
+        "total": 0.0,
         "idCliente": 2
     }
 ]

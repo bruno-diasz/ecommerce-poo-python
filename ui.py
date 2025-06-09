@@ -64,7 +64,8 @@ class UI:
             print(f"Oi, {cls.usr.nome}! Que bom te ver por aqui 😄\n")
             print("1. Iniciar carrinho de compras | 2. Listar as compras")
             print("3. Listar carrinho de compras  | 4. Inserir produto no carrinho")
-            print("5. Confirmar compra            | 9. Sair\n")
+            print("5. Excluir produto do carrinho | 6. Confirmar compra ")
+            print("9. Sair\n")
 
             op = usr_op + input("- Digite o número da opção desejada: ")
 
@@ -103,7 +104,8 @@ class UI:
             elif op == 32: UI.venda_listar_usr()
             elif op == 33: UI.venda_listar_carrinho()
             elif op == 34: UI.venda_inserir_item()
-            elif op == 35: UI.venda_confirmar()
+            elif op == 35: UI.venda_excluir_item()
+            elif op == 36: UI.venda_confirmar()
 
             elif op == 19 : print("\nSistema Encerrado!!! Até Mais🤙️"); break
 
@@ -180,7 +182,6 @@ class UI:
             email = input("Digite seu email: ")
             senha = getpass("Digite sua senha: ")
             usr = View.cliente_autenticar(email, senha)
-            print (usr)
 
         except ValueError as e:
             print(f"\n*** {e}! ⚠️")
@@ -350,13 +351,15 @@ class UI:
             print(f"\n*** Produto adicionado com sucesso! ✅️***")
             UI.venda_inserir_item() #Repetindo novamente a operação novamente
             
-    @staticmethod
-    def venda_excluir_item():
-        UI.venda_listar_usr()
+    @classmethod
+    def venda_excluir_item(cls):
+        UI.venda_listar_carrinho()
+        print()
+        UI.produto_listar()
         try:
             itemid = input("Digite o id do produto que deseja remover do carrinho: ")
             qtd = input("Digite a quantidade que deseja remover: ")
-            View.venda_excluir_item(itemid, qtd)
+            View.venda_excluir_item(itemid, qtd,cls.carrinho.id)
         except ValueError as e:
             print(f"\n*** {e} ⚠️")
         else:
@@ -414,7 +417,7 @@ class UI:
 
         except ValueError as e:
             print(f"\n*** {e} ⚠️")
-            
+
         else:
             print("\n*** Compra efetuado com sucesso! ✅️")
 

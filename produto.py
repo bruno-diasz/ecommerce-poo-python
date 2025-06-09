@@ -64,7 +64,6 @@ class Produto:
 
     #Metodos
     def __str__(self):
-
         return f"{self.id}. {self.descricao:<15}R$ {self.preco} - Estoque:{self.estoque} - categoriaID:{self.idCategoria} "
     
     def to_dict(self):
