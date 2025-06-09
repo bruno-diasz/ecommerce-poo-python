@@ -409,9 +409,14 @@ class UI:
             return
         
         print()
-    
-        cls.carrinho = View.venda_confirmar(cls.carrinho.id)
-        print("\n*** Compra efetuado com sucesso! ✅️")
+        try:
+            cls.carrinho = View.venda_confirmar(cls.carrinho.id)
+
+        except ValueError as e:
+            print(f"\n*** {e} ⚠️")
+            
+        else:
+            print("\n*** Compra efetuado com sucesso! ✅️")
 
 UI.main()
 

@@ -3,14 +3,14 @@
         "id": 1,
         "desc": "Iphone 15",
         "preco": 792.0,
-        "estoque": 7,
+        "estoque": 0,
         "categoriaID": 0
     },
     {
         "id": 2,
         "desc": "Samsung S26",
         "preco": 643.5,
-        "estoque": 25,
+        "estoque": 24,
         "categoriaID": 0
     },
     {

@@ -161,14 +161,32 @@ class View:
     def venda_inserir_item(item_id:int, qtd:int, id_carrinho:int) -> None:
         
         item = Produtos.listar_id(item_id) #Pegando o produto da lista de produtos
+
+        #Verificação de erros
         if item is None:
             raise ValueError("Id do produto não encontrado")
         if qtd > item.estoque:
             raise ValueError("Estoque insuficiente para compra")
-        preco = item.preco*qtd #Escolhendo o preço
-        venda = VendaItem(0,qtd,preco) #Montando o item de venda
+        
         carrinho = Vendas.listar_id(id_carrinho) #Pegando o carrinho
+        preco = item.preco*qtd #Calculando o preço
 
+        
+        #Verifica se o item ja está no carrinho caso esteja ele não cria um itemvenda novo so acrescenta
+        for i in VendaItems.listar():
+            if i.idProduto == item_id and i.idVenda == id_carrinho:
+                if qtd + i.qtd > item.estoque:
+                    raise ValueError(f"Estoque insuficiente para compra do {item.descricao}") #Verifica se tem o item em estoque
+                i.qtd += qtd
+                i.preco += preco #Adiciona o valor ao itemvenda
+                VendaItems.atualizar(i)#Atualiza o itemvenda na persistencia 
+
+                carrinho.total += preco #Adicionando valor ao total no carrinho
+                Vendas.atualizar(carrinho)#SAlvando valor na persistencia
+                return
+
+        #Caso contrario Adiciona um novo item
+        venda = VendaItem(0,qtd,preco) #Montando o item de venda
         venda.idProduto = item.id #Associando itemvenda ao produto
         venda.idVenda = carrinho.id #Associando ao carrinho
 
@@ -191,6 +209,8 @@ class View:
                     VendaItems.excluir(v)
                 else:
                     VendaItems.atualizar(v)
+
+        #Metodo não concluido
         
 
     @staticmethod
@@ -198,6 +218,14 @@ class View:
         items = VendaItems.listar() #Listando items
         carrinho = Vendas.listar_id(carrinho_id) #Pegando carrinho pelo id
 
+        #Verifica compra completa antes de remover do estoque: Para o caso do produto estar no carrinho mas alguem ter comprado o produto
+        for i in items:
+            if carrinho_id == i.idVenda: #Verifica se o item pertence aquela compra
+                prod = Produtos.listar_id(i.idProduto) #Pega o produto a partir do item venda
+                if prod.estoque - i.qtd < 0:
+                    raise ValueError(f"Estoque insuficiente para compra do {prod.descricao}")
+
+        #Sai removendo todas as compras do estoque
         for i in items:
             if carrinho_id == i.idVenda: #Verifica se o item pertence aquela compra
                 prod = Produtos.listar_id(i.idProduto) #Pega o produto a partir do item venda

@@ -26,5 +26,12 @@
         "email": "bruno@",
         "fone": "1234",
         "senha": "1234"
+    },
+    {
+        "id": 5,
+        "nome": "Xiquinho",
+        "email": "xi@",
+        "fone": "1234",
+        "senha": "pintinho"
     }
 ]
