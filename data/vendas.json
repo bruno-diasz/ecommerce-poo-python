@@ -9,8 +9,15 @@
     {
         "id": 2,
         "data": "09/06/2025 11:17:49",
-        "carrinho": true,
+        "carrinho": false,
         "total": 0.0,
+        "idCliente": 2
+    },
+    {
+        "id": 3,
+        "data": "09/06/2025 18:11:34",
+        "carrinho": true,
+        "total": 792.0,
         "idCliente": 2
     }
 ]

@@ -17,8 +17,11 @@ class UI:
             print("1. Entrar | 2. Criar conta | 9. Encerrar")
             op = usr_op + input("\n- Digite o número da opção desejada: ") 
 
-            
-            return int(op)
+            try:    
+                return int(op)
+            except:
+                print("*** A opção deve ser um numero! ⚠️")
+                UI.menu()
 
             
         if cls.usr.email == "admin": #O Usuario é o adm!
@@ -55,14 +58,18 @@ class UI:
                 op += input("- Digite o número da opção desejada: ")
 
 
-            return int(op)
+            try:    
+                return int(op)
+            except:
+                print("*** A opção deve ser um numero! ⚠️")
+                UI.menu()
         
         else:# está logado, e não é o adm
             usr_op = "3"
 
             print("\n#======================== MENU CLIENTE ========================#")
             print(f"Oi, {cls.usr.nome}! Que bom te ver por aqui 😄\n")
-            print("1. Iniciar carrinho de compras | 2. Listar as compras")
+            print("1. Iniciar carrinho de compras | 2. Listar as compras concluidas")
             print("3. Listar carrinho de compras  | 4. Inserir produto no carrinho")
             print("5. Excluir produto do carrinho | 6. Confirmar compra ")
             print("9. Sair\n")
@@ -353,12 +360,17 @@ class UI:
             
     @classmethod
     def venda_excluir_item(cls):
+        if cls.carrinho is None: #Verificando se tem carrinho
+            print("\n*** Para inserir um produto é necessario iniciar um carrinho! ⚠️")
+            return
+        
         UI.venda_listar_carrinho()
-        print()
-        UI.produto_listar()
+        print("\nLista de IDS:")
+        for p in View.produto_listar():
+            print(f"ID: {p.id} - {p.descricao}")
         try:
-            itemid = input("Digite o id do produto que deseja remover do carrinho: ")
-            qtd = input("Digite a quantidade que deseja remover: ")
+            itemid = int(input("\nDigite o id do produto que deseja remover do carrinho: "))
+            qtd = int(input("Digite a quantidade que deseja remover: "))
             View.venda_excluir_item(itemid, qtd,cls.carrinho.id)
         except ValueError as e:
             print(f"\n*** {e} ⚠️")
@@ -381,9 +393,9 @@ class UI:
 
     @classmethod
     def venda_listar_usr(cls):
-        print()
         vendas = View.venda_listar()
         items = View.vendaitem_listar()
+        print("\nCompras Concluidas: ")
         for v in vendas:
             if v.idCliente == cls.usr.id and not v.carrinho:
                 print(v)
@@ -397,9 +409,9 @@ class UI:
         if cls.carrinho is None: #Verificando se tem carrinho
             print("\n*** Você ainda não tem carrinho ⚠️")
             return
-        print()
 
         items = View.vendaitem_listar()
+        print("\nCarrinho: ")
         print(cls.carrinho)
         for i in items:
             if i.idVenda == cls.carrinho.id:

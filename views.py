@@ -202,25 +202,31 @@ class View:
 
         item = Produtos.listar_id(item_id) #Pegando o produto da lista de produtos
         carrinho = Vendas.listar_id(id_carrinho) #Pegando o carrinho
-        preco = item.preco*qtd #Calculando o preço do vendaitem
 
         if item is None:
             raise ValueError("Id do produto não encontrado")
         if qtd < 0:
             raise ValueError("A quantidade não pode ser negativa")
         
+        preco = item.preco*qtd #Calculando o preço do vendaitem
 
         for i in VendaItems.listar():
             if i.idProduto == item_id and i.idVenda == id_carrinho:
                 if i.qtd < qtd:
-                    raise ValueError(f"Produtos insuficiente no carrinho") #Verifica se tem o item em estoque
+                    raise ValueError(f"Você está tentando remover mais itens do que há no carrinho.") #Verifica se tem o item em estoque
                 i.qtd -= qtd
                 i.preco -= preco #Adiciona o valor ao itemvenda
-                VendaItems.atualizar(i)#Atualiza o itemvenda na persistencia 
+
+                if i.qtd <= 0:
+                    VendaItems.excluir(i) #Se tiver menos que 1 remove o item
+                else:
+                    VendaItems.atualizar(i)#Atualiza o itemvenda na persistencia 
 
                 carrinho.total -= preco #Adicionando valor ao total no carrinho
                 Vendas.atualizar(carrinho)#SAlvando valor na persistencia
                 return
+            else:
+                raise ValueError("Id do produto não encontrado no carrinho")
             
         
 
