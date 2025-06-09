@@ -15,8 +15,8 @@
     },
     {
         "id": 3,
-        "qtd": 2,
-        "preco": 792.0,
+        "qtd": 1,
+        "preco": 396.0,
         "idVenda": 3,
         "idProduto": 3
     }

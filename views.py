@@ -17,11 +17,11 @@ class View:
                 raise ValueError("O email já está em uso!")
             
         #Regras senha
+        if senha == '':
+            raise ValueError("O senha é obrigatório!")
         tamanho = len(senha) 
         if tamanho < 4:
             raise ValueError("A senha deve ter pelo menos 4 caracteres")
-        if senha == '':
-            raise ValueError("O senha é obrigatório!")
        
         #Criação e adição do objeto
         x = Cliente(0, nome, email, fone, senha)
@@ -103,6 +103,8 @@ class View:
             p.preco += percentual/100*p.preco
             Produtos.atualizar(p)
 
+    
+
 
     #===== Classe Categorias ======
     @staticmethod
@@ -122,15 +124,15 @@ class View:
             raise ValueError("Categoria não encontrado")
         Categorias.atualizar(x)
         
-#Produto encontrado
     @staticmethod
     def categoria_excluir(id:int) -> None: #Delete
         x = Categorias.listar_id(id)
         if x is None:
             raise ValueError("Categoria não encontrado")
         Categorias.excluir(x)
+
+  
         
-#Produto encontrado
 
     #===== Classe Vendas =====
     @staticmethod
@@ -138,8 +140,6 @@ class View:
         return Vendas.listar()
     
     
-    
-
     
     #===== Classe VendasItem =====
     @staticmethod
@@ -225,12 +225,12 @@ class View:
                 carrinho.total -= preco #Adicionando valor ao total no carrinho
                 Vendas.atualizar(carrinho)#SAlvando valor na persistencia
                 return
-            else:
-                raise ValueError("Id do produto não encontrado no carrinho")
+        
+        raise ValueError("Id do produto não encontrado no carrinho")
             
         
 
-        #Metodo não concluido
+      
         
 
     @staticmethod

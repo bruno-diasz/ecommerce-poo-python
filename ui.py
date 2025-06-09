@@ -21,7 +21,7 @@ class UI:
                 return int(op)
             except:
                 print("*** A opção deve ser um numero! ⚠️")
-                UI.menu()
+                return UI.menu()
 
             
         if cls.usr.email == "admin": #O Usuario é o adm!
@@ -62,7 +62,7 @@ class UI:
                 return int(op)
             except:
                 print("*** A opção deve ser um numero! ⚠️")
-                UI.menu()
+                return UI.menu()
         
         else:# está logado, e não é o adm
             usr_op = "3"
@@ -76,7 +76,11 @@ class UI:
 
             op = usr_op + input("- Digite o número da opção desejada: ")
 
-            return int(op)
+            try:    
+                return int(op)
+            except:
+                print("*** A opção deve ser um numero! ⚠️")
+                UI.menu()
         
         
         
@@ -268,7 +272,10 @@ class UI:
             elif percentual < 0:
                 print(f"\n*** Desconto de {abs(percentual)}% em todos os produtos efetuado com sucesso! ✅️")
         
-
+    @staticmethod
+    def produto_vincular_categoria(id_categoria, id_produto):
+        pass
+        
     #====== CRUD Categoria======
 
     @staticmethod
@@ -339,24 +346,25 @@ class UI:
             print("\n*** Para inserir um produto é necessario iniciar um carrinho! ⚠️")
             return
         
-        print()
-        UI.produto_listar() #Listando Produtos
-        print("\nDigite -1 para sair\n")
+        while True:
+            
+            print()
+            UI.produto_listar() #Listando Produtos
+            print("\nDigite -1 para sair\n")
 
-        try:
-            #Coletando informaçao para adicionar produto
-            item_id = int(input("Insira o codigo do produto: "))
-            if item_id == -1: return #Condição de parada para o laço recursivo
-            qtd = int(input("Digite a quantidade: "))
-            View.venda_inserir_item(item_id, qtd, cls.carrinho.id) #Chamando função do view para adicionar ao carrinho
+            try:
+                #Coletando informaçao para adicionar produto
+                item_id = int(input("Insira o codigo do produto: "))
+                if item_id == -1: break #Condição de parada
+                qtd = int(input("Digite a quantidade: "))
+                View.venda_inserir_item(item_id, qtd, cls.carrinho.id) #Chamando função do view para adicionar ao carrinho
 
-        except ValueError as e:
-            print(f"\n*** {e} ⚠️")
-            UI.venda_inserir_item() #Repetindo novamente a operação novamente
-        
-        else:
-            print(f"\n*** Produto adicionado com sucesso! ✅️***")
-            UI.venda_inserir_item() #Repetindo novamente a operação novamente
+            except ValueError as e:
+                print(f"\n*** {e} ⚠️")
+            
+            else:
+                print(f"\n*** Produto adicionado com sucesso! ✅️***")
+              
             
     @classmethod
     def venda_excluir_item(cls):
