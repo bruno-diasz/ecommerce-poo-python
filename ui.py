@@ -456,8 +456,11 @@ class UI:
         vendas = View.venda_listar()
         items = View.vendaitem_listar()
         for v in vendas:
-            print(v)
+            if v.carrinho:print("CARRINHO:")
+            else:print("PEDIDO CONFIRMADO: ")
+            print(v, " C:",v.idCliente)
             print("-"*60)
+            print(f"     {'NOME':<18} {'PREÇO':<11} {'QTD':<7} {'SUBTOTAL'}")
             for i in items:
                 if i.idVenda == v.id:
                     print("    ",i)
