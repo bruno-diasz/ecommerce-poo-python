@@ -22,6 +22,7 @@ class Categorias:
 
     @classmethod
     def listar_id(cls,id:int):
+        cls.abrir()
         for obj in cls.objetos:
             if obj.id == id:
                 return obj

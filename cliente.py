@@ -22,10 +22,10 @@ class Cliente:
     def nome(self) -> str:
         return self.__nome
     @nome.setter
-    def nome(self, valor):
-        if not isinstance(valor, str):
+    def nome(self, nome):
+        if not isinstance(nome, str):
              raise TypeError("O nome de ser uma string")
-        self.__nome = valor
+        self.__nome = nome.strip().title()
     
     @property
     def email(self) -> str:
@@ -36,7 +36,7 @@ class Cliente:
              raise TypeError("O email de ser uma string")
         if "@" not in valor and valor != "admin":
             raise ValueError("Formato de email inválido!")
-        self.__email = valor
+        self.__email = valor.strip().lower()
 
     @property
     def fone(self) -> str:
@@ -45,7 +45,7 @@ class Cliente:
     def fone(self, valor):
         if not isinstance(valor, str):
              raise TypeError("O fone de ser uma string")
-        self.__fone = valor
+        self.__fone = valor.strip()
 
     @property
     def senha(self) -> str:
@@ -55,11 +55,11 @@ class Cliente:
     def senha(self, senha:str):
         if not isinstance(senha, str):
             raise TypeError("O fone de ser uma string")
-        self.__senha = senha
+        self.__senha = senha.strip()
 
     #Metodos da instancia
     def __str__(self):
-        return f"{self.id}. {self.nome} - {self.email} - {self.fone}"
+        return f"{self.id}. {self.nome:<18} {self.email:<20} {self.fone}"
     
     def to_dict(self):
         return {"id":self.id, "nome":self.nome, "email":self.email, "fone":self.fone, "senha":self.senha}

@@ -59,7 +59,7 @@ class Produtos:
                 clientes_json = json.load(arquivo)
                 for obj in clientes_json:
                     c = Produto(obj["id"], obj["desc"], obj["preco"],obj["estoque"] )
-                    c.idCategoria = 0
+                    c.idCategoria = obj["categoriaID"]
                     cls.objetos.append(c)
         except FileNotFoundError:
             pass

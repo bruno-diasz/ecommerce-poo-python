@@ -1,3 +1,4 @@
+from dao.categorias import Categorias
 class Produto:
     #Construtor
     def __init__(self, id:int, desc:str, preco:float,estoq:int):
@@ -64,7 +65,11 @@ class Produto:
 
     #Metodos
     def __str__(self):
-        return f"{self.id}. {self.descricao:<15}R$ {self.preco} - Estoque:{self.estoque} - categoriaID:{self.idCategoria} "
+        categoria = Categorias.listar_id(self.idCategoria)
+        if categoria is None:
+            return f"{self.id}. {self.descricao:<20}R$ {self.preco:<7} {self.estoque} {'UN':<6} -"
+        
+        return f"{self.id}. {self.descricao:<20}R$ {self.preco:<7} {self.estoque} {'UN':<6} {categoria.descricao} "
     
     def to_dict(self):
         return {"id": self.id, "desc":self.descricao, "preco":self.preco, "estoque":self.estoque, "categoriaID":self.idCategoria}

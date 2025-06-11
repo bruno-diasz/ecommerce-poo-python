@@ -14,7 +14,7 @@ class UI:
 
             print("\n#================ MENU VISITANTE =================#")
             print("Bem vindo: \n")
-            print("1. Entrar | 2. Criar conta | 9. Encerrar")
+            print("1. Entrar | 2. Criar conta | 0. Encerrar")
             op = usr_op + input("\n- Digite o número da opção desejada: ") 
 
             try:    
@@ -29,7 +29,7 @@ class UI:
 
             print("\n#================== MENU ADMIN ===================#")
             print("Selecione o item que quer editar\n")
-            print("1. Cliente | 2. Produto | 3. Categoria | 4. Pedidos | 9. Sair\n")
+            print("1. Cliente | 2. Produto | 3. Categoria | 4. Pedidos | 0. Sair\n")
             op = usr_op + input("- Digite o número da opção desejada: ") 
 
             if op == "21":
@@ -42,7 +42,8 @@ class UI:
                 print("\n#====================== PRODUTO ======================#")
                 print("Selecione uma das opções abaixo:\n")
                 print("1. Listar | 2. Inserir | 3. Atualizar | 4. Excluir")
-                print("5. Reajustar preço\n")
+                print("5. Listar produtos por categoria")
+                print("6. Reajustar preço     | 7. Vincular a categoria  \n")
                 op += input("- Digite o número da opção desejada: ")
 
             elif op == "23":
@@ -72,7 +73,7 @@ class UI:
             print("1. Iniciar carrinho de compras | 2. Listar as compras concluidas")
             print("3. Listar carrinho de compras  | 4. Inserir produto no carrinho")
             print("5. Excluir produto do carrinho | 6. Confirmar compra ")
-            print("9. Sair\n")
+            print("0. Sair\n")
 
             op = usr_op + input("- Digite o número da opção desejada: ")
 
@@ -91,7 +92,7 @@ class UI:
             op = UI.menu()
             
             if op == 11: UI.cliente_autenticar()
-            elif op== 29 or op == 39: UI.cliente_logout()
+            elif op== 20 or op == 30: UI.cliente_logout()
 
             elif op == 12 or op == 212 : UI.cliente_inserir(op)
             elif op == 211: UI.cliente_listar()
@@ -102,7 +103,9 @@ class UI:
             elif op == 222: UI.produto_inserir()
             elif op == 223: UI.produto_atualizar()
             elif op == 224: UI.produto_excluir()
-            elif op == 225: UI.produto_reajuste()
+            elif op == 225: UI.produto_listar_categoria()
+            elif op == 226: UI.produto_reajuste()
+            elif op == 227: UI.produto_vincular_categoria()
 
             elif op == 231: UI.categoria_listar()
             elif op == 232: UI.categoria_inserir()
@@ -118,7 +121,7 @@ class UI:
             elif op == 35: UI.venda_excluir_item()
             elif op == 36: UI.venda_confirmar()
 
-            elif op == 19 : print("\nSistema Encerrado!!! Até Mais🤙️"); break
+            elif op == 10 : print("\nSistema Encerrado!!! Até Mais🤙️"); break
 
             else: print("\n*** Opção inválida! ⚠️")
 
@@ -129,13 +132,13 @@ class UI:
         print()
         try:
             if op == 12:
-                nome = input("Digite seu nome: ")
+                nome = input("\nDigite seu nome: ")
                 email = input("Digite seu email: ").strip()
                 fone = input("Digite seu telefone: ")
                 senha = getpass("Digite sua senha: ")
 
             if op == 212:
-                nome = input("Digite o nome do cliente: ")
+                nome = input("\nDigite o nome do cliente: ")
                 email = input("Digite o email do cliente: ")
                 fone = input("Digite o telefone do cliente: ")
                 senha = getpass("Digite a senha do cliente: ")
@@ -151,14 +154,15 @@ class UI:
 
     @staticmethod
     def cliente_listar(): #Read
-        print()
+        print(f"\nID {'NOME':<18} {'E-MAIL':<20} {'TELEFONE'}")
+        print("-"*56)
         for c in View.cliente_listar(): print(c)
    
     @staticmethod
     def cliente_atualizar(): #Update
         print()
         try:
-            id = int(input("Digite o ID o cliente que deseja atualizar: "))
+            id = int(input("\nDigite o ID o cliente que deseja atualizar: "))
             nome = input("Informe o novo nome: ")
             email = input("Informe o novo e-mail: ")
             fone = input("Informe o novo fone: ")        
@@ -176,7 +180,7 @@ class UI:
     def cliente_excluir(): #Delete
         print()
         try:
-            id = int(input("Digite o ID o cliente que deseja excluir: "))
+            id = int(input("\nDigite o ID o cliente que deseja excluir: "))
             View.cliente_excluir(id)
 
         except ValueError as e:
@@ -190,8 +194,8 @@ class UI:
     def cliente_autenticar(cls): #Login
         print()
         try:
-            email = input("Digite seu email: ")
-            senha = getpass("Digite sua senha: ")
+            email = input("Digite seu email: ").strip().lower()
+            senha = getpass("Digite sua senha: ").strip()
             usr = View.cliente_autenticar(email, senha)
 
         except ValueError as e:
@@ -213,7 +217,7 @@ class UI:
     @staticmethod
     def produto_inserir(): #Create
         try:
-            desc = input("Digite a descrição do produto:")
+            desc = input("\nDigite a descrição do produto:")
             preco = float(input("Digite o preço do produto:"))
             estoq = int(input("Digite a quantidade em estoque:"))
             View.produto_inserir(desc, preco, estoq)
@@ -225,14 +229,33 @@ class UI:
         
     @staticmethod
     def produto_listar(): #Read
-        print()
+        print(f"\nID {'NOME':<19} {'PREÇO':<10} {'ESTOQUE':<8} {'CATEGORIA'}")
+        print("-"*56)
         for c in View.produto_listar():
             print(c)
+
+    @staticmethod
+    def produto_listar_categoria():
+        UI.categoria_listar()
+        try:
+            id_categoria = int(input("\nDigite o ID da categoria: "))
+        except:
+            print("\n*** O ID deve ser um número inteiro ⚠️")
+            return
         
+        print(f"\nID {'NOME':<19} {'PREÇO':<10} {'ESTOQUE':<8} {'CATEGORIA'}")
+        print("-"*56)
+        try:
+            for c in View.produto_listar_categoria(id_categoria):
+                print(c)
+        except ValueError as e:
+            print(f"\n*** {e} ⚠️")
+
+
     @staticmethod
     def produto_atualizar(): #Update
         try:
-            id = int(input("Digite o ID do produto que deseja atualizar: "))
+            id = int(input("\nDigite o ID do produto que deseja atualizar: "))
             desc = input("Digite a nova descrição:")
             preco = float(input("Digite o novo preço: "))
             estoq = int(input("Digite a quantidade em estoque atualizada:"))
@@ -246,7 +269,7 @@ class UI:
     @staticmethod
     def produto_excluir(): #Delete
         try:
-            id = int(input("Digite o ID do produto que deseja excluir: "))
+            id = int(input("\nDigite o ID do produto que deseja excluir: "))
             View.produto_excluir(id)
 
         except ValueError as e:
@@ -259,7 +282,7 @@ class UI:
     @staticmethod
     def produto_reajuste():
         try:
-            percentual = float(input("Digite o percentual de reajuste: "))
+            percentual = float(input("\nDigite o percentual de reajuste: "))
             View.produto_reajuste(percentual)
 
         except ValueError as e:
@@ -273,15 +296,31 @@ class UI:
                 print(f"\n*** Desconto de {abs(percentual)}% em todos os produtos efetuado com sucesso! ✅️")
         
     @staticmethod
-    def produto_vincular_categoria(id_categoria, id_produto):
-        pass
+    def produto_vincular_categoria():
+        try:
+            UI.produto_listar()
+            id_produto = int(input("\nDigite o id do produto: "))
+            UI.categoria_listar()
+            id_categoria = int(input("Digite o id da categoria: "))
+        except:
+            print("\n*** O ID deve ser um número inteiro ⚠️")
+            return
+        try:
+            View.produto_vincular_categoria(id_produto,id_categoria)
+
+        except TypeError as e:
+            print(f"\n*** {e} ⚠️")
+        else:
+            
+            print("\n*** Associação efetuado com sucesso! ✅️")
+            
         
     #====== CRUD Categoria======
 
     @staticmethod
     def categoria_inserir(): #Create
         try:
-            desc = input("Digite a descrição do produto:")
+            desc = input("Digite a descrição do produto: ")
             View.categoria_inserir(desc)
 
         except ValueError as e:
@@ -294,7 +333,8 @@ class UI:
         
     @staticmethod
     def categoria_listar(): #Read
-        print()
+        print("\nID CATEGORIA")
+        print("-"*20)
         for c in View.categoria_listar():
             print(c)
 
@@ -302,7 +342,7 @@ class UI:
     def categoria_atualizar(): #Update
         try:
             id = int(input("Digite o ID da categoria que deseja atualizar: "))
-            desc = input("Digite a nova descrição:")
+            desc = input("Digite a nova descrição: ")
             View.categoria_atualizar(id, desc)
 
         except ValueError as e:
@@ -342,21 +382,33 @@ class UI:
         
     @classmethod    
     def venda_inserir_item(cls):
+
         if cls.carrinho is None: #Verificando se tem carrinho
             print("\n*** Para inserir um produto é necessario iniciar um carrinho! ⚠️")
             return
         
         while True:
             
-            print()
-            UI.produto_listar() #Listando Produtos
-            print("\nDigite -1 para sair\n")
+            print("\nDeseja listar:")
+            print("1. Todos os produtos | 2. Produtos por categoria")
+            op = input("\nDigite a opção desejada: ")
+            if op == '1': UI.produto_listar() 
+            elif op == '2': UI.produto_listar_categoria()
+            else: print("\n *** Opção inválida! ⚠️") ; continue
+
+            
+            print("\nDigite 0 para sair\n")
 
             try:
-                #Coletando informaçao para adicionar produto
+                 #Coletando informaçao para adicionar produto
                 item_id = int(input("Insira o codigo do produto: "))
-                if item_id == -1: break #Condição de parada
+                if item_id == 0: break #Condição de parada
                 qtd = int(input("Digite a quantidade: "))
+            except ValueError:
+                print(f"\n*** Somente números inteiros são aceitos! ⚠️")
+                continue
+
+            try:
                 View.venda_inserir_item(item_id, qtd, cls.carrinho.id) #Chamando função do view para adicionar ao carrinho
 
             except ValueError as e:
@@ -394,6 +446,7 @@ class UI:
         items = View.vendaitem_listar()
         for v in vendas:
             print(v)
+            print("-"*60)
             for i in items:
                 if i.idVenda == v.id:
                     print("    ",i)
@@ -403,10 +456,12 @@ class UI:
     def venda_listar_usr(cls):
         vendas = View.venda_listar()
         items = View.vendaitem_listar()
-        print("\nCompras Concluidas: ")
+        print("\nCOMPRAS CONCLUIDAS: ")
         for v in vendas:
             if v.idCliente == cls.usr.id and not v.carrinho:
                 print(v)
+                print("-"*60)
+                print(f"     {'NOME':<18} {'PREÇO':<11} {'QTD':<7} {'SUBTOTAL'}")
                 for i in items:
                     if i.idVenda == v.id:
                         print("    ",i)
@@ -419,8 +474,11 @@ class UI:
             return
 
         items = View.vendaitem_listar()
-        print("\nCarrinho: ")
+        print("\nCARRINHO: ")
         print(cls.carrinho)
+        print("-"*60)
+        print(f"     {'NOME':<18} {'PREÇO':<11} {'QTD':<7} {'SUBTOTAL'}")
+       
         for i in items:
             if i.idVenda == cls.carrinho.id:
                 print("    ",i)

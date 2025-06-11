@@ -14,10 +14,38 @@
         "idCliente": 2
     },
     {
+        "id": 4,
+        "data": "10/06/2025 18:45:13",
+        "carrinho": false,
+        "total": 0,
+        "idCliente": 7
+    },
+    {
+        "id": 5,
+        "data": "10/06/2025 18:46:35",
+        "carrinho": false,
+        "total": 6286.5,
+        "idCliente": 7
+    },
+    {
+        "id": 6,
+        "data": "10/06/2025 18:54:15",
+        "carrinho": false,
+        "total": 7078.5,
+        "idCliente": 7
+    },
+    {
         "id": 3,
         "data": "09/06/2025 18:11:34",
+        "carrinho": false,
+        "total": 2326.5,
+        "idCliente": 2
+    },
+    {
+        "id": 7,
+        "data": "10/06/2025 23:06:38",
         "carrinho": true,
-        "total": 396.0,
+        "total": 3217.5,
         "idCliente": 2
     }
 ]

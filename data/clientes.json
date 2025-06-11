@@ -33,5 +33,19 @@
         "email": "xi@",
         "fone": "1234",
         "senha": "pintinho"
+    },
+    {
+        "id": 6,
+        "nome": "Paulo g. Dias",
+        "email": "pauloW@gmail.com",
+        "fone": "12345671",
+        "senha": "1234"
+    },
+    {
+        "id": 7,
+        "nome": "paulo",
+        "email": "email@gmail.com",
+        "fone": "123",
+        "senha": "1234"
     }
 ]

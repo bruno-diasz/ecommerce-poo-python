@@ -65,7 +65,7 @@ class Venda:
     #Metodos de instancia
     def __str__(self):
         data = self.data.strftime("%d/%m/%Y %H:%M:%S")
-        return f"{self.id}. {data} - Total: R$ {self.total:.2f}"
+        return f"{self.id}. {data:<33} TOTAL: R$ {self.total:.2f}"
     
     def to_dict(self):
         data = self.data.strftime("%d/%m/%Y %H:%M:%S")

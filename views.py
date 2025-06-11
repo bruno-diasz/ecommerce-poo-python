@@ -79,6 +79,17 @@ class View:
     @staticmethod
     def produto_listar() -> list[Produtos]: #Read
         return Produtos.listar()
+    
+    @staticmethod
+    def produto_listar_categoria(categoria_id) -> list[Produto]:
+        if not Categorias.listar_id(categoria_id) :
+            raise ValueError("Categoria não encontrada")
+        produto_categoria = []
+        for prod in Produtos.listar():
+            if prod.idCategoria == categoria_id:
+                produto_categoria.append(prod)
+        
+        return produto_categoria
 
     @staticmethod
     def produto_atualizar(id:int, desc:str, preco:float, estoq:int) -> None: #Update
@@ -103,6 +114,17 @@ class View:
             p.preco += percentual/100*p.preco
             Produtos.atualizar(p)
 
+    @staticmethod
+    def produto_vincular_categoria(id_produto:int, id_categoria:int)-> None:
+        prod = Produtos.listar_id(id_produto)
+        cat = Categorias.listar_id(id_categoria)
+        
+        if prod is None:
+            raise TypeError("Produto não encontrado")
+        if cat is None:
+            raise TypeError("Categoria não encontrado")
+        prod.idCategoria = id_categoria
+        Produtos.atualizar(prod)
     
 
 
@@ -120,6 +142,7 @@ class View:
     def categoria_atualizar(id:int, desc:str) -> None: #Update
         x = Categoria(id,desc)
         c = Categorias.listar_id(id)
+
         if c is None:
             raise ValueError("Categoria não encontrado")
         Categorias.atualizar(x)
@@ -165,10 +188,11 @@ class View:
         #Verificação de erros
         if item is None:
             raise ValueError("Id do produto não encontrado")
-        if qtd < 0:
-            raise ValueError("A quantidade não pode ser negativa")
+        if qtd <= 0:
+            raise ValueError("A quantidade deve ser maior que zero!")
         if qtd > item.estoque:
             raise ValueError("Estoque insuficiente para compra")
+        
         
         carrinho = Vendas.listar_id(id_carrinho) #Pegando o carrinho
         preco = item.preco*qtd #Calculando o preço do vendaitem
@@ -205,8 +229,8 @@ class View:
 
         if item is None:
             raise ValueError("Id do produto não encontrado")
-        if qtd < 0:
-            raise ValueError("A quantidade não pode ser negativa")
+        if qtd <= 0:
+            raise ValueError("A quantidade deve ser maior que zero!")
         
         preco = item.preco*qtd #Calculando o preço do vendaitem
 
@@ -237,14 +261,19 @@ class View:
     def venda_confirmar(carrinho_id:int) -> None:
         items = VendaItems.listar() #Listando items
         carrinho = Vendas.listar_id(carrinho_id) #Pegando carrinho pelo id
-
+        items_do_carrinho= []
         #Verifica compra completa antes de remover do estoque: Para o caso do produto estar no carrinho mas alguem ter comprado o produto
         for i in items:
             if carrinho_id == i.idVenda: #Verifica se o item pertence aquela compra
                 prod = Produtos.listar_id(i.idProduto) #Pega o produto a partir do item venda
+                items_do_carrinho.append(prod)
                 if prod.estoque - i.qtd < 0:
                     raise ValueError(f"Estoque insuficiente para compra do {prod.descricao}")
-
+                
+        #Verifica se o carrinho está vazio
+        if  not  items_do_carrinho:
+            raise ValueError("Seu carrinho está vazio")
+        
         #Sai removendo todas as compras do estoque
         for i in items:
             if carrinho_id == i.idVenda: #Verifica se o item pertence aquela compra
