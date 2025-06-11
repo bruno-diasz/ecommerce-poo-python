@@ -1,14 +1,14 @@
 [
     {
         "id": 1,
-        "nome": "admin",
+        "nome": "Admin",
         "email": "admin",
         "fone": "#",
         "senha": "admin"
     },
     {
         "id": 2,
-        "nome": "bruno",
+        "nome": "Bruno",
         "email": "bruno@email.com",
         "fone": "12345",
         "senha": "12345"
@@ -22,7 +22,7 @@
     },
     {
         "id": 4,
-        "nome": "bruno",
+        "nome": "Bruno",
         "email": "bruno@",
         "fone": "1234",
         "senha": "1234"
@@ -36,16 +36,23 @@
     },
     {
         "id": 6,
-        "nome": "Paulo g. Dias",
-        "email": "pauloW@gmail.com",
+        "nome": "Paulo G. Dias",
+        "email": "paulow@gmail.com",
         "fone": "12345671",
         "senha": "1234"
     },
     {
         "id": 7,
-        "nome": "paulo",
+        "nome": "Paulo",
         "email": "email@gmail.com",
         "fone": "123",
+        "senha": "1234"
+    },
+    {
+        "id": 8,
+        "nome": "Gilbert",
+        "email": "gilbert@email.com",
+        "fone": "1234",
         "senha": "1234"
     }
 ]

@@ -67,9 +67,9 @@ class Produto:
     def __str__(self):
         categoria = Categorias.listar_id(self.idCategoria)
         if categoria is None:
-            return f"{self.id}. {self.descricao:<20}R$ {self.preco:<7} {self.estoque} {'UN':<6} -"
+            return f"{self.id}. {self.descricao:<20}R$ {self.preco:<7.2f} {self.estoque} {'UN':<6} -"
         
-        return f"{self.id}. {self.descricao:<20}R$ {self.preco:<7} {self.estoque} {'UN':<6} {categoria.descricao} "
+        return f"{self.id}. {self.descricao:<20}R$ {self.preco:<7.2f} {self.estoque} {'UN':<6} {categoria.descricao} "
     
     def to_dict(self):
         return {"id": self.id, "desc":self.descricao, "preco":self.preco, "estoque":self.estoque, "categoriaID":self.idCategoria}

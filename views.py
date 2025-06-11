@@ -198,7 +198,7 @@ class View:
         
         
         carrinho = Vendas.listar_id(id_carrinho) #Pegando o carrinho
-        preco = item.preco*qtd #Calculando o preço do vendaitem
+        preco = item.preco #Calculando o preço do vendaitem
 
         
         #Verifica se o item ja está no carrinho caso esteja ele não cria um itemvenda novo so acrescenta
@@ -207,7 +207,6 @@ class View:
                 if qtd + i.qtd > item.estoque:
                     raise ValueError(f"Estoque insuficiente para compra do {item.descricao}") #Verifica se tem o item em estoque
                 i.qtd += qtd
-                i.preco += preco #Adiciona o valor ao itemvenda
                 VendaItems.atualizar(i)#Atualiza o itemvenda na persistencia 
 
                 carrinho.total += preco #Adicionando valor ao total no carrinho
