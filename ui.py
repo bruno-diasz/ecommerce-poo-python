@@ -42,9 +42,19 @@ class UI:
                 print("\n#====================== PRODUTO ======================#")
                 print("Selecione uma das opções abaixo:\n")
                 print("1. Listar | 2. Inserir | 3. Atualizar | 4. Excluir")
-                print("5. Listar produtos por categoria")
-                print("6. Reajustar preço     | 7. Vincular a categoria  \n")
+                print("5. Reajustar preço     | 6. Vincular a categoria  \n")
                 op += input("- Digite o número da opção desejada: ")
+
+                if op == "221":
+                    print("\n#====================== PRODUTO ======================#")
+                    print("Selecione uma das opções abaixo:\n")
+                    print("1. Listar todos | 2. Listar por categoria\n")
+                    op += input("- Digite o número da opção desejada: ")
+                    try:    
+                        return int(op)
+                    except:
+                        print("*** A opção deve ser um numero! ⚠️")
+                        return UI.menu()
 
             elif op == "23":
                 print("\n#===================== CATEGORIA =====================#")
@@ -99,13 +109,13 @@ class UI:
             elif op == 213: UI.cliente_atualizar()
             elif op == 214: UI.cliente_excluir()
 
-            elif op == 221: UI.produto_listar()
+            elif op == 2211: UI.produto_listar()
+            elif op == 2212: UI.produto_listar_categoria()
             elif op == 222: UI.produto_inserir()
             elif op == 223: UI.produto_atualizar()
             elif op == 224: UI.produto_excluir()
-            elif op == 225: UI.produto_listar_categoria()
-            elif op == 226: UI.produto_reajuste()
-            elif op == 227: UI.produto_vincular_categoria()
+            elif op == 225: UI.produto_reajuste()
+            elif op == 226: UI.produto_vincular_categoria()
 
             elif op == 231: UI.categoria_listar()
             elif op == 232: UI.categoria_inserir()
@@ -335,6 +345,7 @@ class UI:
     def categoria_listar(): #Read
         print("\nID CATEGORIA")
         print("-"*20)
+        print("0. Sem Categoria")
         for c in View.categoria_listar():
             print(c)
 

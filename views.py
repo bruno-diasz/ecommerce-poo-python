@@ -82,8 +82,11 @@ class View:
     
     @staticmethod
     def produto_listar_categoria(categoria_id) -> list[Produto]:
-        if not Categorias.listar_id(categoria_id) :
+        if categoria_id == 0:
+            pass
+        elif not Categorias.listar_id(categoria_id) :
             raise ValueError("Categoria não encontrada")
+        
         produto_categoria = []
         for prod in Produtos.listar():
             if prod.idCategoria == categoria_id:
