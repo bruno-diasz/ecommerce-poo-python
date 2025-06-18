@@ -1,121 +1,44 @@
 [
     {
         "id": 1,
+        "qtd": 3,
+        "preco": 100,
+        "idVenda": 1,
+        "idProduto": 2
+    },
+    {
+        "id": 2,
         "qtd": 5,
-        "preco": 3960.0,
+        "preco": 500,
         "idVenda": 1,
         "idProduto": 1
     },
     {
-        "id": 2,
-        "qtd": 0,
-        "preco": 0.0,
+        "id": 3,
+        "qtd": 2,
+        "preco": 110.0,
         "idVenda": 2,
         "idProduto": 2
     },
     {
         "id": 4,
-        "qtd": 0,
-        "preco": 0.0,
-        "idVenda": 5,
+        "qtd": 2,
+        "preco": 550.0,
+        "idVenda": 2,
         "idProduto": 1
     },
     {
         "id": 5,
-        "qtd": 5,
-        "preco": 3217.5,
-        "idVenda": 5,
-        "idProduto": 2
+        "qtd": 3,
+        "preco": 500.005,
+        "idVenda": 3,
+        "idProduto": 1
     },
     {
         "id": 6,
-        "qtd": 1,
-        "preco": 396.0,
-        "idVenda": 5,
-        "idProduto": 3
-    },
-    {
-        "id": 7,
-        "qtd": 3,
-        "preco": 2673.0,
-        "idVenda": 5,
-        "idProduto": 4
-    },
-    {
-        "id": 8,
-        "qtd": 11,
-        "preco": 7078.5,
-        "idVenda": 6,
-        "idProduto": 2
-    },
-    {
-        "id": 9,
-        "qtd": 1,
-        "preco": 643.5,
-        "idVenda": 3,
-        "idProduto": 2
-    },
-    {
-        "id": 10,
         "qtd": 2,
-        "preco": 792.0,
+        "preco": 300.003,
         "idVenda": 3,
         "idProduto": 3
-    },
-    {
-        "id": 11,
-        "qtd": 1,
-        "preco": 891.0,
-        "idVenda": 3,
-        "idProduto": 4
-    },
-    {
-        "id": 12,
-        "qtd": 1,
-        "preco": 396.0,
-        "idVenda": 7,
-        "idProduto": 3
-    },
-    {
-        "id": 13,
-        "qtd": 3,
-        "preco": 1930.5,
-        "idVenda": 7,
-        "idProduto": 2
-    },
-    {
-        "id": 14,
-        "qtd": 1,
-        "preco": 891.0,
-        "idVenda": 7,
-        "idProduto": 4
-    },
-    {
-        "id": 15,
-        "qtd": 1,
-        "preco": 871.0,
-        "idVenda": 8,
-        "idProduto": 1
-    },
-    {
-        "id": 16,
-        "qtd": 3,
-        "preco": 958.1,
-        "idVenda": 9,
-        "idProduto": 1
-    },
-    {
-        "id": 17,
-        "qtd": 2,
-        "preco": 479.16,
-        "idVenda": 10,
-        "idProduto": 3
-    },
-    {
-        "id": 19,
-        "qtd": 2,
-        "preco": 1053.91,
-        "idVenda": 11,
-        "idProduto": 1
     }
 ]

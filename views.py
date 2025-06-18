@@ -117,6 +117,15 @@ class View:
             p.preco += percentual/100*p.preco
             Produtos.atualizar(p)
 
+        #Aumentando o preço dos produtos que estão no carrinho
+        for item in VendaItems.listar():
+            venda = Vendas.listar_id(item.idVenda)
+            if venda.carrinho:
+                item.preco  += percentual/100*item.preco
+                VendaItems.atualizar(item)
+                venda.total += (percentual/100*item.preco)*item.qtd
+                Vendas.atualizar(venda)
+
     @staticmethod
     def produto_vincular_categoria(id_produto:int, id_categoria:int)-> None:
         prod = Produtos.listar_id(id_produto)
@@ -249,7 +258,7 @@ class View:
                     VendaItems.atualizar(i)#Atualiza o itemvenda na persistencia 
 
                 carrinho.total -= preco*qtd #Adicionando valor ao total no carrinho
-                Vendas.atualizar(carrinho)#SAlvando valor na persistencia #TRECHO COM PROBLEMAS
+                Vendas.atualizar(carrinho)#SAlvando valor na persistencia 
                 return
         
         raise ValueError("Id do produto não encontrado no carrinho")
