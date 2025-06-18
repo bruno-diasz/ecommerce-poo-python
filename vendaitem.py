@@ -68,8 +68,6 @@ class VendaItem:
     #Metodos de instancia
     def __str__(self):
         nomeprod = Produtos.listar_id(self.idProduto).descricao
-        
-    
         return f"{nomeprod:<18} R$ {self.preco:.2f} x {self.qtd:<7} R$ {self.preco*self.qtd:.2f}"
     
     def to_dict(self):

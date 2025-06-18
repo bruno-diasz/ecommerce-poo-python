@@ -61,5 +61,19 @@
         "carrinho": true,
         "total": 958.1,
         "idCliente": 4
+    },
+    {
+        "id": 10,
+        "data": "18/06/2025 16:58:39",
+        "carrinho": false,
+        "total": 958.32,
+        "idCliente": 9
+    },
+    {
+        "id": 11,
+        "data": "18/06/2025 17:02:15",
+        "carrinho": true,
+        "total": 5269.55,
+        "idCliente": 9
     }
 ]
