@@ -1,64 +1,22 @@
 [
     {
-        "id": 1,
-        "nome": "Admin",
+        "id": 0,
+        "nome": "#",
         "email": "admin",
         "fone": "#",
         "senha": "admin"
     },
     {
-        "id": 2,
-        "nome": "Bruno",
-        "email": "bruno@email.com",
-        "fone": "12345",
-        "senha": "12345"
-    },
-    {
-        "id": 3,
-        "nome": "",
-        "email": "teste@email.com",
-        "fone": "12345",
-        "senha": "1234"
-    },
-    {
-        "id": 4,
-        "nome": "Bruno",
-        "email": "bruno@",
-        "fone": "1234",
-        "senha": "1234"
-    },
-    {
-        "id": 5,
-        "nome": "Xiquinho",
-        "email": "xi@",
-        "fone": "1234",
-        "senha": "pintinho"
-    },
-    {
-        "id": 6,
-        "nome": "Paulo G. Dias",
-        "email": "paulow@gmail.com",
-        "fone": "12345671",
-        "senha": "1234"
-    },
-    {
-        "id": 7,
-        "nome": "Paulo",
-        "email": "email@gmail.com",
-        "fone": "123",
-        "senha": "1234"
-    },
-    {
-        "id": 8,
-        "nome": "Gilbert",
-        "email": "gilbert@email.com",
-        "fone": "1234",
-        "senha": "1234"
-    },
-    {
-        "id": 9,
+        "id": 1,
         "nome": "Teste",
         "email": "teste@",
+        "fone": "1234",
+        "senha": "1234"
+    },
+    {
+        "id": 2,
+        "nome": "Bruno Dias",
+        "email": "bruno@email.com",
         "fone": "1234",
         "senha": "1234"
     }

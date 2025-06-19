@@ -182,16 +182,7 @@ class View:
         return VendaItems.listar() 
     
     #===== Venda Operações ======
-    @staticmethod
-    def venda_iniciar(idCliente:int) -> Venda:
-        for carrinho in Vendas.listar():
-           if carrinho.idCliente == idCliente and carrinho.carrinho: #Verifica se a venda é do cliente e se a venda está no carrinho
-               raise ValueError("Você ja tem um carrinho iniciado!")
-        x =  Venda(0) #Cria um carrinho
-        x.idCliente = idCliente
-        Vendas.inserir(x) #Joga na lista
-        return x #Retorna um carrinho para por no contexto
-
+    
     @staticmethod
     def venda_inserir_item(item_id:int, qtd:int, id_carrinho:int) -> None:
         
@@ -294,10 +285,18 @@ class View:
 
         carrinho.carrinho = False #Finaliza o carrinho
         Vendas.atualizar(carrinho) #Joga na memoria
-        return None #Retorna vazio para aplicar novamente no carrinho
+        return None 
 
     @staticmethod
-    def carregar_carrinho(clienteid) -> Venda:
-       for carrinho in Vendas.listar():
-           if carrinho.idCliente == clienteid and carrinho.carrinho: #Verifica se a venda é do cliente e se a venda está no carrinho
+    def carregar_carrinho(idCliente) -> Venda:
+       #Verifica se o cliente tem um carrinho
+        if idCliente == 0 :return #Se for o adm não faz nada
+        for carrinho in Vendas.listar():
+           if carrinho.idCliente == idCliente and carrinho.carrinho: #Verifica se a venda é do cliente e se a venda é um carrinho
                return carrinho
+           
+        #Se não tiver cria um novo
+        x =  Venda(0) #Cria um carrinho
+        x.idCliente = idCliente #associa o cliente ao carrinho
+        Vendas.inserir(x) #Joga na lista
+        return x #Retorna um carrinho para por no contexto

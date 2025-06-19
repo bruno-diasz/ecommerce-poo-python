@@ -1,4 +1,4 @@
-from produto import Produto
+from models.produto import Produto
 import json
 
 class Produtos:

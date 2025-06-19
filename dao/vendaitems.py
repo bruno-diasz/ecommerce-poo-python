@@ -1,4 +1,4 @@
-from vendaitem import VendaItem
+from models.vendaitem import VendaItem
 import json
 
 class VendaItems:

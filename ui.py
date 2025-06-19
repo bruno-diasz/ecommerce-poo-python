@@ -80,10 +80,10 @@ class UI:
 
             print("\n#======================== MENU CLIENTE ========================#")
             print(f"Oi, {cls.usr.nome}! Que bom te ver por aqui 😄\n")
-            print("1. Iniciar carrinho de compras | 2. Listar as compras concluidas")
-            print("3. Listar carrinho de compras  | 4. Inserir produto no carrinho")
-            print("5. Excluir produto do carrinho | 6. Confirmar compra ")
-            print("0. Sair\n")
+            print("1. Listar as compras concluidas| 2. Listar carrinho de compras")
+            print("3. Inserir produto no carrinho | 4. Excluir produto do carrinho")
+            print("5. Confirmar compra            | 0. Sair\n")
+            
 
             op = usr_op + input("- Digite o número da opção desejada: ")
 
@@ -124,12 +124,11 @@ class UI:
 
             elif op == 241: UI.venda_listar()
 
-            elif op == 31: UI.venda_iniciar()
-            elif op == 32: UI.venda_listar_usr()
-            elif op == 33: UI.venda_listar_carrinho()
-            elif op == 34: UI.venda_inserir_item()
-            elif op == 35: UI.venda_excluir_item()
-            elif op == 36: UI.venda_confirmar()
+            elif op == 31: UI.venda_listar_usr()
+            elif op == 32: UI.venda_listar_carrinho()
+            elif op == 33: UI.venda_inserir_item()
+            elif op == 34: UI.venda_excluir_item()
+            elif op == 35: UI.venda_confirmar()
 
             elif op == 10 : print("\nSistema Encerrado!!! Até Mais🤙️"); break
 
@@ -398,15 +397,20 @@ class UI:
             print("\n*** Para inserir um produto é necessario iniciar um carrinho! ⚠️")
             return
         
+        print("\nDeseja listar:")
+        print("1. Todos os produtos | 2. Produtos por categoria")
+        op = input("\nDigite a opção desejada: ")
+        if op != '1' and op != '2':
+            print("\n *** Opção inválida! ⚠️")
+            return
+
+
         while True:
             
-            print("\nDeseja listar:")
-            print("1. Todos os produtos | 2. Produtos por categoria")
-            op = input("\nDigite a opção desejada: ")
+           
             if op == '1': UI.produto_listar() 
             elif op == '2': UI.produto_listar_categoria()
-            else: print("\n *** Opção inválida! ⚠️") ; continue
-
+            
             
             print("\nDigite 0 para sair\n")
 
@@ -512,6 +516,7 @@ class UI:
 
         else:
             print("\n*** Compra efetuado com sucesso! ✅️")
+            cls.carrinho = View.carregar_carrinho(cls.usr.id)
 
 UI.main()
 

@@ -1,4 +1,4 @@
-from categoria import Categoria
+from models.categoria import Categoria
 import json
 
 class Categorias:

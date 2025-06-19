@@ -1,23 +1,9 @@
 [
     {
         "id": 1,
-        "data": "18/06/2025 18:15:37",
-        "carrinho": false,
-        "total": 2800,
-        "idCliente": 9
-    },
-    {
-        "id": 2,
-        "data": "18/06/2025 18:17:06",
-        "carrinho": false,
-        "total": 1332.0,
-        "idCliente": 9
-    },
-    {
-        "id": 3,
-        "data": "18/06/2025 18:21:59",
+        "data": "18/06/2025 23:26:24",
         "carrinho": true,
-        "total": 2119.1080911,
-        "idCliente": 9
+        "total": 500.005,
+        "idCliente": 1
     }
 ]

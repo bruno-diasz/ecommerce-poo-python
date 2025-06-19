@@ -1,4 +1,4 @@
-from cliente import Cliente
+from models.cliente import Cliente
 import json
 
 class Clientes:
@@ -7,11 +7,11 @@ class Clientes:
     @classmethod
     def inserir(cls, obj:object):
         cls.abrir()
-        i = 0
+       
         for elemento in cls.objetos:
-            if elemento.id > i:
-                i = elemento.id
-        obj.id = i + 1
+            if elemento.id >= obj.id:
+                 obj.id = elemento.id + 1
+
         cls.objetos.append(obj)
         cls.salvar()
 
