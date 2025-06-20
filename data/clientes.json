@@ -19,5 +19,12 @@
         "email": "bruno@email.com",
         "fone": "1234",
         "senha": "1234"
+    },
+    {
+        "id": 3,
+        "nome": "Zezin",
+        "email": "zezin@",
+        "fone": "1234",
+        "senha": "1234"
     }
 ]

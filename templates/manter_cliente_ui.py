@@ -1,42 +1,48 @@
 import streamlit as st
 import pandas as pd
+import time
 from views import View
 
 
 class ManterClienteUI:
 
-
     @staticmethod
     def main():
         st.subheader("Administração de Usuários")
-        listar,inserir,editar,remover = st.tabs(['**:material/article_person: Lista de Clientes**','**:material/person_add: Cadastrar Cliente**', '**:material/person_edit: Editar Cliente**','**:material/person_remove: Remover Cliente**'] )
-        with listar: ManterClienteUI.listar()
-        with inserir: ManterClienteUI.inserir()
-        with editar: pass #ManterClienteUI.atualizar()
-        with remover: pass #ManterClienteUI.excluir()
-       
+        listar, inserir, editar, remover = st.tabs(['**:material/article_person: Lista de Clientes**','**:material/person_add: Cadastrar Cliente**','**:material/person_edit: Editar Cliente**','**:material/person_remove: Remover Cliente**'])
+        with listar:
+            ManterClienteUI.listar()
+        with inserir:
+            ManterClienteUI.inserir()
+        with editar:
+            pass  # ManterClienteUI.atualizar()
+        with remover:
+            pass  # ManterClienteUI.excluir()
+
     @staticmethod
     def listar():
         clientes = View.cliente_listar()
-        if len(clientes) == 0: 
+        if len(clientes) == 0:
             st.write("Nenhum cliente cadastrado")
-        else:    
+        else:
             dic = []
-            for obj in clientes: dic.append(obj.to_dict())
-            df = pd.DataFrame(dic, columns=['id','nome','email','fone'])
-            st.dataframe(df, hide_index=True, column_config={"id":"ID", "nome":"Nome", "email":"E-mail", "fone":"Telefone"})
-
+            for obj in clientes:
+                dic.append(obj.to_dict())
+            df = pd.DataFrame(dic, columns=['id', 'nome', 'email', 'fone'])
+            st.dataframe(df, hide_index=True,column_config={"id": "ID", "nome": "Nome", "email": "E-mail", "fone": "Telefone"})
 
     @staticmethod
     def inserir():
-        with st.form("Criar Usuario"):
-            st.text_input("Nome:")
-            st.text_input("E-mail:")
-            st.text_input("Telefone:")
-            st.text_input("Senha:")
-            st.text_input("Repita a Senha:")
-            st.form_submit_button("Cadastrar")
+        with st.form(key='cadastro_cliente', clear_on_submit=True):
+            nome = st.text_input("Nome: ", placeholder='Digite seu Nome aqui')
+            email = st.text_input("E-mail: ", placeholder='Digite seu E-mail aqui')
+            senha = st.text_input("Senha: ", type='password', placeholder='Digite sua Senha aqui')
+            senha2 = st.text_input("Repita a Senha: ", type='password', placeholder='Digite novamente sua Senha aqui')
+            fone = st.text_input("Telefone: ", placeholder='Digite seu Telefone aqui')
 
-
-
-
+            st.write('---')
+            if st.form_submit_button("Cadastrar", type='primary'):
+                View.cliente_inserir(nome, email, fone, senha)
+                st.success("Cadastrado com realizado sucesso. :material/check:")
+                time.sleep(4)
+                st.rerun()
