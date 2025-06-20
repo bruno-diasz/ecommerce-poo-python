@@ -8,7 +8,7 @@ class ManterClienteUI:
 
     @staticmethod
     def main():
-        st.subheader("Administração de Usuários")
+        st.subheader(":material/person: Administração de Usuários")
         listar, inserir, editar, remover = st.tabs(['**:material/article_person: Lista de Clientes**','**:material/person_add: Cadastrar Cliente**','**:material/person_edit: Editar Cliente**','**:material/person_remove: Remover Cliente**'])
         with listar:
             ManterClienteUI.listar()

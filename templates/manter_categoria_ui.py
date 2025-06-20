@@ -8,7 +8,7 @@ class ManterCategoriaUI:
 
     @staticmethod
     def main():
-        st.subheader("Administração de Categorias")
+        st.subheader(":material/category: Administração de Categorias")
         listar, inserir, editar, remover = st.tabs(['**:material/article: Lista de Categorias**','**:material/add_2: Cadastrar Categoria**','**:material/edit: Editar Categoria**','**:material/delete: Remover Categoria**'])
         with listar:
             ManterCategoriaUI.listar()

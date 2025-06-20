@@ -2,29 +2,29 @@
     {
         "id": 1,
         "desc": "Iphone 15",
-        "preco": 500.005,
-        "estoque": 12,
+        "preco": 500.0,
+        "estoque": 8,
         "categoriaID": 1
     },
     {
         "id": 2,
         "desc": "Samsung S26",
-        "preco": 100.001,
-        "estoque": 15,
+        "preco": 100.0,
+        "estoque": 10,
         "categoriaID": 1
     },
     {
         "id": 3,
         "desc": "Redmi 12",
-        "preco": 300.003,
-        "estoque": 15,
+        "preco": 300.0,
+        "estoque": 10,
         "categoriaID": 2
     },
     {
         "id": 4,
         "desc": "Samsung a52",
-        "preco": 200.002,
-        "estoque": 10,
+        "preco": 200.0,
+        "estoque": 8,
         "categoriaID": 15
     }
 ]
