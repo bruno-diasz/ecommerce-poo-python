@@ -10,10 +10,18 @@ class IndexUI:
         with st.sidebar:
             st.title(':red[Painel Administrativo]')
             st.write('---')
-            if st.button('Gerenciar Clientes',use_container_width=True,): st.session_state.op = 1
-            st.button('Gerenciar Produto',use_container_width=True)
-            st.button('Gerenciar Categorias',use_container_width=True)
-            st.button('Histórico de Vendas',use_container_width=True)
+
+            #===MENU ALTERNATIVO ===
+            # if st.button(':material/person: Gerenciar Clientes',use_container_width=True): st.session_state.op = 1
+            # st.button(':material/package_2: Gerenciar Produto',use_container_width=True)
+            # st.button(':material/category: Gerenciar Categorias',use_container_width=True)
+            # st.button(':material/shoppingmode: Histórico de Vendas',use_container_width=True)
+
+            if st.button(':material/person: Gerenciar Clientes', type='tertiary'): st.session_state.op = 1
+            st.button(':material/package_2: Gerenciar Produto\n ---', type='tertiary')
+            st.button(':material/category: Gerenciar Categorias', type='tertiary')
+            st.button(':material/shoppingmode: Histórico de Vendas', type='tertiary')
+
 
         if st.session_state.op == 1:
             MClienteUI.main()

@@ -1,7 +1,7 @@
 [
     {
         "id": 0,
-        "nome": "#",
+        "nome": "Admin",
         "email": "admin",
         "fone": "#",
         "senha": "admin"
@@ -15,7 +15,7 @@
     },
     {
         "id": 2,
-        "nome": "Bruno Dias",
+        "nome": "Brunin",
         "email": "bruno@email.com",
         "fone": "1234",
         "senha": "1234"

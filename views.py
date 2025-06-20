@@ -65,7 +65,7 @@ class View:
     def admin_criar():
         for cliente in Clientes.listar():
             if cliente.email == "admin" : return
-        View.cliente_inserir("#", "admin", "#","admin")    
+        View.cliente_inserir("admin", "admin", "#","admin")    
      
 
 

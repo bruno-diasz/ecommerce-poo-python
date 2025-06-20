@@ -33,7 +33,7 @@ class Clientes:
         x = cls.listar_id(obj.id)
         if x is not None: 
             cls.objetos.remove(x)
-            cls.objetos.insert(obj.id-1,obj)
+            cls.objetos.insert(obj.id,obj)
             cls.salvar()
 
     @classmethod

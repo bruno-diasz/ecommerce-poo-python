@@ -15,9 +15,9 @@ class ManterClienteUI:
         with inserir:
             ManterClienteUI.inserir()
         with editar:
-            pass  # ManterClienteUI.atualizar()
+            ManterClienteUI.atualizar()
         with remover:
-            pass  # ManterClienteUI.excluir()
+            ManterClienteUI.excluir()
 
     @staticmethod
     def listar():
@@ -43,6 +43,37 @@ class ManterClienteUI:
             st.write('---')
             if st.form_submit_button("Cadastrar", type='primary'):
                 View.cliente_inserir(nome, email, fone, senha)
-                st.success("Cadastrado com realizado sucesso. :material/check:")
+                st.success("Cadastrado realizado com sucesso. :material/check:")
                 time.sleep(4)
                 st.rerun()
+
+    @staticmethod
+    def atualizar():
+        clientes= View.cliente_listar()
+        cliente = st.selectbox('Selecione um Cliente para editar:',clientes, format_func=lambda cliente: f'{cliente.id}. {cliente.nome:>10} - {cliente.email} - {cliente.fone}') 
+         
+        with st.form(key='atualizar_cliente', clear_on_submit=True):
+            nome = st.text_input("Novo Nome: ", placeholder='Digite seu novo Nome aqui',value=cliente.nome )
+            email = st.text_input("Novo E-mail: ", placeholder='Digite seu novo E-mail aqui', value=cliente.email)
+            senha = st.text_input("Nova Senha: ", type='password', placeholder='Digite sua nova Senha aqui', value=cliente.senha)
+            senha2 = st.text_input("Nova Repita a Senha: ", type='password', placeholder='Digite novamente sua nova Senha aqui', value=cliente.senha)
+            fone = st.text_input("Novo Telefone: ", placeholder='Digite seu novo Telefone aqui', value=cliente.fone)
+
+            st.write('---')
+            if st.form_submit_button("Atualizar", type='primary'):
+                View.cliente_atualizar(cliente.id, nome, email, fone, senha)
+                st.success("Atualização realizado com sucesso. :material/check:")
+                time.sleep(4)
+                st.rerun()
+
+    @staticmethod
+    def excluir():
+        clientes= View.cliente_listar()
+        cliente = st.selectbox('Selecione um Cliente para remover:',clientes, format_func=lambda cliente: f'{cliente.id}. {cliente.nome:>10} - {cliente.email} - {cliente.fone}') 
+
+        st.write('---')
+        if st.button("Remover", type='primary'):
+            View.cliente_excluir(cliente.id)
+            st.success("Exclusão realizado com sucesso. :material/check:")
+            time.sleep(4)
+            st.rerun()
