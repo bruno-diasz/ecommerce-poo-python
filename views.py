@@ -143,7 +143,7 @@ class View:
     #===== Classe Categorias ======
     @staticmethod
     def categoria_inserir(desc:str)->None: #Create
-        x = Categoria(0, desc)
+        x = Categoria(0, desc.capitalize())
         Categorias.inserir(x)
 
     @staticmethod

@@ -50,7 +50,7 @@ class ManterClienteUI:
     @staticmethod
     def atualizar():
         clientes= View.cliente_listar()
-        cliente = st.selectbox('Selecione um Cliente para editar:',clientes, format_func=lambda cliente: f'{cliente.id}. {cliente.nome:>10} - {cliente.email} - {cliente.fone}') 
+        cliente = st.selectbox('Selecione um Cliente para editar:',clientes, format_func=lambda cliente: f'{cliente.id}. {cliente.nome:} - {cliente.email} - {cliente.fone}') 
          
         with st.form(key='atualizar_cliente', clear_on_submit=True):
             nome = st.text_input("Novo Nome: ", placeholder='Digite seu novo Nome aqui',value=cliente.nome )
@@ -69,7 +69,7 @@ class ManterClienteUI:
     @staticmethod
     def excluir():
         clientes= View.cliente_listar()
-        cliente = st.selectbox('Selecione um Cliente para remover:',clientes, format_func=lambda cliente: f'{cliente.id}. {cliente.nome:>10} - {cliente.email} - {cliente.fone}') 
+        cliente = st.selectbox('Selecione um Cliente para remover:',clientes, format_func=lambda cliente: f'{cliente.id}. {cliente.nome} - {cliente.email} - {cliente.fone}') 
 
         st.write('---')
         if st.button("Remover", type='primary'):
