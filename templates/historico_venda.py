@@ -9,7 +9,7 @@ class HistoricoVenda:
             def __init__(self):
                 pass
             def __str__(self):
-                return f"{'ITEM':<27}     {'PREÇO':>15}   {'QTD':<6} {'SUBTOTAL':>25}"
+                return f"{'ITEM':<27}     {'PREÇO':>15}   {'QTD':<6} {'SUBTOTAL':>26}"
                 
         c = cabecalho()
         st.subheader(":material/receipt: Histórico de Vendas")

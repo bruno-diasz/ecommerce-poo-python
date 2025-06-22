@@ -3,7 +3,7 @@
         "id": 1,
         "desc": "Iphone 15",
         "preco": 500.0,
-        "estoque": 8,
+        "estoque": 10,
         "categoriaID": 1
     },
     {
@@ -24,7 +24,14 @@
         "id": 4,
         "desc": "Samsung a52",
         "preco": 200.0,
-        "estoque": 8,
-        "categoriaID": 15
+        "estoque": 6,
+        "categoriaID": 0
+    },
+    {
+        "id": 5,
+        "desc": "teste",
+        "preco": 0.0,
+        "estoque": 0,
+        "categoriaID": 0
     }
 ]

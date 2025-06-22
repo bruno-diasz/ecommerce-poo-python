@@ -73,7 +73,7 @@ class View:
     #===== Classe Produtos ======
     @staticmethod
     def produto_inserir(desc:str, preco:float, estoq:int) -> None: #Create
-        x = Produto(0,desc,preco,estoq)
+        x = Produto(0,desc,round(preco,2),estoq)
         Produtos.inserir(x)
 
     @staticmethod
@@ -96,11 +96,13 @@ class View:
 
     @staticmethod
     def produto_atualizar(id:int, desc:str, preco:float, estoq:int) -> None: #Update
-        x = Produto(id,desc,preco,estoq)
+        x = Produto(id,desc,round(preco,2),estoq)
         c = Produtos.listar_id(id)
         if c is None:
             raise ValueError("Produto não encontrado")
+        x.idCategoria = c.idCategoria
         Produtos.atualizar(x)
+
        
 
     @staticmethod

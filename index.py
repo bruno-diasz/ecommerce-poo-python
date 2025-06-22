@@ -1,5 +1,6 @@
 import streamlit as st
 from templates.manter_cliente_ui import ManterClienteUI as MClienteUI
+from templates.manter_produtos_ui import ManterProdutoUI as MProdutoUI
 from templates.manter_categoria_ui import ManterCategoriaUI as MCategoriaUI
 from templates.historico_venda import HistoricoVenda 
 
@@ -14,21 +15,21 @@ class IndexUI:
             st.write('---')
 
             #===MENU ALTERNATIVO ===
-            # if st.button('**:material/person: Gerenciar Clientes**',use_container_width=True): st.session_state.op = 1
-            # st.button('**:material/package_2: Gerenciar Produto**',use_container_width=True)
-            # st.button('**:material/category: Gerenciar Categorias**',use_container_width=True)
-            # st.button('**:material/receipt: Histórico de Vendas**',use_container_width=True)
+            if st.button('**:material/person: Gerenciar Clientes**',use_container_width=True): st.session_state.op = 1
+            if st.button('**:material/package_2: Gerenciar Produtos**',use_container_width=True): st.session_state.op = 2
+            if st.button('**:material/category: Gerenciar Categorias**',use_container_width=True): st.session_state.op = 3
+            if st.button('**:material/receipt: Histórico de Vendas**',use_container_width=True): st.session_state.op = 4
 
-            if st.button('**:material/person: Gerenciar Clientes**', type='tertiary'): st.session_state.op = 1
-            if st.button('**:material/package_2: Gerenciar Produto**', type='tertiary'): st.session_state.op = 2
-            if st.button('**:material/category: Gerenciar Categorias**', type='tertiary'): st.session_state.op = 3
-            if st.button('**:material/receipt: Histórico de Vendas**', type='tertiary'): st.session_state.op = 4
+            # if st.button('**:material/person: Gerenciar Clientes**', type='tertiary'): st.session_state.op = 1
+            # if st.button('**:material/package_2: Gerenciar Produtos**', type='tertiary'): st.session_state.op = 2
+            # if st.button('**:material/category: Gerenciar Categorias**', type='tertiary'): st.session_state.op = 3
+            # if st.button('**:material/receipt: Histórico de Vendas**', type='tertiary'): st.session_state.op = 4
 
 
         if st.session_state.op == 1:
             MClienteUI.main()
         elif st.session_state.op == 2:
-            pass
+            MProdutoUI.main()
         elif st.session_state.op == 3:
             MCategoriaUI.main()
         elif st.session_state.op == 4:
