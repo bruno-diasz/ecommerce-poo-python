@@ -57,8 +57,8 @@ class ManterClienteUI:
             col1,col2 = st.columns(2)
             nome = col1.text_input("Novo Nome: ", placeholder='Digite seu novo Nome aqui',value=cliente.nome )
             email = col2.text_input("Novo E-mail: ", placeholder='Digite seu novo E-mail aqui', value=cliente.email)
-            senha = col1.text_input("Nova Senha: ", type='password', placeholder='Digite sua nova Senha aqui', value=cliente.senha)
-            senha2 = col2.text_input("Nova Repita a Senha: ", type='password', placeholder='Digite novamente sua nova Senha aqui', value=cliente.senha)
+            senha = col1.text_input("Nova Senha: ", type='password', placeholder='Digite sua nova Senha aqui')
+            senha2 = col2.text_input("Nova Repita a Senha: ", type='password', placeholder='Digite novamente sua nova Senha aqui')
             fone = col1.text_input("Novo Telefone: ", placeholder='Digite seu novo Telefone aqui', value=cliente.fone)
 
             st.write('---')
