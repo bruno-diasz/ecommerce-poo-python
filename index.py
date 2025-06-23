@@ -20,10 +20,7 @@ class IndexUI:
             if st.button('**:material/category: Gerenciar Categorias**',use_container_width=True): st.session_state.op = 3
             if st.button('**:material/receipt: Histórico de Vendas**',use_container_width=True): st.session_state.op = 4
 
-            # if st.button('**:material/person: Gerenciar Clientes**', type='tertiary'): st.session_state.op = 1
-            # if st.button('**:material/package_2: Gerenciar Produtos**', type='tertiary'): st.session_state.op = 2
-            # if st.button('**:material/category: Gerenciar Categorias**', type='tertiary'): st.session_state.op = 3
-            # if st.button('**:material/receipt: Histórico de Vendas**', type='tertiary'): st.session_state.op = 4
+            
 
 
         if st.session_state.op == 1:
@@ -42,7 +39,9 @@ class IndexUI:
     @staticmethod
     def main():
         IndexUI.sidebar()
-        
+        # imagem = st.file_uploader('texte', type='png,jpg')
+        # if imagem is not None:
+        #     st.image(imagem, width=110)
 
 IndexUI.main()
         

@@ -9,7 +9,7 @@ class ManterProdutoUI:
     @staticmethod
     def main():
         st.subheader(":material/package_2: Administração de Produtos")
-        listar, inserir, editar, remover = st.tabs(['**:material/article: Lista de Produtos**','**:material/add_2: Cadastrar Produto**','**:material/edit: Editar Produto**','**:material/delete: Remover Produto**'])
+        listar, inserir, editar, remover,categoria = st.tabs(['**:material/article: Lista de Produtos**','**:material/add_2: Cadastrar Produto**','**:material/edit: Editar Produto**','**:material/delete: Remover Produto**','**:material/category: Vincular Categoria**'])
         with listar:
             ManterProdutoUI.listar()
         with inserir:
@@ -18,6 +18,8 @@ class ManterProdutoUI:
             ManterProdutoUI.atualizar()
         with remover:
             ManterProdutoUI.excluir()
+        with categoria:
+            ManterProdutoUI.vincular_categoria()
 
     @staticmethod
     def listar():
@@ -74,5 +76,21 @@ class ManterProdutoUI:
         if st.button("Remover", type='primary'):
             View.produto_excluir(produto.id)
             st.success("Exclusão realizado com sucesso. :material/check:")
+            time.sleep(4)
+            st.rerun()
+
+    @staticmethod
+    def vincular_categoria():
+        col1,col2 = st.columns(2)
+        produtos= View.produto_listar()
+        produto = col1.selectbox('Selecione um produto para vincular a categoria :',produtos, format_func=lambda produto: f'{produto.id}. {produto.descricao}') 
+
+        categorias= View.categoria_listar()
+        categoria = col2.selectbox('Selecione uma categoria:',categorias, format_func=lambda categoria: f'{categoria.id}. {categoria.descricao}') 
+
+        st.write('---')
+        if st.button("Vincular produto", type='primary'):
+            View.produto_vincular_categoria(produto.id,categoria.id)
+            st.success("Vinculo realizado com sucesso. :material/check:")
             time.sleep(4)
             st.rerun()
