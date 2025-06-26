@@ -91,6 +91,6 @@ class ManterProdutoUI:
         st.write('---')
         if st.button("Vincular produto", type='primary'):
             View.produto_vincular_categoria(produto.id,categoria.id)
-            st.success("Vinculo realizado com sucesso. :material/check:")
+            st.success("Vínculo realizado com sucesso. :material/check:")
             time.sleep(4)
             st.rerun()

@@ -21,6 +21,9 @@ class ManterClienteUI:
 
     @staticmethod
     def listar():
+        st.subheader(":material/article_person: Listagem de Clientes:")
+        colun1,colun2 = st.columns([2,1])
+        colun1.divider()
         clientes = View.cliente_listar()
         if len(clientes) == 0:
             st.write("Nenhum cliente cadastrado")
@@ -33,6 +36,9 @@ class ManterClienteUI:
 
     @staticmethod
     def inserir():
+        st.subheader(":material/person_add: Cadastro:")
+        colun1,colun2 = st.columns([2,1])
+        colun1.divider()
         with st.form(key='cadastro_cliente', clear_on_submit=True):
             col1,col2 = st.columns(2)
             nome = col1.text_input("Nome: ", placeholder='Digite seu Nome aqui')
@@ -50,6 +56,10 @@ class ManterClienteUI:
 
     @staticmethod
     def atualizar():
+        st.subheader(":material/person_edit: Edição de Cliente:")
+        colun1,colun2 = st.columns([2,1])
+        colun1.divider()
+
         clientes= View.cliente_listar()
         cliente = st.selectbox('Selecione um Cliente para editar:',clientes, format_func=lambda cliente: f'{cliente.id}. {cliente.email}') 
          
@@ -70,6 +80,10 @@ class ManterClienteUI:
 
     @staticmethod
     def excluir():
+        st.subheader(":material/person_remove: Exclusão de Cliente:")
+        colun1,colun2 = st.columns([2,1])
+        colun1.divider()
+
         clientes= View.cliente_listar()
         cliente = st.selectbox('Selecione um Cliente para remover:',clientes, format_func=lambda cliente: f'{cliente.id}. {cliente.email}') 
 
