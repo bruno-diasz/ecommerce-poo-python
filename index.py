@@ -3,6 +3,7 @@ from templates.manter_cliente_ui import ManterClienteUI as MClienteUI
 from templates.manter_produtos_ui import ManterProdutoUI as MProdutoUI
 from templates.manter_categoria_ui import ManterCategoriaUI as MCategoriaUI
 from templates.historico_venda import HistoricoVenda 
+from templates.historico_compra import HistoricoCompra 
 from templates.login_ui import LoginUI
 
 class IndexUI:
@@ -27,8 +28,27 @@ class IndexUI:
            
 
     @staticmethod
-    def menu_usuario():
-        st.text("logado legal")
+    def menu_cliente():
+        if 'op' not in st.session_state:
+            st.session_state.op = 0
+        with st.sidebar:
+            st.title(':red[Área do Cliente]')
+            st.write('---')
+            
+            if st.button('**:material/package_2: Catalógo de Produtos**',use_container_width=True): st.session_state.op = 1
+            if st.button('**:material/shopping_cart: Carrinho de Compras**',use_container_width=True): st.session_state.op = 2
+            if st.button('**:material/receipt: Historico de Compras**',use_container_width=True): st.session_state.op = 3
+            st.divider()
+            if st.button('**:material/logout: Sair da Conta**',use_container_width=True): st.session_state.op = 4
+
+        if st.session_state.op == 1:
+            MClienteUI.main()
+        elif st.session_state.op == 2:
+            MProdutoUI.main()
+        elif st.session_state.op == 3:
+            HistoricoCompra.main()
+        elif st.session_state.op == 4:
+            IndexUI.logout()
 
     @staticmethod
     def menu_admin():
@@ -63,7 +83,7 @@ class IndexUI:
         elif st.session_state.usr.email == "admin":
             IndexUI.menu_admin()
         else:
-            IndexUI.menu_usuario()
+            IndexUI.menu_cliente()
 
     @staticmethod
     def logout():
@@ -74,9 +94,11 @@ class IndexUI:
     def main():
       
         IndexUI.sidebar()
-        # imagem = st.file_uploader('texte', type='png,jpg')
-        # if imagem is not None:
-        #     st.image(imagem, width=110)
+       
+       
+          
+        
+        
 
 IndexUI.main()
         
