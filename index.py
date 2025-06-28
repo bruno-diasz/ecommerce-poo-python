@@ -36,7 +36,7 @@ class IndexUI:
             st.title(':red[Área do Cliente]')
             st.write('---')
             
-            if st.button('**:material/package_2: Catalógo de Produtos**',use_container_width=True): st.session_state.op = 1
+            if st.button('**:material/package_2: Catálogo de Produtos**',use_container_width=True): st.session_state.op = 1
             if st.button('**:material/shopping_cart: Carrinho de Compras**',use_container_width=True): st.session_state.op = 2
             if st.button('**:material/receipt: Historico de Compras**',use_container_width=True): st.session_state.op = 3
             st.divider()

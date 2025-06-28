@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import time
+import base64
 from views import View
 
 
@@ -19,7 +20,7 @@ class ManterProdutoUI:
         with remover:
             ManterProdutoUI.excluir()
         with categoria:
-            ManterProdutoUI.vincular_categoria()
+            ManterProdutoUI.vincular_categoria()            
 
     @staticmethod
     def listar():
@@ -36,11 +37,11 @@ class ManterProdutoUI:
     @staticmethod
     def inserir():
         with st.container(border=True):
-            desc = st.text_input("Nome do Produto: ", placeholder='Digite o Nome do Produto aqui')
+            desc = st.text_input("Nome do Produto: ", placeholder='Digite o Nome do Produto aqui', key='produto_desc')
             col1,col2 = st.columns(2)
-            preco = col1.number_input("Preço: ",min_value=0.0 ) 
-            estoque = col2.number_input("Quantidade em estoque: ",min_value=0)
-            imagem = col1.file_uploader('Imagem do produto:', ['png','jpg'],key="adicionar_img")
+            preco = col1.number_input("Preço: ",min_value=0.0 ,key='produto_preco') 
+            estoque = col2.number_input("Quantidade em estoque: ",min_value=0, key='produto_estoque')
+            imagem = col1.file_uploader('Imagem do Produto:', ['png','jpg'],key="produto_imagem")
             with col2.container():
                 colun1,colun2,colun3 = st.columns([1,3,1])
                 if imagem is not None:
@@ -51,6 +52,7 @@ class ManterProdutoUI:
             if st.button("Cadastrar", type='primary'):
                 View.produto_inserir(desc, preco, estoque,imagem)
                 st.success("Cadastrado realizado com sucesso. :material/check:")
+
                 time.sleep(4)
                 st.rerun()
       
@@ -70,9 +72,13 @@ class ManterProdutoUI:
                 imagem = col1.file_uploader('Imagem do Produto:', ['png','jpg'],key="atualizar_img")
                 with col2.container():
                     colun1,colun2,colun3 = st.columns([1,3,1])
+                   
                     if imagem is not None:
                         colun2.write(" ")
                         colun2.image(imagem, width=190,caption='Preview')
+                    else:
+                        colun2.write(" ")
+                        colun2.image(base64.b64decode(produto.imagem), width=190,caption='Preview')
 
              
 

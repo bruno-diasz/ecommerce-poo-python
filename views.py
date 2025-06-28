@@ -79,7 +79,7 @@ class View:
         imagem_b64 = base64.b64encode(imagem_bytes).decode('utf-8')
 
         #Criando objeto
-        x = Produto(0,desc,round(preco,2),estoq,imagem_b64)
+        x = Produto(0,desc.title(),round(preco,2),estoq,imagem_b64)
         Produtos.inserir(x)
 
     @staticmethod
@@ -107,7 +107,7 @@ class View:
         imagem_b64 = base64.b64encode(imagem_bytes).decode('utf-8')
 
         #Criando objeto
-        x = Produto(id,desc,round(preco,2),estoq, imagem_b64)
+        x = Produto(id,desc.title(),round(preco,2),estoq, imagem_b64)
         c = Produtos.listar_id(id)
         if c is None:
             raise ValueError("Produto não encontrado")
