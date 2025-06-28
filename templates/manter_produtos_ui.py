@@ -30,42 +30,58 @@ class ManterProdutoUI:
             dic = []
             for obj in produtos:
                 dic.append(obj.to_dict())
-            df = pd.DataFrame(dic)
+            df = pd.DataFrame(dic, columns= ['id', 'desc', 'preco', 'estoque', 'categoriaID'])
             st.dataframe(df, hide_index=True,column_config={"id": "ID", "desc": "Produto", "preco": "Preço", "estoque" : "Estoque","categoriaID": "CategoriaID"})
 
     @staticmethod
     def inserir():
-        with st.form(key='cadastro_produto', clear_on_submit=True):
+        with st.container(border=True):
             desc = st.text_input("Nome do Produto: ", placeholder='Digite o Nome do Produto aqui')
             col1,col2 = st.columns(2)
             preco = col1.number_input("Preço: ",min_value=0.0 ) 
             estoque = col2.number_input("Quantidade em estoque: ",min_value=0)
-            
+            imagem = col1.file_uploader('Imagem do produto:', ['png','jpg'],key="adicionar_img")
+            with col2.container():
+                colun1,colun2,colun3 = st.columns([1,3,1])
+                if imagem is not None:
+                    colun2.write(" ")
+                    colun2.image(imagem, width=190,caption='Preview')
 
             st.write('---')
-            if st.form_submit_button("Cadastrar", type='primary'):
-                View.produto_inserir(desc, preco, estoque)
+            if st.button("Cadastrar", type='primary'):
+                View.produto_inserir(desc, preco, estoque,imagem)
                 st.success("Cadastrado realizado com sucesso. :material/check:")
                 time.sleep(4)
                 st.rerun()
-
+      
     @staticmethod
     def atualizar():
         produtos= View.produto_listar()
-        produto = st.selectbox('Selecione um produto para editar:',produtos, format_func=lambda produto: f'{produto.id}. {produto.descricao}') 
-         
-        with st.form(key='atualizar_produto', clear_on_submit=True):
-            desc = st.text_input("Nome do Produto: ", placeholder='Digite o Nome do Produto aqui', value=produto.descricao)
-            col1,col2 = st.columns(2)
-            preco = col1.number_input("Preço: ",min_value=0.0, value=produto.preco)
-            estoque = col2.number_input("Quantidade em Estoque: ",min_value=0, value=produto.estoque)
+        if len(produtos) == 0:
+            st.write("Nenhum produto cadastrado")
+        else:
+            produto = st.selectbox('Selecione um produto para editar:',produtos, format_func=lambda produto: f'{produto.id}. {produto.descricao}') 
+            
+            with st.container(border=True):
+                desc = st.text_input("Nome do Produto: ", placeholder='Digite o Nome do Produto aqui', value=produto.descricao)
+                col1,col2 = st.columns(2)
+                preco = col1.number_input("Preço: ",min_value=0.0, value=produto.preco)
+                estoque = col2.number_input("Quantidade em Estoque: ",min_value=0, value=produto.estoque)
+                imagem = col1.file_uploader('Imagem do Produto:', ['png','jpg'],key="atualizar_img")
+                with col2.container():
+                    colun1,colun2,colun3 = st.columns([1,3,1])
+                    if imagem is not None:
+                        colun2.write(" ")
+                        colun2.image(imagem, width=190,caption='Preview')
 
-            st.write('---')
-            if st.form_submit_button("Atualizar", type='primary'):
-                View.produto_atualizar(produto.id, desc, preco, estoque)
-                st.success("Atualização realizado com sucesso. :material/check:")
-                time.sleep(4)
-                st.rerun()
+             
+
+                st.write('---')
+                if st.button("Atualizar", type='primary'):
+                    View.produto_atualizar(produto.id, desc, preco, estoque,imagem)
+                    st.success("Atualização realizado com sucesso. :material/check:")
+                    time.sleep(4)
+                    st.rerun()
 
     @staticmethod
     def excluir():

@@ -1,8 +1,8 @@
 from models.categoria import Categoria
-from dao.crud import Crud
+from dao.crud import CRUD
 import json
 
-class Categorias(Crud):
+class Categorias(CRUD):
 
     @classmethod
     def abrir(cls):

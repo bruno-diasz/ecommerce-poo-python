@@ -4,6 +4,7 @@ from templates.manter_produtos_ui import ManterProdutoUI as MProdutoUI
 from templates.manter_categoria_ui import ManterCategoriaUI as MCategoriaUI
 from templates.historico_venda import HistoricoVenda 
 from templates.historico_compra import HistoricoCompra 
+from templates.catalogo_produtos import CatalogoProdutos
 from templates.login_ui import LoginUI
 
 class IndexUI:
@@ -42,7 +43,7 @@ class IndexUI:
             if st.button('**:material/logout: Sair da Conta**',use_container_width=True): st.session_state.op = 4
 
         if st.session_state.op == 1:
-            MClienteUI.main()
+            CatalogoProdutos.main()
         elif st.session_state.op == 2:
             MProdutoUI.main()
         elif st.session_state.op == 3:

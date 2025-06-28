@@ -33,11 +33,11 @@ class ManterCategoriaUI:
 
     @staticmethod
     def inserir():
-        with st.form(key='cadastro_categoria', clear_on_submit=True):
+        with st.container(border=True):
             desc = st.text_input("Nome da Categoria: ", placeholder='Digite o nome da Categoria aqui')
 
             st.write('---')
-            if st.form_submit_button("Cadastrar", type='primary'):
+            if st.button("Cadastrar", type='primary'):
                 View.categoria_inserir(desc)
                 st.success("Categoria criada com sucesso. :material/check:")
                 time.sleep(4)
@@ -48,11 +48,11 @@ class ManterCategoriaUI:
         categorias = View.categoria_listar()
         categoria = st.selectbox('Selecione um categoria para editar:',categorias , format_func=lambda categoria: f'{categoria.id}. {categoria.descricao}') 
          
-        with st.form(key='atualizar_categoria', clear_on_submit=True):
+        with st.container(border=True):
             nome = st.text_input("Novo Nome: ", placeholder='Digite seu novo Nome aqui',value=categoria.descricao )
            
             st.write('---')
-            if st.form_submit_button("Atualizar", type='primary'):
+            if st.button("Atualizar", type='primary'):
                 View.categoria_atualizar(categoria.id, nome)
                 st.success("Atualização realizado com sucesso. :material/check:")
                 time.sleep(4)

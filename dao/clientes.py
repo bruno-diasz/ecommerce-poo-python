@@ -1,8 +1,8 @@
 from models.cliente import Cliente
-from dao.crud import Crud
+from dao.crud import CRUD
 import json
 
-class Clientes(Crud):
+class Clientes(CRUD):
 
     @classmethod
     def abrir(cls):

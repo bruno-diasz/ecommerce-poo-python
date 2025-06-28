@@ -1,8 +1,8 @@
 from models.vendaitem import VendaItem
-from dao.crud import Crud
+from dao.crud import CRUD
 import json
 
-class VendaItems(Crud):
+class VendaItems(CRUD):
     
     @classmethod
     def abrir(cls):

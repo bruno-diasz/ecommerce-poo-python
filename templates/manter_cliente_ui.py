@@ -39,7 +39,7 @@ class ManterClienteUI:
         st.subheader(":material/person_add: Cadastro:")
         colun1,colun2 = st.columns([2,1])
         colun1.divider()
-        with st.form(key='cadastro_cliente', clear_on_submit=True):
+        with st.container(border=True):
             col1,col2 = st.columns(2)
             nome = col1.text_input("Nome: ", placeholder='Digite seu Nome aqui')
             email = col2.text_input("E-mail: ", placeholder='Digite seu E-mail aqui')
@@ -48,7 +48,7 @@ class ManterClienteUI:
             fone = col1.text_input("Telefone: ", placeholder='Digite seu Telefone aqui')
 
             st.write('---')
-            if st.form_submit_button("Cadastrar", type='primary'):
+            if st.button("Cadastrar", type='primary'):
                 View.cliente_inserir(nome, email, fone, senha)
                 st.success("Cadastro realizado com sucesso. :material/check:")
                 time.sleep(4)
@@ -63,7 +63,7 @@ class ManterClienteUI:
         clientes= View.cliente_listar()
         cliente = st.selectbox('Selecione um Cliente para editar:',clientes, format_func=lambda cliente: f'{cliente.id}. {cliente.email}') 
          
-        with st.form(key='atualizar_cliente', clear_on_submit=True):
+        with st.container(border=True):
             col1,col2 = st.columns(2)
             nome = col1.text_input("Novo Nome: ", placeholder='Digite seu novo Nome aqui',value=cliente.nome )
             email = col2.text_input("Novo E-mail: ", placeholder='Digite seu novo E-mail aqui', value=cliente.email)
@@ -72,7 +72,7 @@ class ManterClienteUI:
             fone = col1.text_input("Novo Telefone: ", placeholder='Digite seu novo Telefone aqui', value=cliente.fone)
 
             st.write('---')
-            if st.form_submit_button("Atualizar", type='primary'):
+            if st.button("Atualizar", type='primary'):
                 View.cliente_atualizar(cliente.id, nome, email, fone, senha)
                 st.success("Atualização realizado com sucesso. :material/check:")
                 time.sleep(4)

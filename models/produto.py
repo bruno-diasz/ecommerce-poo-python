@@ -1,11 +1,12 @@
 from dao.categorias import Categorias
 class Produto:
     #Construtor
-    def __init__(self, id:int, desc:str, preco:float,estoq:int):
+    def __init__(self, id:int, desc:str, preco:float,estoq:int, img:str):
         self.id = id #Chamando setter
         self.descricao = desc #Chamando setter
         self.preco = preco #Chamando setter
         self.estoque = estoq #Chamando setter
+        self.imagem = img #Chamando setter
         
         self.__idCategoria = 0
 
@@ -52,6 +53,19 @@ class Produto:
         self.__estoque = valor
 
     @property
+    def imagem(self):
+        return self.__imagem
+    
+    @imagem.setter
+    def imagem(self, imagem:str):
+        if not isinstance(imagem, str):
+            raise TypeError("A imagem deve estar em base64")
+        if len(imagem) < 1:
+            raise ValueError("A imagem nao pode estar vazia")
+        self.__imagem = imagem
+
+
+    @property
     def idCategoria(self) -> int:
         return self.__idCategoria
     
@@ -63,6 +77,9 @@ class Produto:
             raise ValueError("O idCategoria deve ser positivo")
         self.__idCategoria= valor
 
+
+    
+
     #Metodos
     def __str__(self):
         categoria = Categorias.listar_id(self.idCategoria)
@@ -72,5 +89,5 @@ class Produto:
         return f"{self.id}. {self.descricao:<20}R$ {self.preco:<7.2f} {self.estoque} {'UN':<6} {categoria.descricao} "
     
     def to_dict(self):
-        return {"id": self.id, "desc":self.descricao, "preco":self.preco, "estoque":self.estoque, "categoriaID":self.idCategoria}
+        return {"id": self.id, "desc":self.descricao, "preco":self.preco, "estoque":self.estoque, "categoriaID":self.idCategoria, "imagem":self.imagem}
     

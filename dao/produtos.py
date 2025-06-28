@@ -1,8 +1,8 @@
 from models.produto import Produto
-from dao.crud import Crud
+from dao.crud import CRUD
 import json
 
-class Produtos(Crud):
+class Produtos(CRUD):
    
     @classmethod
     def abrir(cls):
@@ -11,7 +11,7 @@ class Produtos(Crud):
             with open("data/produtos.json", mode="r") as arquivo:
                 clientes_json = json.load(arquivo)
                 for obj in clientes_json:
-                    c = Produto(obj["id"], obj["desc"], obj["preco"],obj["estoque"] )
+                    c = Produto(obj["id"], obj["desc"], obj["preco"],obj["estoque"], obj["imagem"])
                     c.idCategoria = obj["categoriaID"]
                     cls.objetos.append(c)
         except FileNotFoundError:

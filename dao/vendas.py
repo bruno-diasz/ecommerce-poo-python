@@ -1,9 +1,9 @@
 from models.venda import Venda
 from datetime import datetime
-from dao.crud import Crud
+from dao.crud import CRUD
 import json
 
-class Vendas(Crud):
+class Vendas(CRUD):
     
 
     @classmethod

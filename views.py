@@ -3,6 +3,7 @@ from dao.produtos import Produto, Produtos
 from dao.categorias import Categoria, Categorias
 from dao.vendas import Venda, Vendas
 from dao.vendaitems import VendaItem, VendaItems
+import base64
 
 class View:
 
@@ -72,8 +73,13 @@ class View:
 
     #===== Classe Produtos ======
     @staticmethod
-    def produto_inserir(desc:str, preco:float, estoq:int) -> None: #Create
-        x = Produto(0,desc,round(preco,2),estoq)
+    def produto_inserir(desc:str, preco:float, estoq:int, imagem:object) -> None: #Create
+        #Transformando imagem em texto
+        imagem_bytes = imagem.read()
+        imagem_b64 = base64.b64encode(imagem_bytes).decode('utf-8')
+
+        #Criando objeto
+        x = Produto(0,desc,round(preco,2),estoq,imagem_b64)
         Produtos.inserir(x)
 
     @staticmethod
@@ -95,8 +101,13 @@ class View:
         return produto_categoria
 
     @staticmethod
-    def produto_atualizar(id:int, desc:str, preco:float, estoq:int) -> None: #Update
-        x = Produto(id,desc,round(preco,2),estoq)
+    def produto_atualizar(id:int, desc:str, preco:float, estoq:int, imagem:object) -> None: #Update
+        #Tranformando imagem em texto
+        imagem_bytes = imagem.read()
+        imagem_b64 = base64.b64encode(imagem_bytes).decode('utf-8')
+
+        #Criando objeto
+        x = Produto(id,desc,round(preco,2),estoq, imagem_b64)
         c = Produtos.listar_id(id)
         if c is None:
             raise ValueError("Produto não encontrado")
