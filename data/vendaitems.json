@@ -1,0 +1,37 @@
+[
+    {
+        "id": 0,
+        "qtd": 4,
+        "preco": 150.0,
+        "idVenda": 4,
+        "idProduto": 0
+    },
+    {
+        "id": 1,
+        "qtd": 1,
+        "preco": 500.0,
+        "idVenda": 4,
+        "idProduto": 3
+    },
+    {
+        "id": 2,
+        "qtd": 3,
+        "preco": 250.0,
+        "idVenda": 4,
+        "idProduto": 2
+    },
+    {
+        "id": 3,
+        "qtd": 2,
+        "preco": 200.0,
+        "idVenda": 4,
+        "idProduto": 1
+    },
+    {
+        "id": 4,
+        "qtd": 20,
+        "preco": 399.99,
+        "idVenda": 4,
+        "idProduto": 8
+    }
+]

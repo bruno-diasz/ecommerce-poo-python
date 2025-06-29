@@ -23,8 +23,8 @@
     {
         "id": 4,
         "data": "20/06/2025 17:26:27",
-        "carrinho": true,
-        "total": 0,
+        "carrinho": false,
+        "total": 10249.799999999997,
         "idCliente": 1
     }
 ]

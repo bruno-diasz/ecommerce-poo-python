@@ -1,11 +1,18 @@
 import streamlit as st
-from views import View,Produtos
+from views import View
 import base64
+import time
 
 class CatalogoProdutos:
 
 	@staticmethod
 	def main ():
+
+		@st.dialog(' ')
+		def modal():
+			st.success("Produto adicionado ao carrinho com sucesso " ,icon=':material/check:')
+			
+
 		st.header(":material/package_2: Catálogo de Produtos")
 		st.divider()
 
@@ -18,9 +25,14 @@ class CatalogoProdutos:
 					imagem = base64.b64decode(imagem64)
 					if imagem is not None:
 						st.image(imagem)
-					
 					st.markdown(f"<b>{produto.descricao}</b></br>R$ {produto.preco:.2f}".replace('.',','), unsafe_allow_html=True)
-					st.button(":material/add_shopping_cart: Adicionar ao carrinho ", type='primary', use_container_width=True, key=f'item_{produto.id}')
+					colun1,colun2 = st.columns([1,1])
+					colun2.write("")
+					colun2.write("")
+					qtd = colun1.selectbox('Quantidade:',[i+1 for i in range(produto.estoque)],key=f'qtd_{produto.id}')
+					if colun2.button(":material/add_shopping_cart: :small[Add]", type='primary', use_container_width=True, key=f'add_{produto.id}'):
+						View.venda_inserir_item(produto.id, qtd,st.session_state.carrinho.id)
+						modal()
 
 		for produto in produtos[1::3]:
 			with col2:
@@ -31,7 +43,14 @@ class CatalogoProdutos:
 						st.image(imagem)
 					
 					st.markdown(f"<b>{produto.descricao}</b></br>R$ {produto.preco:.2f}".replace('.',','), unsafe_allow_html=True)
-					st.button(":material/add_shopping_cart: Adicionar ao carrinho ", type='primary', use_container_width=True, key=f'item_{produto.id}')
+
+					colun1,colun2 = st.columns([1,1])
+					colun2.write("")
+					colun2.write("")
+					qtd = colun1.selectbox('Quantidade:',[i+1 for i in range(produto.estoque)],key=f'qtd_{produto.id}')
+					if colun2.button(":material/add_shopping_cart: :small[Add]", type='primary', use_container_width=True, key=f'add_{produto.id}'):
+						View.venda_inserir_item(produto.id, qtd,st.session_state.carrinho.id)
+						modal()
 
 		for produto in produtos[2::3]:
 			with col3:
@@ -42,7 +61,18 @@ class CatalogoProdutos:
 						st.image(imagem)
 					
 					st.markdown(f"<b>{produto.descricao}</b></br>R$ {produto.preco:.2f}".replace('.',','), unsafe_allow_html=True)
-					st.button(":material/add_shopping_cart: Adicionar ao carrinho ", type='primary', use_container_width=True, key=f'item_{produto.id}')
+
+					colun1,colun2 = st.columns([1,1])
+					colun2.write("")
+					colun2.write("")
+					qtd = colun1.selectbox('Quantidade:',[i+1 for i in range(produto.estoque)],key=f'qtd_{produto.id}')
+					if colun2.button(":material/add_shopping_cart: :small[Add]", type='primary', use_container_width=True, key=f'add_{produto.id}'):
+						View.venda_inserir_item(produto.id, qtd,st.session_state.carrinho.id)
+						modal()
+	
+			
+							
+
 				
 				
 		   

@@ -5,6 +5,7 @@ from templates.manter_categoria_ui import ManterCategoriaUI as MCategoriaUI
 from templates.historico_venda import HistoricoVenda 
 from templates.historico_compra import HistoricoCompra 
 from templates.catalogo_produtos import CatalogoProdutos
+from templates.checkout import CheckOut
 from templates.login_ui import LoginUI
 
 class IndexUI:
@@ -38,14 +39,14 @@ class IndexUI:
             
             if st.button('**:material/package_2: Catálogo de Produtos**',use_container_width=True): st.session_state.op = 1
             if st.button('**:material/shopping_cart: Carrinho de Compras**',use_container_width=True): st.session_state.op = 2
-            if st.button('**:material/receipt: Historico de Compras**',use_container_width=True): st.session_state.op = 3
+            if st.button('**:material/receipt: Histórico de Compras**',use_container_width=True): st.session_state.op = 3
             st.divider()
             if st.button('**:material/logout: Sair da Conta**',use_container_width=True): st.session_state.op = 4
 
         if st.session_state.op == 1:
             CatalogoProdutos.main()
         elif st.session_state.op == 2:
-            MProdutoUI.main()
+            CheckOut.main()
         elif st.session_state.op == 3:
             HistoricoCompra.main()
         elif st.session_state.op == 4:

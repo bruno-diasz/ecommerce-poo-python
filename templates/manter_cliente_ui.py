@@ -50,7 +50,7 @@ class ManterClienteUI:
             st.write('---')
             if st.button("Cadastrar", type='primary'):
                 View.cliente_inserir(nome, email, fone, senha)
-                st.success("Cadastro realizado com sucesso. :material/check:")
+                st.success("Cadastro realizado com sucesso.", icon=':material/check: ')
                 time.sleep(4)
                 st.rerun()
 
