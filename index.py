@@ -15,7 +15,7 @@ class IndexUI:
         if 'op' not in st.session_state:
             st.session_state.op = 0
         with st.sidebar:
-            st.title(':red[Bem-Vindo Visitante] :smile:')
+            st.title(':red[Bem-Vindo Visitante] :smile:',)
             st.write('---')
 
             if st.button('**:material/login: Entrar**',use_container_width=True): st.session_state.op = 1

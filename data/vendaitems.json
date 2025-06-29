@@ -33,5 +33,96 @@
         "preco": 399.99,
         "idVenda": 4,
         "idProduto": 8
+    },
+    {
+        "id": 5,
+        "qtd": 1,
+        "preco": 500.0,
+        "idVenda": 5,
+        "idProduto": 3
+    },
+    {
+        "id": 6,
+        "qtd": 2,
+        "preco": 250.0,
+        "idVenda": 5,
+        "idProduto": 2
+    },
+    {
+        "id": 7,
+        "qtd": 1,
+        "preco": 200.0,
+        "idVenda": 5,
+        "idProduto": 1
+    },
+    {
+        "id": 8,
+        "qtd": 1,
+        "preco": 150.0,
+        "idVenda": 6,
+        "idProduto": 0
+    },
+    {
+        "id": 9,
+        "qtd": 1,
+        "preco": 250.0,
+        "idVenda": 6,
+        "idProduto": 2
+    },
+    {
+        "id": 10,
+        "qtd": 1,
+        "preco": 200.0,
+        "idVenda": 7,
+        "idProduto": 1
+    },
+    {
+        "id": 11,
+        "qtd": 1,
+        "preco": 150.0,
+        "idVenda": 8,
+        "idProduto": 0
+    },
+    {
+        "id": 12,
+        "qtd": 4,
+        "preco": 200.0,
+        "idVenda": 8,
+        "idProduto": 1
+    },
+    {
+        "id": 13,
+        "qtd": 1,
+        "preco": 500.0,
+        "idVenda": 8,
+        "idProduto": 3
+    },
+    {
+        "id": 14,
+        "qtd": 3,
+        "preco": 399.99,
+        "idVenda": 8,
+        "idProduto": 8
+    },
+    {
+        "id": 15,
+        "qtd": 3,
+        "preco": 10.0,
+        "idVenda": 9,
+        "idProduto": 5
+    },
+    {
+        "id": 16,
+        "qtd": 2,
+        "preco": 10.0,
+        "idVenda": 10,
+        "idProduto": 5
+    },
+    {
+        "id": 17,
+        "qtd": 2,
+        "preco": 500.0,
+        "idVenda": 11,
+        "idProduto": 3
     }
 ]

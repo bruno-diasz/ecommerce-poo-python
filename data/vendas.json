@@ -26,5 +26,61 @@
         "carrinho": false,
         "total": 10249.799999999997,
         "idCliente": 1
+    },
+    {
+        "id": 5,
+        "data": "29/06/2025 09:14:02",
+        "carrinho": false,
+        "total": 1200.0,
+        "idCliente": 1
+    },
+    {
+        "id": 6,
+        "data": "29/06/2025 09:41:22",
+        "carrinho": false,
+        "total": 400.0,
+        "idCliente": 1
+    },
+    {
+        "id": 7,
+        "data": "29/06/2025 09:50:18",
+        "carrinho": false,
+        "total": 200.0,
+        "idCliente": 1
+    },
+    {
+        "id": 8,
+        "data": "29/06/2025 09:50:58",
+        "carrinho": false,
+        "total": 2649.9700000000003,
+        "idCliente": 1
+    },
+    {
+        "id": 9,
+        "data": "29/06/2025 12:49:22",
+        "carrinho": false,
+        "total": 30.0,
+        "idCliente": 1
+    },
+    {
+        "id": 10,
+        "data": "29/06/2025 13:38:09",
+        "carrinho": false,
+        "total": 20.0,
+        "idCliente": 1
+    },
+    {
+        "id": 11,
+        "data": "29/06/2025 13:40:29",
+        "carrinho": false,
+        "total": 1000.0,
+        "idCliente": 1
+    },
+    {
+        "id": 12,
+        "data": "29/06/2025 13:52:09",
+        "carrinho": true,
+        "total": 0,
+        "idCliente": 1
     }
 ]
