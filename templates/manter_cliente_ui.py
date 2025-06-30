@@ -46,10 +46,17 @@ class ManterClienteUI:
             senha = col1.text_input("Senha: ", type='password', placeholder='Digite sua Senha aqui')
             senha2 = col2.text_input("Repita a Senha: ", type='password', placeholder='Digite novamente sua Senha aqui')
             fone = col1.text_input("Telefone: ", placeholder='Digite seu Telefone aqui')
+            if st.session_state.usr.funcao == "admin":
+                st.write("teste")
+                funcao = col2.selectbox("Função: ", ["admin", "entregador", "cliente"], format_func= lambda funcao : funcao.capitalize())
+            else:
+                funcao = "cliente"
+            if False:
+                st.write("teste")
 
             st.write('---')
             if st.button("Cadastrar", type='primary'):
-                View.cliente_inserir(nome, email, fone, senha)
+                View.cliente_inserir(nome, email, fone, senha, funcao)
                 st.success("Cadastro realizado com sucesso.", icon=':material/check: ')
                 time.sleep(4)
                 st.rerun()

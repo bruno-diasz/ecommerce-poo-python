@@ -85,9 +85,9 @@ class IndexUI:
     def sidebar():
         if "usr" not in st.session_state:
             IndexUI.menu_visitante()
-        elif st.session_state.usr.email == "admin":
+        elif st.session_state.usr.funcao == "admin":
             IndexUI.menu_admin()
-        else:
+        elif st.session_state.usr.funcao == "cliente":
             IndexUI.menu_cliente()
 
     @staticmethod

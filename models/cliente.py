@@ -1,10 +1,12 @@
 class Cliente:
-    def __init__(self, id:int, nome:str, email:str, fone:str, senha:str):
+    def __init__(self, id:int, nome:str, email:str, fone:str, senha:str, funcao:str):
         self.id = id #Chamando setter
         self.nome = nome #Chamando setter
         self.email= email #Chamando setter
         self.fone = fone #Chamando setter
         self.senha = senha #Chamando setter
+        self.funcao = funcao # chama o setter
+
     #Getters e setters
     @property
     def id(self) -> int:
@@ -57,9 +59,17 @@ class Cliente:
             raise TypeError("O fone de ser uma string")
         self.__senha = senha.strip()
 
+    @property
+    def funcao(self) -> str:
+        return self.__funcao
+    
+    @funcao.setter
+    def funcao(self, funcao:str):
+        self.__funcao = funcao
+        
     #Metodos da instancia
     def __str__(self):
         return f"{self.id}. {self.nome:<18} {self.email:<20} {self.fone}"
     
     def to_dict(self):
-        return {"id":self.id, "nome":self.nome, "email":self.email, "fone":self.fone, "senha":self.senha}
+        return {"id":self.id, "nome":self.nome, "email":self.email, "fone":self.fone, "senha":self.senha, "funcao":self.funcao}

@@ -9,7 +9,7 @@ class View:
 
     #==== Classe Clientes ====
     @staticmethod
-    def cliente_inserir(nome:str, email:str, fone:str, senha:str) -> None: #Create
+    def cliente_inserir(nome:str, email:str, fone:str, senha:str, funcao:str) -> None: #Create
         #Regras email
         if email == '':
             raise ValueError("O email é obrigatório!")
@@ -23,9 +23,14 @@ class View:
         tamanho = len(senha) 
         if tamanho < 4:
             raise ValueError("A senha deve ter pelo menos 4 caracteres")
+        
+        #Regras de Funcao
+        if funcao not in ["admin","entregador","cliente"]:
+            raise ValueError("Funcao de usuario invalida")
+            
        
         #Criação e adição do objeto
-        x = Cliente(0, nome, email, fone, senha)
+        x = Cliente(0, nome, email, fone, senha,funcao)
         Clientes.inserir(x)
 
     @staticmethod
@@ -33,14 +38,14 @@ class View:
         return Clientes.listar()
 
     @staticmethod
-    def cliente_atualizar(id:int, nome:str, email:str, fone:str, senha:str) -> None:  #Update
+    def cliente_atualizar(id:int, nome:str, email:str, fone:str, senha:str, funcao:str) -> None:  #Update
         c = Clientes.listar_id(id)
 
         #Regra de atualização
         if c is None:
             raise ValueError("Id de cliente não encontrado")
         
-        x = Cliente(id, nome, email, fone, senha)
+        x = Cliente(id, nome, email, fone, senha, funcao)
         Clientes.atualizar(x)
         
 

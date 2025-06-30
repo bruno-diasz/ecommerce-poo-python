@@ -141,9 +141,16 @@
     },
     {
         "id": 21,
-        "qtd": 6,
+        "qtd": 1,
         "preco": 250.0,
         "idVenda": 14,
         "idProduto": 2
+    },
+    {
+        "id": 22,
+        "qtd": 1,
+        "preco": 200.0,
+        "idVenda": 14,
+        "idProduto": 1
     }
 ]
