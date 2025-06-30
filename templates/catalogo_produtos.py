@@ -16,8 +16,12 @@ class CatalogoProdutos:
 		st.header(":material/package_2: Catálogo de Produtos")
 		st.divider()
 
-		col1,col2,col3 = st.columns(3)
 		produtos = View.produto_listar()
+		#categorias = View.produto_listar_categoria()
+		categorias = View.categoria_listar()
+		st.segmented_control('Categorias:',[ categoria.descricao for categoria in categorias])
+
+		col1,col2,col3 = st.columns(3)
 		for produto in produtos[::3]:
 			with col1:
 				with st.container(border=True):

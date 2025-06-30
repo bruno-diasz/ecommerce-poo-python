@@ -124,5 +124,26 @@
         "preco": 500.0,
         "idVenda": 11,
         "idProduto": 3
+    },
+    {
+        "id": 18,
+        "qtd": 2,
+        "preco": 150.0,
+        "idVenda": 13,
+        "idProduto": 0
+    },
+    {
+        "id": 20,
+        "qtd": 2,
+        "preco": 150.0,
+        "idVenda": 12,
+        "idProduto": 0
+    },
+    {
+        "id": 21,
+        "qtd": 6,
+        "preco": 250.0,
+        "idVenda": 14,
+        "idProduto": 2
     }
 ]

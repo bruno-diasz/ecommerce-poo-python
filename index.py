@@ -14,8 +14,9 @@ class IndexUI:
     def menu_visitante():
         if 'op' not in st.session_state:
             st.session_state.op = 0
+       
         with st.sidebar:
-            st.title(':red[Bem-Vindo Visitante] :smile:',)
+            st.title(':red[Bem-Vindo, Visitante!] :smile:',)
             st.write('---')
 
             if st.button('**:material/login: Entrar**',use_container_width=True): st.session_state.op = 1
@@ -35,6 +36,7 @@ class IndexUI:
             st.session_state.op = 0
         with st.sidebar:
             st.title(':red[Área do Cliente]')
+            st.subheader(f"E aí, :red[{st.session_state.usr.nome}]! Bem-vindo(a) de volta! ")
             st.write('---')
             
             if st.button('**:material/package_2: Catálogo de Produtos**',use_container_width=True): st.session_state.op = 1
@@ -58,6 +60,7 @@ class IndexUI:
             st.session_state.op = 0
         with st.sidebar:
             st.title(':red[Painel Administrativo]')
+            st.subheader(f"E aí, :red[{st.session_state.usr.nome}]! Bem-vindo(a) de volta! ")
             st.write('---')
 
             if st.button('**:material/person: Gerenciar Clientes**',use_container_width=True): st.session_state.op = 1
