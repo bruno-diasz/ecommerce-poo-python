@@ -102,15 +102,20 @@ class View:
 
     @staticmethod
     def produto_atualizar(id:int, desc:str, preco:float, estoq:int, imagem:object) -> None: #Update
-        #Tranformando imagem em texto
-        imagem_bytes = imagem.read()
-        imagem_b64 = base64.b64encode(imagem_bytes).decode('utf-8')
 
-        #Criando objeto
-        x = Produto(id,desc.title(),round(preco,2),estoq, imagem_b64)
         c = Produtos.listar_id(id)
         if c is None:
             raise ValueError("Produto não encontrado")
+        
+        #Tranformando imagem em texto
+        if imagem is not None:
+            imagem_bytes = imagem.read()
+            imagem_b64 = base64.b64encode(imagem_bytes).decode('utf-8')
+        else:
+            imagem_b64 = c.imagem
+
+        #Criando objeto
+        x = Produto(id,desc.title(),round(preco,2),estoq, imagem_b64)
         x.idCategoria = c.idCategoria
         Produtos.atualizar(x)
 
