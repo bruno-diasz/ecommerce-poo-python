@@ -7,7 +7,7 @@ class Venda:
         self.__data = datetime.now()
         self.__carrinho = True
         self.__total = 0
-        self.__idCliente = 0
+        self.__idUsuario = 0
 
     #Getters e setters
     @property
@@ -51,16 +51,16 @@ class Venda:
         self.__total= valor
 
     @property
-    def idCliente(self) -> int:
-        return self.__idCliente
+    def idUsuario(self) -> int:
+        return self.__idUsuario
     
-    @idCliente.setter
-    def idCliente(self,valor:int):
+    @idUsuario.setter
+    def idUsuario(self,valor:int):
         if not isinstance(valor, int):
-            raise TypeError("O valor o idCliente deve ser um número inteiro")
+            raise TypeError("O valor o idUsuario deve ser um número inteiro")
         if valor < 0:
-            raise ValueError("O idCliente deve ser maior ou igual a zero")
-        self.__idCliente= valor
+            raise ValueError("O idUsuario deve ser maior ou igual a zero")
+        self.__idUsuario= valor
 
     #Metodos de instancia
     def __str__(self):
@@ -69,7 +69,7 @@ class Venda:
     
     def to_dict(self):
         data = self.data.strftime("%d/%m/%Y %H:%M:%S")
-        return {"id":self.id, "data":data, "carrinho":self.carrinho, "total":self.total, "idCliente":self.idCliente}
+        return {"id":self.id, "data":data, "carrinho":self.carrinho, "total":self.total, "idUsuario":self.idUsuario}
     
 
 

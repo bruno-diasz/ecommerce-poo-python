@@ -11,6 +11,6 @@ class LoginUI:
             senha = st.text_input("Senha:", type='password', placeholder="Digite sua senha")
             if st.form_submit_button("Entrar"): 
                 st.session_state
-                st.session_state.usr = View.cliente_autenticar(email,senha)
+                st.session_state.usr = View.usuario_autenticar(email,senha)
                 st.session_state.carrinho = View.carregar_carrinho(st.session_state.usr.id)
                 st.rerun()

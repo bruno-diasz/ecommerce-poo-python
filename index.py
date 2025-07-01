@@ -1,5 +1,6 @@
 import streamlit as st
-from templates.manter_cliente_ui import ManterClienteUI as MClienteUI
+from views import View
+from templates.manter_usuario_ui import ManterUsuarioUI as MUsuarioUI
 from templates.manter_produtos_ui import ManterProdutoUI as MProdutoUI
 from templates.manter_categoria_ui import ManterCategoriaUI as MCategoriaUI
 from templates.historico_venda import HistoricoVenda 
@@ -26,7 +27,7 @@ class IndexUI:
         if st.session_state.op == 1:
             LoginUI.main()
         elif st.session_state.op == 2:
-            MClienteUI.inserir()
+            MUsuarioUI.inserir()
         
            
 
@@ -63,7 +64,7 @@ class IndexUI:
             st.subheader(f"E aí, :red[{st.session_state.usr.nome}]! Bem-vindo(a) de volta! ")
             st.write('---')
 
-            if st.button('**:material/person: Gerenciar Clientes**',use_container_width=True): st.session_state.op = 1
+            if st.button('**:material/person: Gerenciar Usuarios**',use_container_width=True): st.session_state.op = 1
             if st.button('**:material/package_2: Gerenciar Produtos**',use_container_width=True): st.session_state.op = 2
             if st.button('**:material/category: Gerenciar Categorias**',use_container_width=True): st.session_state.op = 3
             if st.button('**:material/receipt: Histórico de Vendas**',use_container_width=True): st.session_state.op = 4
@@ -71,7 +72,7 @@ class IndexUI:
             if st.button('**:material/logout: Sair da Conta**',use_container_width=True): st.session_state.op = 5
 
         if st.session_state.op == 1:
-            MClienteUI.main()
+            MUsuarioUI.main()
         elif st.session_state.op == 2:
             MProdutoUI.main()
         elif st.session_state.op == 3:
@@ -97,7 +98,7 @@ class IndexUI:
         
     @staticmethod
     def main():
-      
+        View.admin_criar()
         IndexUI.sidebar()
        
        

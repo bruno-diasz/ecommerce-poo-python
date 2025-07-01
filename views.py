@@ -1,4 +1,4 @@
-from dao.clientes import Cliente, Clientes
+from dao.usuarios import Usuario, Usuarios
 from dao.produtos import Produto, Produtos
 from dao.categorias import Categoria, Categorias
 from dao.vendas import Venda, Vendas
@@ -7,13 +7,13 @@ import base64
 
 class View:
 
-    #==== Classe Clientes ====
+    #==== Classe Usuarios ====
     @staticmethod
-    def cliente_inserir(nome:str, email:str, fone:str, senha:str, funcao:str) -> None: #Create
+    def usuario_inserir(nome:str, email:str, fone:str, senha:str, funcao:str) -> None: #Create
         #Regras email
         if email == '':
             raise ValueError("O email é obrigatório!")
-        for c in Clientes.listar():
+        for c in Usuarios.listar():
             if c.email == email:
                 raise ValueError("O email já está em uso!")
             
@@ -25,43 +25,43 @@ class View:
             raise ValueError("A senha deve ter pelo menos 4 caracteres")
         
         #Regras de Funcao
-        if funcao not in ["admin","entregador","cliente"]:
+        if funcao not in ["admin","entregador","usuario"]:
             raise ValueError("Funcao de usuario invalida")
             
        
         #Criação e adição do objeto
-        x = Cliente(0, nome, email, fone, senha,funcao)
-        Clientes.inserir(x)
+        x = Usuario(0, nome, email, fone, senha,funcao)
+        Usuarios.inserir(x)
 
     @staticmethod
-    def cliente_listar() -> list[Cliente]: #Read
-        return Clientes.listar()
+    def usuario_listar() -> list[Usuario]: #Read
+        return Usuarios.listar()
 
     @staticmethod
-    def cliente_atualizar(id:int, nome:str, email:str, fone:str, senha:str, funcao:str) -> None:  #Update
-        c = Clientes.listar_id(id)
+    def usuario_atualizar(id:int, nome:str, email:str, fone:str, senha:str, funcao:str) -> None:  #Update
+        c = Usuarios.listar_id(id)
 
         #Regra de atualização
         if c is None:
-            raise ValueError("Id de cliente não encontrado")
+            raise ValueError("Id de usuario não encontrado")
         
-        x = Cliente(id, nome, email, fone, senha, funcao)
-        Clientes.atualizar(x)
+        x = Usuario(id, nome, email, fone, senha, funcao)
+        Usuarios.atualizar(x)
         
 
     @staticmethod
-    def cliente_excluir(id:int) -> None: #Delete
-        x = Clientes.listar_id(id)
+    def usuario_excluir(id:int) -> None: #Delete
+        x = Usuarios.listar_id(id)
 
         #Regra de exclusão
         if x is None:
-            raise ValueError("Id de cliente não encontrado")
+            raise ValueError("Id de usuario não encontrado")
         
-        Clientes.excluir(x)
+        Usuarios.excluir(x)
         
     @staticmethod
-    def cliente_autenticar(email:str, senha:str)-> Cliente: 
-        for c in Clientes.listar():
+    def usuario_autenticar(email:str, senha:str)-> Usuario: 
+        for c in Usuarios.listar():
             if c.email == email and c.senha == senha:
                 return c
         
@@ -69,9 +69,9 @@ class View:
     
     @staticmethod
     def admin_criar():
-        for cliente in Clientes.listar():
-            if cliente.email == "admin" : return
-        View.cliente_inserir("admin", "admin", "#","admin")    
+        for usuario in Usuarios.listar():
+            if usuario.funcao == "admin" : return
+        View.usuario_inserir("admin", "admin", "","admin","admin")    
      
 
 
@@ -311,15 +311,15 @@ class View:
         return None 
 
     @staticmethod
-    def carregar_carrinho(idCliente) -> Venda:
-       #Verifica se o cliente tem um carrinho
-        if idCliente == 0 :return #Se for o adm não faz nada
+    def carregar_carrinho(idUsuario) -> Venda:
+       #Verifica se o usuario tem um carrinho
+        if idUsuario == 0 :return #Se for o adm não faz nada
         for carrinho in Vendas.listar():
-           if carrinho.idCliente == idCliente and carrinho.carrinho: #Verifica se a venda é do cliente e se a venda é um carrinho
+           if carrinho.idUsuario == idUsuario and carrinho.carrinho: #Verifica se a venda é do usuario e se a venda é um carrinho
                return carrinho
            
         #Se não tiver cria um novo
         x =  Venda(0) #Cria um carrinho
-        x.idCliente = idCliente #associa o cliente ao carrinho
+        x.idUsuario = idUsuario #associa o usuario ao carrinho
         Vendas.inserir(x) #Joga na lista
         return x #Retorna um carrinho para por no contexto

@@ -13,7 +13,7 @@ class CheckOut:
         produtos = View.produto_listar()
         
         for venda in vendas:
-            if venda.idCliente == st.session_state.usr.id:
+            if venda.idUsuario == st.session_state.usr.id:
                 if  venda.carrinho:
                     t_col1,t_col2 = st.columns([2,1])
                     t_col1.subheader(f":material/shopping_cart: Carrinho de Compras")

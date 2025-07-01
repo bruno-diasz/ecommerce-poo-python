@@ -1,4 +1,4 @@
-class Cliente:
+class Usuario:
     def __init__(self, id:int, nome:str, email:str, fone:str, senha:str, funcao:str):
         self.id = id #Chamando setter
         self.nome = nome #Chamando setter

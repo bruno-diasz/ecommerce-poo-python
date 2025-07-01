@@ -4,35 +4,35 @@ import time
 from views import View
 
 
-class ManterClienteUI:
+class ManterUsuarioUI:
 
     @staticmethod
     def main():
         st.subheader(":material/person: Administração de Usuários")
-        listar, inserir, editar, remover = st.tabs(['**:material/article_person: Lista de Clientes**','**:material/person_add: Cadastrar Cliente**','**:material/person_edit: Editar Cliente**','**:material/person_remove: Remover Cliente**'])
+        listar, inserir, editar, remover = st.tabs(['**:material/article_person: Lista de Usuários**','**:material/person_add: Cadastrar Usuário**','**:material/person_edit: Editar Usuário**','**:material/person_remove: Remover Usuário**'])
         with listar:
-            ManterClienteUI.listar()
+            ManterUsuarioUI.listar()
         with inserir:
-            ManterClienteUI.inserir()
+            ManterUsuarioUI.inserir()
         with editar:
-            ManterClienteUI.atualizar()
+            ManterUsuarioUI.atualizar()
         with remover:
-            ManterClienteUI.excluir()
+            ManterUsuarioUI.excluir()
 
     @staticmethod
     def listar():
-        st.subheader(":material/article_person: Listagem de Clientes:")
+        st.subheader(":material/article_person: Listagem de Usuários:")
         colun1,colun2 = st.columns([2,1])
         colun1.divider()
-        clientes = View.cliente_listar()
-        if len(clientes) == 0:
-            st.write("Nenhum cliente cadastrado")
+        usuarios = View.usuario_listar()
+        if len(usuarios) == 0:
+            st.write("Nenhum usuario cadastrado")
         else:
             dic = []
-            for obj in clientes:
+            for obj in usuarios:
                 dic.append(obj.to_dict())
-            df = pd.DataFrame(dic, columns=['id', 'nome', 'email', 'fone'])
-            st.dataframe(df, hide_index=True,column_config={"id": "ID", "nome": "Nome", "email": "E-mail", "fone": "Telefone"})
+            df = pd.DataFrame(dic, columns=['id', 'nome', 'email', 'fone', 'funcao'])
+            st.dataframe(df, hide_index=True,column_config={"id": "ID", "nome": "Nome", "email": "E-mail", "fone": "Telefone", "funcao": "Função"})
 
     @staticmethod
     def inserir():
@@ -46,29 +46,28 @@ class ManterClienteUI:
             senha = col1.text_input("Senha: ", type='password', placeholder='Digite sua Senha aqui')
             senha2 = col2.text_input("Repita a Senha: ", type='password', placeholder='Digite novamente sua Senha aqui')
             fone = col1.text_input("Telefone: ", placeholder='Digite seu Telefone aqui')
-            if st.session_state.usr.funcao == "admin":
+            
+            if "usr" in st.session_state and st.session_state.usr.funcao == "admin":
                 st.write("teste")
                 funcao = col2.selectbox("Função: ", ["admin", "entregador", "cliente"], format_func= lambda funcao : funcao.capitalize())
             else:
                 funcao = "cliente"
-            if False:
-                st.write("teste")
-
+          
             st.write('---')
             if st.button("Cadastrar", type='primary'):
-                View.cliente_inserir(nome, email, fone, senha, funcao)
+                View.usuario_inserir(nome, email, fone, senha, funcao)
                 st.success("Cadastro realizado com sucesso.", icon=':material/check: ')
                 time.sleep(4)
                 st.rerun()
 
     @staticmethod
     def atualizar():
-        st.subheader(":material/person_edit: Edição de Cliente:")
+        st.subheader(":material/person_edit: Edição de Usuário:")
         colun1,colun2 = st.columns([2,1])
         colun1.divider()
 
-        clientes= View.cliente_listar()
-        cliente = st.selectbox('Selecione um Cliente para editar:',clientes, format_func=lambda cliente: f'{cliente.id}. {cliente.email}') 
+        clientes= View.usuario_listar()
+        cliente = st.selectbox('Selecione um Usuário para editar:',clientes, format_func=lambda cliente: f'{cliente.id}. {cliente.email}') 
          
         with st.container(border=True):
             col1,col2 = st.columns(2)
@@ -80,23 +79,23 @@ class ManterClienteUI:
 
             st.write('---')
             if st.button("Atualizar", type='primary'):
-                View.cliente_atualizar(cliente.id, nome, email, fone, senha)
+                View.usuario_atualizar(cliente.id, nome, email, fone, senha)
                 st.success("Atualização realizado com sucesso. :material/check:")
                 time.sleep(4)
                 st.rerun()
 
     @staticmethod
     def excluir():
-        st.subheader(":material/person_remove: Exclusão de Cliente:")
+        st.subheader(":material/person_remove: Exclusão de Usuário:")
         colun1,colun2 = st.columns([2,1])
         colun1.divider()
 
-        clientes= View.cliente_listar()
-        cliente = st.selectbox('Selecione um Cliente para remover:',clientes, format_func=lambda cliente: f'{cliente.id}. {cliente.email}') 
+        clientes= View.usuario_listar()
+        cliente = st.selectbox('Selecione um Usuário para remover:',clientes, format_func=lambda cliente: f'{cliente.id}. {cliente.email}') 
 
         st.write('---')
         if st.button("Remover", type='primary'):
-            View.cliente_excluir(cliente.id)
+            View.usuario_excluir(cliente.id)
             st.success("Exclusão realizado com sucesso. :material/check:")
             time.sleep(4)
             st.rerun()

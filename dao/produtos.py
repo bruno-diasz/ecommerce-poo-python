@@ -9,8 +9,8 @@ class Produtos(CRUD):
         try:
             cls.objetos = []    
             with open("data/produtos.json", mode="r") as arquivo:
-                clientes_json = json.load(arquivo)
-                for obj in clientes_json:
+                usuarios_json = json.load(arquivo)
+                for obj in usuarios_json:
                     c = Produto(obj["id"], obj["desc"], obj["preco"],obj["estoque"], obj["imagem"])
                     c.idCategoria = obj["categoriaID"]
                     cls.objetos.append(c)
