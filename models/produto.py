@@ -1,14 +1,14 @@
 from dao.categorias import Categorias
 class Produto:
     #Construtor
-    def __init__(self, id:int, desc:str, preco:float,estoq:int, img:str):
+    def __init__(self, id:int, desc:str, preco:float,estoq:int, img:str, idCategoria:int):
         self.id = id #Chamando setter
         self.descricao = desc #Chamando setter
         self.preco = preco #Chamando setter
         self.estoque = estoq #Chamando setter
         self.imagem = img #Chamando setter
         
-        self.__idCategoria = 0
+        self.idCategoria = idCategoria
 
     @property
     def id(self) -> int:

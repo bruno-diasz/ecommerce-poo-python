@@ -98,6 +98,7 @@ class IndexUI:
         
     @staticmethod
     def main():
+        View.sem_categoria_criar()
         View.admin_criar()
         IndexUI.sidebar()
        

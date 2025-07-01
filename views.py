@@ -25,7 +25,7 @@ class View:
             raise ValueError("A senha deve ter pelo menos 4 caracteres")
         
         #Regras de Funcao
-        if funcao not in ["admin","entregador","usuario"]:
+        if funcao not in ["admin","entregador","cliente"]:
             raise ValueError("Funcao de usuario invalida")
             
        
@@ -78,13 +78,13 @@ class View:
 
     #===== Classe Produtos ======
     @staticmethod
-    def produto_inserir(desc:str, preco:float, estoq:int, imagem:object) -> None: #Create
+    def produto_inserir(desc:str, preco:float, estoq:int, imagem:object, categoriaID:int) -> None: #Create
         #Transformando imagem em texto
         imagem_bytes = imagem.read()
         imagem_b64 = base64.b64encode(imagem_bytes).decode('utf-8')
 
         #Criando objeto
-        x = Produto(0,desc.title(),round(preco,2),estoq,imagem_b64)
+        x = Produto(0,desc.title(),round(preco,2),estoq,imagem_b64, categoriaID)
         Produtos.inserir(x)
 
     @staticmethod
@@ -106,7 +106,7 @@ class View:
         return produto_categoria
 
     @staticmethod
-    def produto_atualizar(id:int, desc:str, preco:float, estoq:int, imagem:object) -> None: #Update
+    def produto_atualizar(id:int, desc:str, preco:float, estoq:int, imagem:object, categoriaID:int) -> None: #Update
 
         c = Produtos.listar_id(id)
         if c is None:
@@ -120,8 +120,8 @@ class View:
             imagem_b64 = c.imagem
 
         #Criando objeto
-        x = Produto(id,desc.title(),round(preco,2),estoq, imagem_b64)
-        x.idCategoria = c.idCategoria
+        x = Produto(id,desc.title(),round(preco,2),estoq, imagem_b64, categoriaID)
+        
         Produtos.atualizar(x)
 
        
@@ -188,6 +188,13 @@ class View:
         if x is None:
             raise ValueError("Categoria não encontrado")
         Categorias.excluir(x)
+    
+    @staticmethod
+    def sem_categoria_criar():
+        if Categorias.listar_id(0) is None:
+            x = Categoria(0,"Sem categoria")
+            Categorias.inserir(x)
+
 
   
         

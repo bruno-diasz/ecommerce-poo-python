@@ -48,8 +48,8 @@ class ManterUsuarioUI:
             fone = col1.text_input("Telefone: ", placeholder='Digite seu Telefone aqui')
             
             if "usr" in st.session_state and st.session_state.usr.funcao == "admin":
-                st.write("teste")
-                funcao = col2.selectbox("Função: ", ["admin", "entregador", "cliente"], format_func= lambda funcao : funcao.capitalize())
+                
+                funcao = col2.selectbox("Função: ", ["admin", "entregador", "cliente"], format_func= lambda funcao : funcao.capitalize(), key="adc_func")
             else:
                 funcao = "cliente"
           
@@ -73,13 +73,16 @@ class ManterUsuarioUI:
             col1,col2 = st.columns(2)
             nome = col1.text_input("Novo Nome: ", placeholder='Digite seu novo Nome aqui',value=cliente.nome )
             email = col2.text_input("Novo E-mail: ", placeholder='Digite seu novo E-mail aqui', value=cliente.email)
-            senha = col1.text_input("Nova Senha: ", type='password', placeholder='Digite sua nova Senha aqui')
-            senha2 = col2.text_input("Nova Repita a Senha: ", type='password', placeholder='Digite novamente sua nova Senha aqui')
+            senha = col1.text_input("Nova Senha: ", type='password', placeholder='Digite sua nova Senha aqui', value=cliente.senha)
+            senha2 = col2.text_input("Nova Repita a Senha: ", type='password', placeholder='Digite novamente sua nova Senha aqui', value=cliente.senha)
             fone = col1.text_input("Novo Telefone: ", placeholder='Digite seu novo Telefone aqui', value=cliente.fone)
+    
+            if "usr" in st.session_state and st.session_state.usr.funcao == "admin":
+                funcao = col2.selectbox("Função: ", ["admin", "entregador", "cliente"], format_func= lambda funcao : funcao.capitalize(), key="editar_func")
 
             st.write('---')
             if st.button("Atualizar", type='primary'):
-                View.usuario_atualizar(cliente.id, nome, email, fone, senha)
+                View.usuario_atualizar(cliente.id, nome, email, fone, senha,funcao)
                 st.success("Atualização realizado com sucesso. :material/check:")
                 time.sleep(4)
                 st.rerun()

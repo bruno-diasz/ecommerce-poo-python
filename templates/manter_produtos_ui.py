@@ -10,7 +10,7 @@ class ManterProdutoUI:
     @staticmethod
     def main():
         st.subheader(":material/package_2: Administração de Produtos")
-        listar, inserir, editar, remover,categoria = st.tabs(['**:material/article: Lista de Produtos**','**:material/add_2: Cadastrar Produto**','**:material/edit: Editar Produto**','**:material/delete: Remover Produto**','**:material/category: Vincular Categoria**'])
+        listar, inserir, editar, remover = st.tabs(['**:material/article: Lista de Produtos**','**:material/add_2: Cadastrar Produto**','**:material/edit: Editar Produto**','**:material/delete: Remover Produto**'])
         with listar:
             ManterProdutoUI.listar()
         with inserir:
@@ -19,8 +19,7 @@ class ManterProdutoUI:
             ManterProdutoUI.atualizar()
         with remover:
             ManterProdutoUI.excluir()
-        with categoria:
-            ManterProdutoUI.vincular_categoria()            
+        
 
     @staticmethod
     def listar():
@@ -37,8 +36,10 @@ class ManterProdutoUI:
     @staticmethod
     def inserir():
         with st.container(border=True):
-            desc = st.text_input("Nome do Produto: ", placeholder='Digite o Nome do Produto aqui', key='produto_desc')
             col1,col2 = st.columns(2)
+            desc = col1.text_input("Nome do Produto: ", placeholder='Digite o Nome do Produto aqui', key='produto_desc')
+            categorias= View.categoria_listar()
+            categoria = col2.selectbox('Selecione uma categoria:',categorias, format_func=lambda categoria: f'{categoria.id}. {categoria.descricao}', key="vincular_categoria",placeholder="Nenhuma") 
             preco = col1.number_input("Preço: ",min_value=0.0 ,key='produto_preco') 
             estoque = col2.number_input("Quantidade em estoque: ",min_value=0, key='produto_estoque')
             imagem = col1.file_uploader('Imagem do Produto:', ['png','jpg'],key="produto_imagem")
@@ -50,7 +51,7 @@ class ManterProdutoUI:
 
             st.write('---')
             if st.button("Cadastrar", type='primary'):
-                View.produto_inserir(desc, preco, estoque,imagem)
+                View.produto_inserir(desc, preco, estoque,imagem,categoria.id)
                 st.success("Cadastrado realizado com sucesso. :material/check:")
 
                 time.sleep(4)
@@ -65,8 +66,10 @@ class ManterProdutoUI:
             produto = st.selectbox('Selecione um produto para editar:',produtos, format_func=lambda produto: f'{produto.id}. {produto.descricao}') 
             
             with st.container(border=True):
-                desc = st.text_input("Nome do Produto: ", placeholder='Digite o Nome do Produto aqui', value=produto.descricao)
                 col1,col2 = st.columns(2)
+                desc = col1.text_input("Nome do Produto: ", placeholder='Digite o Nome do Produto aqui', value=produto.descricao)
+                categorias= View.categoria_listar()
+                categoria = col2.selectbox('Selecione uma categoria:',categorias, format_func=lambda categoria: f'{categoria.id}. {categoria.descricao}', key="editar_categoria",placeholder="Nenhuma") 
                 preco = col1.number_input("Preço: ",min_value=0.0, value=produto.preco)
                 estoque = col2.number_input("Quantidade em Estoque: ",min_value=0, value=produto.estoque)
                 imagem = col1.file_uploader('Imagem do Produto:', ['png','jpg'],key="atualizar_img")
@@ -84,7 +87,7 @@ class ManterProdutoUI:
 
                 st.write('---')
                 if st.button("Atualizar", type='primary'):
-                    View.produto_atualizar(produto.id, desc, preco, estoque,imagem)
+                    View.produto_atualizar(produto.id, desc, preco, estoque,imagem,categoria.id)
                     st.success("Atualização realizado com sucesso. :material/check:")
                     time.sleep(4)
                     st.rerun()
@@ -101,18 +104,5 @@ class ManterProdutoUI:
             time.sleep(4)
             st.rerun()
 
-    @staticmethod
-    def vincular_categoria():
-        col1,col2 = st.columns(2)
-        produtos= View.produto_listar()
-        produto = col1.selectbox('Selecione um produto para vincular a categoria :',produtos, format_func=lambda produto: f'{produto.id}. {produto.descricao}') 
-
-        categorias= View.categoria_listar()
-        categoria = col2.selectbox('Selecione uma categoria:',categorias, format_func=lambda categoria: f'{categoria.id}. {categoria.descricao}') 
-
-        st.write('---')
-        if st.button("Vincular produto", type='primary'):
-            View.produto_vincular_categoria(produto.id,categoria.id)
-            st.success("Vínculo realizado com sucesso. :material/check:")
-            time.sleep(4)
-            st.rerun()
+   
+        
