@@ -133,7 +133,7 @@ class ManterProdutoUI:
             porcentagem = st.number_input("Reajustar todos os preços em (%)", min_value=-100.0, step=0.1, format="%.2f", value=0.0)
             if st.button("Confirmar reajuste", type="primary"):
                 View.produto_reajuste(porcentagem)
-                st.success("Reajustes realizados com sucesso.", icon=" :material/check:")
+                st.success("Reajustes realizados com sucesso.", icon=":material/check:")
                 time.sleep(4)
                 st.rerun()
 

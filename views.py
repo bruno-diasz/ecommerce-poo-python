@@ -187,7 +187,7 @@ class View:
         if percentual < -100:
             raise ValueError("A porcentagem de desconto não pode ser maior que 100%")
         if percentual == 0:
-            raise ValueError("A porcentagem de reajustes não pode ser igual a 0")
+            raise ValueError("A porcentagem de reajustes não pode ser igual a 0%")
         
         for p in Produtos.listar():
             p.preco += percentual/100*p.preco

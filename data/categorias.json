@@ -14,5 +14,9 @@
     {
         "id": 3,
         "descricao": "Notebook"
+    },
+    {
+        "id": 4,
+        "descricao": ""
     }
 ]
