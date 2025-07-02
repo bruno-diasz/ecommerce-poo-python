@@ -10,7 +10,7 @@ class ManterProdutoUI:
     @staticmethod
     def main():
         st.subheader(":material/package_2: Administração de Produtos")
-        listar, inserir, editar, remover = st.tabs(['**:material/article: Lista de Produtos**','**:material/add_2: Cadastrar Produto**','**:material/edit: Editar Produto**','**:material/delete: Remover Produto**'])
+        listar, inserir, editar, remover, reajustar = st.tabs(['**:material/article: Lista de Produtos**','**:material/add_2: Cadastrar Produto**','**:material/edit: Editar Produto**','**:material/delete: Remover Produto**', '**:material/shoppingmode: Reajustar Preços**'])
         with listar:
             ManterProdutoUI.listar()
         with inserir:
@@ -19,6 +19,8 @@ class ManterProdutoUI:
             ManterProdutoUI.atualizar()
         with remover:
             ManterProdutoUI.excluir()
+        with reajustar:
+           ManterProdutoUI.reajustar_precos()
         
 
     @staticmethod
@@ -103,6 +105,17 @@ class ManterProdutoUI:
             st.success("Exclusão realizado com sucesso. :material/check:")
             time.sleep(4)
             st.rerun()
+
+    @staticmethod
+    def reajustar_precos():
+        porcentagem = st.number_input("Reajustar todos os preços em (%)", min_value=-100.0, step=0.1, format="%.2f", value=0.0)
+        if st.button("Confirmar reajuste", type="primary"):
+            View.produto_reajuste(porcentagem)
+            st.success("Reajustes realizados com sucesso. :material/check:")
+            time.sleep(4)
+            st.rerun()
+        
+
 
    
         

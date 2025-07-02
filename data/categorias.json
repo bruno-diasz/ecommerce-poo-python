@@ -6,5 +6,13 @@
     {
         "id": 1,
         "descricao": "Smartphones"
+    },
+    {
+        "id": 2,
+        "descricao": "Maquina"
+    },
+    {
+        "id": 3,
+        "descricao": "Notebook"
     }
 ]

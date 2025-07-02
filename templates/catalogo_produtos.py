@@ -16,10 +16,12 @@ class CatalogoProdutos:
 		st.header(":material/package_2: Catálogo de Produtos")
 		st.divider()
 
-		produtos = View.produto_listar()
-		#categorias = View.produto_listar_categoria()
 		categorias = View.categoria_listar()
-		st.segmented_control('Categorias:',[ categoria.descricao for categoria in categorias])
+		categoria = st.segmented_control('Categorias:',categorias)
+		if categoria is not None:
+			produtos = View.produto_listar_categoria(categoria.id)
+		else:
+			produtos = View.produto_listar()
 
 		col1,col2,col3 = st.columns(3)
 		for produto in produtos[::3]:
