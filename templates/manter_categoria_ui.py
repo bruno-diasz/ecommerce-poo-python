@@ -60,12 +60,19 @@ class ManterCategoriaUI:
 
     @staticmethod
     def excluir():
-        categorias = View.categoria_listar()
-        categoria = st.selectbox('Selecione um categoria para remover:',categorias , format_func=lambda categoria: f'{categoria.id}. {categoria.descricao}') 
+        try:
+            categorias = View.categoria_listar()
+            categoria = st.selectbox('Selecione um categoria para remover:',categorias , format_func=lambda categoria: f'{categoria.id}. {categoria.descricao}') 
+        
 
-        st.write('---')
-        if st.button("Remover", type='primary'):
-            View.categoria_excluir(categoria.id)
-            st.success("Exclusão realizado com sucesso. :material/check:")
+
+            st.write('---')
+            if st.button("Remover", type='primary'):
+                View.categoria_excluir(categoria.id)
+                st.success("Exclusão realizado com sucesso.", icon=":material/check:")
+                time.sleep(4)
+                st.rerun()
+        except Exception as erro:
+            st.error(f"{erro}",icon=":material/error:")
             time.sleep(4)
             st.rerun()

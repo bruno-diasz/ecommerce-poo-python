@@ -241,8 +241,14 @@ class View:
     @staticmethod
     def categoria_excluir(id:int) -> None: #Delete
         x = Categorias.listar_id(id)
+
         if x is None:
             raise ValueError("Categoria não encontrado")
+
+        for produto in View.produto_listar():
+            if produto.categoriaID == id:
+                raise ValueError("Não é possivel apagar a categoria, existem produtos associados a ela!")
+        
         Categorias.excluir(x)
     
     @staticmethod

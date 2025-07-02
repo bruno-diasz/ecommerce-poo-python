@@ -16,8 +16,22 @@
     {
         "id": 2,
         "data": "02/07/2025 00:14:59",
+        "carrinho": false,
+        "total": 456.7,
+        "idUsuario": 2
+    },
+    {
+        "id": 3,
+        "data": "02/07/2025 16:20:26",
+        "carrinho": false,
+        "total": 0.0,
+        "idUsuario": 2
+    },
+    {
+        "id": 4,
+        "data": "02/07/2025 16:24:22",
         "carrinho": true,
-        "total": 232.6,
+        "total": 0,
         "idUsuario": 2
     }
 ]

@@ -8,9 +8,23 @@
     },
     {
         "id": 1,
-        "qtd": 1,
+        "qtd": 2,
         "preco": 224.1,
         "idVenda": 2,
         "idProduto": 0
+    },
+    {
+        "id": 2,
+        "qtd": 2,
+        "preco": 0.0,
+        "idVenda": 2,
+        "idProduto": 5
+    },
+    {
+        "id": 3,
+        "qtd": 1,
+        "preco": 0.0,
+        "idVenda": 3,
+        "idProduto": 1
     }
 ]

@@ -43,7 +43,7 @@ class ManterProdutoUI:
                 desc = col1.text_input("Nome do Produto: ", placeholder='Digite o Nome do Produto aqui', key='produto_desc')
                 categorias= View.categoria_listar()
                 categoria = col2.selectbox('Selecione uma categoria:',categorias, format_func=lambda categoria: f'{categoria.id}. {categoria.descricao}', key="vincular_categoria",placeholder="Nenhuma") 
-                preco = col1.number_input("Preço: ",min_value=0.0 ,key='produto_preco') 
+                preco = col1.number_input("Preço: ",min_value=0.0 ,key='produto_preco', value=None) 
                 estoque = col2.number_input("Quantidade em estoque: ",min_value=0, key='produto_estoque')
                 imagem = col1.file_uploader('Imagem do Produto:', ['png','jpg'],key="produto_imagem")
                 with col2.container():
@@ -53,12 +53,10 @@ class ManterProdutoUI:
                         colun2.image(imagem, width=190,caption='Preview')
 
                 st.write('---')
-                if st.button("Cadastrar", type='primary'):
+                if st.button("Cadastrar", type="primary"):
+                    st.write(preco)
                     View.produto_inserir(desc, preco, estoque,imagem,categoria.id)
                     st.success("Cadastrado realizado com sucesso.", icon=":material/check:")
-
-                    #Pedir ajuda ao professor para ver como fazer para ele
-                    # nao permitir o cadastro do produto com valor negativo mesmo estando com o valor zero
 
                     time.sleep(4)
                     st.rerun()
