@@ -30,5 +30,21 @@
         "fone": "",
         "senha": "admin",
         "funcao": "admin"
+    },
+    {
+        "id": 6,
+        "nome": "",
+        "email": "teste23@",
+        "fone": "",
+        "senha": "1234",
+        "funcao": "cliente"
+    },
+    {
+        "id": 7,
+        "nome": "Zezin",
+        "email": "zezin@",
+        "fone": "",
+        "senha": "1234",
+        "funcao": "cliente"
     }
 ]

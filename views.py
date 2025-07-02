@@ -9,20 +9,26 @@ class View:
 
     #==== Classe Usuarios ====
     @staticmethod
-    def usuario_inserir(nome:str, email:str, fone:str, senha:str, funcao:str) -> None: #Create
+    def usuario_inserir(nome:str, email:str, fone:str, senha:str,senha2:str, funcao:str) -> None: #Create
+        #Regras do nome
+        if nome.strip() == "":
+            raise ValueError("Preencher o nome é obrigatorio")
+        
         #Regras email
-        if email == '':
-            raise ValueError("O email é obrigatório!")
+        if email.strip() == '':
+            raise ValueError("Preecher o email é obrigatório!")
         for c in Usuarios.listar():
             if c.email == email:
                 raise ValueError("O email já está em uso!")
             
         #Regras senha
         if senha == '':
-            raise ValueError("O senha é obrigatório!")
+            raise ValueError("Preencher a senha é obrigatório!")
         tamanho = len(senha) 
         if tamanho < 4:
             raise ValueError("A senha deve ter pelo menos 4 caracteres")
+        if senha != senha2:
+            raise ValueError("As senhas não correspondem")
         
         #Regras de Funcao
         if funcao not in ["admin","entregador","cliente"]:
@@ -38,12 +44,37 @@ class View:
         return Usuarios.listar()
 
     @staticmethod
-    def usuario_atualizar(id:int, nome:str, email:str, fone:str, senha:str, funcao:str) -> None:  #Update
+    def usuario_atualizar(id:int, nome:str, email:str, fone:str, senha:str,senha2:str, funcao:str) -> None:  #Update
         c = Usuarios.listar_id(id)
 
         #Regra de atualização
         if c is None:
             raise ValueError("Id de usuario não encontrado")
+        
+         #Regras do nome
+        if nome.strip() == "":
+            raise ValueError("Preencher o nome é obrigatorio")
+        
+        #Regras email
+        if email.strip() == '':
+            raise ValueError("Preecher o email é obrigatório!")
+        
+        for c in Usuarios.listar():
+            if email == c.email and email != Usuarios.listar_id(id).email:
+                raise ValueError("O email já está em uso!")
+            
+        #Regras senha
+        if senha == '':
+            raise ValueError("Preencher a senha é obrigatório!")
+        tamanho = len(senha) 
+        if tamanho < 4:
+            raise ValueError("A senha deve ter pelo menos 4 caracteres")
+        if senha != senha2:
+            raise ValueError("As senhas não correspondem")
+        
+        #Regras de Funcao
+        if funcao not in ["admin","entregador","cliente"]:
+            raise ValueError("Funcao de usuario invalida")
         
         x = Usuario(id, nome, email, fone, senha, funcao)
         Usuarios.atualizar(x)
@@ -80,8 +111,20 @@ class View:
     @staticmethod
     def produto_inserir(desc:str, preco:float, estoq:int, imagem:object, categoriaID:int) -> None: #Create
         #Transformando imagem em texto
-        imagem_bytes = imagem.read()
-        imagem_b64 = base64.b64encode(imagem_bytes).decode('utf-8')
+        if imagem is not None:
+            imagem_bytes = imagem.read()
+            imagem_b64 = base64.b64encode(imagem_bytes).decode('utf-8')
+        else:
+            #caso nao selecione nenhuma foto poe uma foto padrao para nao quebrar o layout
+            caminho_imagem = "assets/no_image.jpg"
+            with open(caminho_imagem, "rb") as imagem_df:
+                imagem_bytes = imagem_df.read()
+                imagem_b64 = base64.b64encode(imagem_bytes).decode('utf-8')
+
+        #Erros
+        if desc.strip() == "":
+            raise ValueError("O produto deve ter um nome")
+
 
         #Criando objeto
         x = Produto(0,desc.title(),round(preco,2),estoq,imagem_b64, categoriaID)
@@ -119,6 +162,10 @@ class View:
         else:
             imagem_b64 = c.imagem
 
+         
+        if desc.strip() == "":
+            raise ValueError("O produto deve ter um nome")
+
         #Criando objeto
         x = Produto(id,desc.title(),round(preco,2),estoq, imagem_b64, categoriaID)
         
@@ -136,17 +183,26 @@ class View:
 
     @staticmethod
     def produto_reajuste(percentual:float)-> None:
+
+        if percentual < -100:
+            raise ValueError("A porcentagem de desconto não pode ser maior que 100%")
+        if percentual == 0:
+            raise ValueError("A porcentagem de reajustes não pode ser igual a 0")
+        
         for p in Produtos.listar():
             p.preco += percentual/100*p.preco
+            p.preco = round(p.preco, 2)
             Produtos.atualizar(p)
 
         #Aumentando o preço dos produtos que estão no carrinho
         for item in VendaItems.listar():
             venda = Vendas.listar_id(item.idVenda)
             if venda.carrinho:
-                item.preco  += percentual/100*item.preco
+                item.preco += percentual/100*item.preco
+                item.preco = round( item.preco,2)
                 VendaItems.atualizar(item)
                 venda.total += (percentual/100*item.preco)*item.qtd
+                venda.total = round(venda.total,2)
                 Vendas.atualizar(venda)
 
     @staticmethod

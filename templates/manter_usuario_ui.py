@@ -39,24 +39,30 @@ class ManterUsuarioUI:
         st.subheader(":material/person_add: Cadastro:")
         colun1,colun2 = st.columns([2,1])
         colun1.divider()
-        with st.container(border=True):
-            col1,col2 = st.columns(2)
-            nome = col1.text_input("Nome: ", placeholder='Digite seu Nome aqui')
-            email = col2.text_input("E-mail: ", placeholder='Digite seu E-mail aqui')
-            senha = col1.text_input("Senha: ", type='password', placeholder='Digite sua Senha aqui')
-            senha2 = col2.text_input("Repita a Senha: ", type='password', placeholder='Digite novamente sua Senha aqui')
-            fone = col1.text_input("Telefone: ", placeholder='Digite seu Telefone aqui')
-            
-            if "usr" in st.session_state and st.session_state.usr.funcao == "admin":
+        try:
+            with st.container(border=True):
+                col1,col2 = st.columns(2)
+                nome = col1.text_input("Nome: ", placeholder='Digite seu Nome aqui')
+                email = col2.text_input("E-mail: ", placeholder='Digite seu E-mail aqui')
+                senha = col1.text_input("Senha: ", type='password', placeholder='Digite sua Senha aqui')
+                senha2 = col2.text_input("Repita a Senha: ", type='password', placeholder='Digite novamente sua Senha aqui')
+                fone = col1.text_input("Telefone: ", placeholder='Digite seu Telefone aqui')
                 
-                funcao = col2.selectbox("Função: ", ["admin", "entregador", "cliente"], format_func= lambda funcao : funcao.capitalize(), key="adc_func")
-            else:
-                funcao = "cliente"
-          
-            st.write('---')
-            if st.button("Cadastrar", type='primary'):
-                View.usuario_inserir(nome, email, fone, senha, funcao)
-                st.success("Cadastro realizado com sucesso.", icon=':material/check: ')
+                if "usr" in st.session_state and st.session_state.usr.funcao == "admin":
+                    funcao = col2.selectbox("Função: ", ["admin", "entregador", "cliente"], format_func= lambda funcao : funcao.capitalize(), key="adc_func")
+                else:
+                    funcao = "cliente"
+
+
+            
+                st.write('---')
+                if st.button("Cadastrar", type='primary'):
+                    View.usuario_inserir(nome, email, fone, senha,senha2, funcao)
+                    st.success("Cadastro realizado com sucesso.", icon=':material/check: ')
+                    time.sleep(4)
+                    st.rerun()
+        except Exception as erro:
+                st.error(f"{erro}",icon=":material/error:")
                 time.sleep(4)
                 st.rerun()
 
@@ -65,27 +71,33 @@ class ManterUsuarioUI:
         st.subheader(":material/person_edit: Edição de Usuário:")
         colun1,colun2 = st.columns([2,1])
         colun1.divider()
+        try:
+            clientes= View.usuario_listar()
+            cliente = st.selectbox('Selecione um Usuário para editar:',clientes, format_func=lambda cliente: f'{cliente.id}. {cliente.email}') 
+            
+            with st.container(border=True):
+                col1,col2 = st.columns(2)
+                nome = col1.text_input("Novo Nome: ", placeholder='Digite seu novo Nome aqui',value=cliente.nome )
+                email = col2.text_input("Novo E-mail: ", placeholder='Digite seu novo E-mail aqui', value=cliente.email)
+                senha = col1.text_input("Nova Senha: ", type='password', placeholder='Digite sua nova Senha aqui', value=cliente.senha)
+                senha2 = col2.text_input("Nova Repita a Senha: ", type='password', placeholder='Digite novamente sua nova Senha aqui', value=cliente.senha)
+                fone = col1.text_input("Novo Telefone: ", placeholder='Digite seu novo Telefone aqui', value=cliente.fone)
+        
+                if "usr" in st.session_state and st.session_state.usr.funcao == "admin":
+                    funcao = col2.selectbox("Função: ", ["admin", "entregador", "cliente"], format_func= lambda funcao : funcao.capitalize(), key="editar_func")
 
-        clientes= View.usuario_listar()
-        cliente = st.selectbox('Selecione um Usuário para editar:',clientes, format_func=lambda cliente: f'{cliente.id}. {cliente.email}') 
-         
-        with st.container(border=True):
-            col1,col2 = st.columns(2)
-            nome = col1.text_input("Novo Nome: ", placeholder='Digite seu novo Nome aqui',value=cliente.nome )
-            email = col2.text_input("Novo E-mail: ", placeholder='Digite seu novo E-mail aqui', value=cliente.email)
-            senha = col1.text_input("Nova Senha: ", type='password', placeholder='Digite sua nova Senha aqui', value=cliente.senha)
-            senha2 = col2.text_input("Nova Repita a Senha: ", type='password', placeholder='Digite novamente sua nova Senha aqui', value=cliente.senha)
-            fone = col1.text_input("Novo Telefone: ", placeholder='Digite seu novo Telefone aqui', value=cliente.fone)
-    
-            if "usr" in st.session_state and st.session_state.usr.funcao == "admin":
-                funcao = col2.selectbox("Função: ", ["admin", "entregador", "cliente"], format_func= lambda funcao : funcao.capitalize(), key="editar_func")
+                st.write('---')
+                if st.button("Atualizar", type='primary'):
+                    View.usuario_atualizar(cliente.id, nome, email, fone, senha, senha2, funcao)
+                    st.success("Atualização realizado com sucesso.", icon=":material/check:")
+                    time.sleep(4)
+                    st.rerun()
 
-            st.write('---')
-            if st.button("Atualizar", type='primary'):
-                View.usuario_atualizar(cliente.id, nome, email, fone, senha,funcao)
-                st.success("Atualização realizado com sucesso. :material/check:")
-                time.sleep(4)
-                st.rerun()
+        except Exception as erro:
+            st.error(f"{erro}",icon=":material/error:")
+            time.sleep(4)
+            st.rerun()
+
 
     @staticmethod
     def excluir():
@@ -99,6 +111,6 @@ class ManterUsuarioUI:
         st.write('---')
         if st.button("Remover", type='primary'):
             View.usuario_excluir(cliente.id)
-            st.success("Exclusão realizado com sucesso. :material/check:")
+            st.success("Exclusão realizado com sucesso.",icon=":material/check:")
             time.sleep(4)
             st.rerun()
