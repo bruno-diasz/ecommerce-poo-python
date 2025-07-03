@@ -32,8 +32,8 @@ class ManterProdutoUI:
             dic = []
             for obj in produtos:
                 dic.append(obj.to_dict())
-            df = pd.DataFrame(dic, columns= ['id', 'desc', 'preco', 'estoque', 'categoriaID'])
-            st.dataframe(df, hide_index=True,column_config={"id": "ID", "desc": "Produto", "preco": "Preço", "estoque" : "Estoque","categoriaID": "CategoriaID"})
+            df = pd.DataFrame(dic, columns= ['id', 'desc', 'preco', 'estoque', 'idCategoria'])
+            st.dataframe(df, hide_index=True,column_config={"id": "ID", "desc": "Produto", "preco": "Preço", "estoque" : "Estoque","idCategoria": "idCategoria"})
 
     @staticmethod
     def inserir():
@@ -44,7 +44,7 @@ class ManterProdutoUI:
                 categorias= View.categoria_listar()
                 categoria = col2.selectbox('Selecione uma categoria:',categorias, format_func=lambda categoria: f'{categoria.id}. {categoria.descricao}', key="vincular_categoria",placeholder="Nenhuma") 
                 preco = col1.number_input("Preço: ",min_value=0.0 ,key='produto_preco', value=None) 
-                estoque = col2.number_input("Quantidade em estoque: ",min_value=0, key='produto_estoque')
+                estoque = col2.number_input("Quantidade em estoque: ",min_value=0, key='produto_estoque', value=None)
                 imagem = col1.file_uploader('Imagem do Produto:', ['png','jpg'],key="produto_imagem")
                 with col2.container():
                     colun1,colun2,colun3 = st.columns([1,3,1])

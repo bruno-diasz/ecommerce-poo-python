@@ -33,28 +33,38 @@ class ManterCategoriaUI:
 
     @staticmethod
     def inserir():
-        with st.container(border=True):
-            desc = st.text_input("Nome da Categoria: ", placeholder='Digite o nome da Categoria aqui')
+        try:
+            with st.container(border=True):
+                desc = st.text_input("Nome da Categoria: ", placeholder='Digite o nome da Categoria aqui')
 
-            st.write('---')
-            if st.button("Cadastrar", type='primary'):
-                View.categoria_inserir(desc)
-                st.success("Categoria criada com sucesso. :material/check:")
-                time.sleep(4)
-                st.rerun()
+                st.write('---')
+                if st.button("Cadastrar", type='primary'):
+                    View.categoria_inserir(desc)
+                    st.success("Categoria criada com sucesso. :material/check:")
+                    time.sleep(4)
+                    st.rerun()
+        except Exception as erro:
+            st.error(f"{erro}",icon=":material/error:")
+            time.sleep(4)
+            st.rerun()
 
     @staticmethod
     def atualizar():
         categorias = View.categoria_listar()
-        categoria = st.selectbox('Selecione um categoria para editar:',categorias , format_func=lambda categoria: f'{categoria.id}. {categoria.descricao}') 
+        categoria = st.selectbox('Selecione um categoria para editar:',categorias[1::] , format_func=lambda categoria: f'{categoria.id}. {categoria.descricao}') 
          
         with st.container(border=True):
-            nome = st.text_input("Novo Nome: ", placeholder='Digite seu novo Nome aqui',value=categoria.descricao )
+            try:
+                nome = st.text_input("Novo Nome: ", placeholder='Digite seu novo Nome aqui',value=categoria.descricao )
            
-            st.write('---')
-            if st.button("Atualizar", type='primary'):
-                View.categoria_atualizar(categoria.id, nome)
-                st.success("Atualização realizado com sucesso. :material/check:")
+                st.write('---')
+                if st.button("Atualizar", type='primary'):
+                    View.categoria_atualizar(categoria.id, nome)
+                    st.success("Atualização realizado com sucesso. :material/check:")
+                    time.sleep(4)
+                    st.rerun()
+            except Exception as erro:
+                st.error(f"{erro}",icon=":material/error:")
                 time.sleep(4)
                 st.rerun()
 
@@ -62,7 +72,7 @@ class ManterCategoriaUI:
     def excluir():
         try:
             categorias = View.categoria_listar()
-            categoria = st.selectbox('Selecione um categoria para remover:',categorias , format_func=lambda categoria: f'{categoria.id}. {categoria.descricao}') 
+            categoria = st.selectbox('Selecione um categoria para remover:',categorias[1::] , format_func=lambda categoria: f'{categoria.id}. {categoria.descricao}') 
         
 
 

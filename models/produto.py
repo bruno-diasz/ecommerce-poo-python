@@ -89,5 +89,5 @@ class Produto:
         return f"{self.id}. {self.descricao:<20}R$ {self.preco:<7.2f} {self.estoque} {'UN':<6} {categoria.descricao} "
     
     def to_dict(self):
-        return {"id": self.id, "desc":self.descricao, "preco":self.preco, "estoque":self.estoque, "categoriaID":self.idCategoria, "imagem":self.imagem}
+        return {"id": self.id, "desc":self.descricao, "preco":self.preco, "estoque":self.estoque, "idCategoria":self.idCategoria, "imagem":self.imagem}
     

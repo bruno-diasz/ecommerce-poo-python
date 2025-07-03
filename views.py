@@ -222,6 +222,10 @@ class View:
     #===== Classe Categorias ======
     @staticmethod
     def categoria_inserir(desc:str)->None: #Create
+        #Validações
+        for categoria in Categorias.listar():
+            if categoria.descricao.strip().lower() == desc.strip().lower():
+                raise ValueError("Ja existe uma categoria com esse nome!")
         x = Categoria(0, desc.capitalize())
         Categorias.inserir(x)
 
@@ -231,22 +235,32 @@ class View:
 
     @staticmethod
     def categoria_atualizar(id:int, desc:str) -> None: #Update
-        x = Categoria(id,desc)
+        x = Categoria(id,desc.capitalize())
         c = Categorias.listar_id(id)
+
+        #Validações
+        for categoria in Categorias.listar():
+            if categoria.descricao.strip().lower() == desc.strip().lower():
+                raise ValueError("Ja existe uma categoria com esse nome!")
 
         if c is None:
             raise ValueError("Categoria não encontrado")
+        if id == 0:
+            raise ValueError('A categoria padrão, "Sem Categoria" não pode ser editada')
         Categorias.atualizar(x)
         
     @staticmethod
     def categoria_excluir(id:int) -> None: #Delete
         x = Categorias.listar_id(id)
 
+        #Validações 
         if x is None:
             raise ValueError("Categoria não encontrado")
+        if id == 0:
+            raise ValueError('A categoria padrão, "Sem Categoria" não pode ser excluida')
 
         for produto in View.produto_listar():
-            if produto.categoriaID == id:
+            if produto.idCategoria == id:
                 raise ValueError("Não é possivel apagar a categoria, existem produtos associados a ela!")
         
         Categorias.excluir(x)
@@ -254,7 +268,7 @@ class View:
     @staticmethod
     def sem_categoria_criar():
         if Categorias.listar_id(0) is None:
-            x = Categoria(0,"Sem categoria")
+            x = Categoria(0,"Sem Categoria")
             Categorias.inserir(x)
 
 

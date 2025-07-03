@@ -1,7 +1,7 @@
 [
     {
         "id": 0,
-        "descricao": "Sem categoria"
+        "descricao": "Sem Categoria"
     },
     {
         "id": 1,
@@ -17,6 +17,6 @@
     },
     {
         "id": 4,
-        "descricao": ""
+        "descricao": "sem  categoria"
     }
 ]
