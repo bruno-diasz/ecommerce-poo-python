@@ -3,10 +3,11 @@ from views import View
 from templates.manter_usuario_ui import ManterUsuarioUI as MUsuarioUI
 from templates.manter_produtos_ui import ManterProdutoUI as MProdutoUI
 from templates.manter_categoria_ui import ManterCategoriaUI as MCategoriaUI
-from templates.historico_venda import HistoricoVenda 
-from templates.historico_compra import HistoricoCompra 
-from templates.catalogo_produtos import CatalogoProdutos
-from templates.checkout import CheckOut
+from templates.gerenciar_vendas_ui import GerenciarVendas
+from templates.minhas_compras_ui import MinhasCompras
+from templates.minhas_entregas_ui import MinhasEntregas
+from templates.catalogo_produtos_ui import CatalogoProdutos
+from templates.checkout_ui import CheckOut
 from templates.login_ui import LoginUI
 
 class IndexUI:
@@ -37,12 +38,12 @@ class IndexUI:
             st.session_state.op = 0
         with st.sidebar:
             st.title(':red[Área do Cliente]')
-            st.subheader(f"E aí, :red[{st.session_state.usr.nome}]! Bem-vindo(a) de volta! ")
+            st.subheader(f"E aí, :red[{st.session_state.usr.nome.split()[0]}]! Bem-vindo(a) de volta! ")
             st.write('---')
             
             if st.button('**:material/package_2: Catálogo de Produtos**',use_container_width=True): st.session_state.op = 1
             if st.button('**:material/shopping_cart: Carrinho de Compras**',use_container_width=True): st.session_state.op = 2
-            if st.button('**:material/receipt: Histórico de Compras**',use_container_width=True): st.session_state.op = 3
+            if st.button('**:material/receipt: Minhas Compras**',use_container_width=True): st.session_state.op = 3
             st.divider()
             if st.button('**:material/logout: Sair da Conta**',use_container_width=True): st.session_state.op = 4
 
@@ -51,8 +52,26 @@ class IndexUI:
         elif st.session_state.op == 2:
             CheckOut.main()
         elif st.session_state.op == 3:
-            HistoricoCompra.main()
+            MinhasCompras.main()
         elif st.session_state.op == 4:
+            IndexUI.logout()
+
+    @staticmethod
+    def menu_entregador():
+        if 'op' not in st.session_state:
+            st.session_state.op = 0
+        with st.sidebar:
+            st.title(':red[Área do Entregador]')
+            st.subheader(f"E aí, :red[{st.session_state.usr.nome.split()[0]}]! Bem-vindo(a) de volta! ")
+            st.write('---')
+            
+            if st.button('**:material/local_shipping: Minhas Entregas**',use_container_width=True): st.session_state.op = 1
+            st.divider()
+            if st.button('**:material/logout: Sair da Conta**',use_container_width=True): st.session_state.op = 2
+
+        if st.session_state.op == 1:
+            MinhasEntregas.main()
+        elif st.session_state.op == 2:
             IndexUI.logout()
 
     @staticmethod
@@ -61,13 +80,13 @@ class IndexUI:
             st.session_state.op = 0
         with st.sidebar:
             st.title(':red[Painel Administrativo]')
-            st.subheader(f"E aí, :red[{st.session_state.usr.nome}]! Bem-vindo(a) de volta! ")
+            st.subheader(f"E aí, :red[{st.session_state.usr.nome.split()[0]}]! Bem-vindo(a) de volta! ")
             st.write('---')
 
             if st.button('**:material/person: Gerenciar Usuarios**',use_container_width=True): st.session_state.op = 1
             if st.button('**:material/package_2: Gerenciar Produtos**',use_container_width=True): st.session_state.op = 2
             if st.button('**:material/category: Gerenciar Categorias**',use_container_width=True): st.session_state.op = 3
-            if st.button('**:material/receipt: Histórico de Vendas**',use_container_width=True): st.session_state.op = 4
+            if st.button('**:material/receipt: Gerenciar de Vendas**',use_container_width=True): st.session_state.op = 4
             st.divider()
             if st.button('**:material/logout: Sair da Conta**',use_container_width=True): st.session_state.op = 5
 
@@ -78,7 +97,7 @@ class IndexUI:
         elif st.session_state.op == 3:
             MCategoriaUI.main()
         elif st.session_state.op == 4:
-            HistoricoVenda.main()
+            GerenciarVendas.main()
         elif st.session_state.op == 5:
             IndexUI.logout()
 
@@ -88,6 +107,8 @@ class IndexUI:
             IndexUI.menu_visitante()
         elif st.session_state.usr.funcao == "admin":
             IndexUI.menu_admin()
+        elif st.session_state.usr.funcao == "entregador":
+            IndexUI.menu_entregador()
         elif st.session_state.usr.funcao == "cliente":
             IndexUI.menu_cliente()
 

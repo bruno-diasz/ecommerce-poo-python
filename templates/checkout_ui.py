@@ -5,6 +5,7 @@ import base64
 
 class CheckOut:
 	def main():
+	
 		
 		try:
 			vendas = View.venda_listar()
@@ -60,6 +61,7 @@ class CheckOut:
 						View.venda_confirmar(st.session_state.carrinho.id)
 						st.session_state.carrinho = View.carregar_carrinho(st.session_state.usr.id)
 						st.success("Compra realizada com sucesso", icon=":material/check:")
+						st.balloons()
 						time.sleep(3)
 						st.rerun()
 

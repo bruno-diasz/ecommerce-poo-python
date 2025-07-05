@@ -20,11 +20,11 @@
     {
         "id": 2,
         "data": "04/07/2025 21:52:43",
-        "carrinho": true,
-        "entrega": "pendente",
-        "total": 0,
+        "carrinho": false,
+        "entrega": "entregue",
+        "total": 0.0,
         "idCliente": 12,
-        "idEntregador": null
+        "idEntregador": 14
     },
     {
         "id": 3,
@@ -33,6 +33,42 @@
         "entrega": "pendente",
         "total": 0,
         "idCliente": 5,
+        "idEntregador": null
+    },
+    {
+        "id": 4,
+        "data": "05/07/2025 08:44:08",
+        "carrinho": true,
+        "entrega": "pendente",
+        "total": 0,
+        "idCliente": 14,
+        "idEntregador": null
+    },
+    {
+        "id": 5,
+        "data": "05/07/2025 09:12:15",
+        "carrinho": false,
+        "entrega": "pendente",
+        "total": 0.0,
+        "idCliente": 12,
+        "idEntregador": null
+    },
+    {
+        "id": 6,
+        "data": "05/07/2025 10:15:01",
+        "carrinho": false,
+        "entrega": "pendente",
+        "total": 0.0,
+        "idCliente": 12,
+        "idEntregador": null
+    },
+    {
+        "id": 7,
+        "data": "05/07/2025 10:15:26",
+        "carrinho": true,
+        "entrega": "pendente",
+        "total": 0,
+        "idCliente": 12,
         "idEntregador": null
     }
 ]

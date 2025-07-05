@@ -409,11 +409,20 @@ class View:
     @staticmethod
     def iniciar_entrega(idEntregador:int, idVenda:int):
         venda = Vendas.listar_id(idVenda)
+        if venda is None:
+            raise ValueError("Venda não encontrada")
         entregadores = [entregador for entregador in View.usuario_listar() if entregador.funcao == "entregador"]
-        print(entregadores)
         if idEntregador not in [e.id for e in entregadores]:
             raise ValueError("Entregador não encontrado")
         venda.idEntregador = idEntregador
         venda.entrega = "enviado"
+        Vendas.atualizar(venda)
+    
+    @staticmethod
+    def finalizar_entrega(idVenda:int):
+        venda = Vendas.listar_id(idVenda)
+        if venda is None:
+            raise ValueError("Venda não encontrada")
+        venda.entrega = "entregue"
         Vendas.atualizar(venda)
         

@@ -2,7 +2,7 @@ import streamlit as st
 from views import View
 import time
 
-class HistoricoVenda:
+class GerenciarVendas:
     def main():
 
         class cabecalho:
@@ -12,7 +12,7 @@ class HistoricoVenda:
                 return f"{'ITEM':<27}     {'PREÇO':>15}   {'QTD':<6} {'SUBTOTAL':>26}"
                 
         c = cabecalho()
-        st.subheader(":material/receipt: Histórico de Vendas")
+        st.subheader(":material/receipt: Gerenciar de Vendas")
         st.write('---')
         vendas= View.venda_listar()
         items = View.vendaitem_listar()
@@ -26,7 +26,6 @@ class HistoricoVenda:
                         col1,col2,col3 = st.columns([1.2,1.2,1.6])
                         entregador = col1.selectbox("entregador",[entregador for entregador in View.usuario_listar() if entregador.funcao =="entregador"], key=f"entregador_{venda.id}", label_visibility='collapsed',  format_func=lambda entregador: f'{entregador.id}. {entregador.email}')
                         if col2.button(":green[:small[**INICIAR ENTREGA**]]", key=f"iniciar_entrega_{venda.id}", type='secondary', icon=":material/local_shipping:"):
-                            st.write(entregador.id)
                             View.iniciar_entrega(entregador.id,venda.id)
                             st.success("Entrega iniciada com sucesso", icon=":material/check:")
                             time.sleep(3)
@@ -39,7 +38,7 @@ class HistoricoVenda:
 
                 if venda.entrega == "enviado":    
                     with enviado.expander(f'ID: {venda.id} ㅤ {venda.data}ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ**TOTAL: R$ {venda.total:.2f}**', icon=':material/paid:'):
-                        st.caption(f"CLIENTE: {venda.idCliente} -\n ENTREGADOR: {venda.idEntregador}")
+                        st.caption(f"CLIENTE: {venda.idCliente} - ENTREGADOR: {venda.idEntregador}")
                        
                         st.write('---')
                         st.write(c)
@@ -49,7 +48,7 @@ class HistoricoVenda:
 
                 if venda.entrega == "entregue":    
                     with entregue.expander(f'ID: {venda.id} ㅤ {venda.data}ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ**TOTAL: R$ {venda.total:.2f}**', icon=':material/paid:'):
-                        st.caption(f"CLIENTE: {venda.idCliente}")
+                        st.caption(f"CLIENTE: {venda.idCliente} - ENTREGADOR: {venda.idEntregador}")
                         st.write('---')
                         st.write(c)
                         for item in items:
