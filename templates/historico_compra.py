@@ -16,7 +16,7 @@ class HistoricoCompra:
         vendas= View.venda_listar()
         items = View.vendaitem_listar()
         for venda in vendas:
-            if venda.idUsuario == st.session_state.usr.id:
+            if venda.idCliente == st.session_state.usr.id:
                 if  not venda.carrinho:
                     with st.expander(f'ID: {venda.id} ㅤ {venda.data}ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ**TOTAL: R$ {venda.total:.2f}**', icon=':material/paid:'):
 

@@ -13,6 +13,8 @@ class CatalogoProdutos:
 			def modal(sucess:bool):
 				if sucess : st.success("Produto adicionado ao carrinho com sucesso " ,icon=':material/check:') 
 				else: st.error(f"{erro}")
+				time.sleep(3)
+				st.rerun()
 				
 
 			st.header(":material/package_2: Catálogo de Produtos")
@@ -41,7 +43,7 @@ class CatalogoProdutos:
 						btn_disable = produto.estoque == 0
 						if colun2.button(":material/add_shopping_cart: :small[Add]", type='primary', use_container_width=True, key=f'add_{produto.id}', disabled=btn_disable):
 							View.venda_inserir_item(produto.id, qtd,st.session_state.carrinho.id)
-							modal()
+							modal(True)
 
 			for produto in produtos[1::3]:
 				with col2:
@@ -60,7 +62,7 @@ class CatalogoProdutos:
 						btn_disable = produto.estoque == 0
 						if colun2.button(":material/add_shopping_cart: :small[Add]", type='primary', use_container_width=True, key=f'add_{produto.id}', disabled=btn_disable):
 							View.venda_inserir_item(produto.id, qtd,st.session_state.carrinho.id)
-							modal()
+							modal(True)
 
 			for produto in produtos[2::3]:
 				with col3:

@@ -65,6 +65,9 @@ class Usuario:
     
     @funcao.setter
     def funcao(self, funcao:str):
+        funcao_valida = ("admin", "entregador", "cliente")
+        if funcao not in funcao_valida:
+            raise ValueError(f"A função deve ser uma das seguintes({funcao_valida})")
         self.__funcao = funcao
         
     #Metodos da instancia

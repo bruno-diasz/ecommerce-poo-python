@@ -49,7 +49,7 @@ class ManterUsuarioUI:
                 fone = col1.text_input("Telefone: ", placeholder='Digite seu Telefone aqui')
                 
                 if "usr" in st.session_state and st.session_state.usr.funcao == "admin":
-                    funcao = col2.selectbox("Função: ", ["admin", "entregador", "cliente"], format_func= lambda funcao : funcao.capitalize(), key="adc_func")
+                    funcao = col2.selectbox("Função: ", ["cliente", "entregador", "admin"], format_func= lambda funcao : funcao.capitalize(), key="adc_func")
                 else:
                     funcao = "cliente"
 
@@ -83,8 +83,11 @@ class ManterUsuarioUI:
                 senha2 = col2.text_input("Nova Repita a Senha: ", type='password', placeholder='Digite novamente sua nova Senha aqui', value=cliente.senha)
                 fone = col1.text_input("Novo Telefone: ", placeholder='Digite seu novo Telefone aqui', value=cliente.fone)
         
+                if cliente.funcao == "cliente": cliente_func = 0
+                elif cliente.funcao == "entregador": cliente_func = 1
+                elif  cliente.funcao == "admin": cliente_func = 2
                 if "usr" in st.session_state and st.session_state.usr.funcao == "admin":
-                    funcao = col2.selectbox("Função: ", ["admin", "entregador", "cliente"], format_func= lambda funcao : funcao.capitalize(), key="editar_func")
+                    funcao = col2.selectbox("Função: ", ["cliente", "entregador", "admin"], format_func= lambda funcao : funcao.capitalize(), key="editar_func", index= cliente_func)
 
                 st.write('---')
                 if st.button("Atualizar", type='primary'):

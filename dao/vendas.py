@@ -16,8 +16,11 @@ class Vendas(CRUD):
                     x = Venda(obj["id"])
                     x.data = datetime.strptime(obj["data"],"%d/%m/%Y %H:%M:%S") 
                     x.carrinho= obj["carrinho"]
+                    x.entrega = obj["entrega"]
                     x.total= obj["total"]
-                    x.idUsuario= obj["idUsuario"]
+                    x.idCliente= obj["idCliente"]
+                    x.idEntregador= obj["idEntregador"]
+                    
                     cls.objetos.append(x)
         except FileNotFoundError:
             pass

@@ -30,9 +30,6 @@ class View:
         if senha != senha2:
             raise ValueError("As senhas não correspondem")
         
-        #Regras de Funcao
-        if funcao not in ["admin","entregador","cliente"]:
-            raise ValueError("Funcao de usuario invalida")
             
        
         #Criação e adição do objeto
@@ -72,9 +69,7 @@ class View:
         if senha != senha2:
             raise ValueError("As senhas não correspondem")
         
-        #Regras de Funcao
-        if funcao not in ["admin","entregador","cliente"]:
-            raise ValueError("Funcao de usuario invalida")
+       
         
         x = Usuario(id, nome, email, fone, senha, funcao)
         Usuarios.atualizar(x)
@@ -223,6 +218,8 @@ class View:
     @staticmethod
     def categoria_inserir(desc:str)->None: #Create
         #Validações
+        if desc == "":
+            raise ValueError("A descrição da categoria não pode estar vazia")
         for categoria in Categorias.listar():
             if categoria.descricao.strip().lower() == desc.strip().lower():
                 raise ValueError("Ja existe uma categoria com esse nome!")
@@ -239,6 +236,9 @@ class View:
         c = Categorias.listar_id(id)
 
         #Validações
+        if desc == "":
+            raise ValueError("A descrição da categoria não pode estar vazia")
+        
         for categoria in Categorias.listar():
             if categoria.descricao.strip().lower() == desc.strip().lower():
                 raise ValueError("Ja existe uma categoria com esse nome!")
@@ -394,15 +394,26 @@ class View:
         return None 
 
     @staticmethod
-    def carregar_carrinho(idUsuario) -> Venda:
+    def carregar_carrinho(idCliente) -> Venda:
        #Verifica se o usuario tem um carrinho
-        if idUsuario == 0 :return #Se for o adm não faz nada
+        if idCliente == 0 :return #Se for o adm não faz nada
         for carrinho in Vendas.listar():
-           if carrinho.idUsuario == idUsuario and carrinho.carrinho: #Verifica se a venda é do usuario e se a venda é um carrinho
+           if carrinho.idCliente == idCliente and carrinho.carrinho: #Verifica se a venda é do usuario e se a venda é um carrinho
                return carrinho
            
         #Se não tiver cria um novo
         x =  Venda(0) #Cria um carrinho
-        x.idUsuario = idUsuario #associa o usuario ao carrinho
+        x.idCliente = idCliente #associa o usuario ao carrinho
         Vendas.inserir(x) #Joga na lista
         return x #Retorna um carrinho para por no contexto
+    @staticmethod
+    def iniciar_entrega(idEntregador:int, idVenda:int):
+        venda = Vendas.listar_id(idVenda)
+        entregadores = [entregador for entregador in View.usuario_listar() if entregador.funcao == "entregador"]
+        print(entregadores)
+        if idEntregador not in [e.id for e in entregadores]:
+            raise ValueError("Entregador não encontrado")
+        venda.idEntregador = idEntregador
+        venda.entrega = "enviado"
+        Vendas.atualizar(venda)
+        

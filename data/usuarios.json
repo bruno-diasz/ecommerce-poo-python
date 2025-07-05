@@ -1,13 +1,5 @@
 [
     {
-        "id": 2,
-        "nome": "Teste",
-        "email": "teste@",
-        "fone": "",
-        "senha": "1234",
-        "funcao": "cliente"
-    },
-    {
         "id": 3,
         "nome": "Teste1",
         "email": "teste1@",
@@ -32,17 +24,41 @@
         "funcao": "admin"
     },
     {
+        "id": 7,
+        "nome": "Zezin",
+        "email": "zezin@",
+        "fone": "",
+        "senha": "1234",
+        "funcao": "cliente"
+    },
+    {
         "id": 6,
-        "nome": "",
+        "nome": "Nome12",
         "email": "teste23@",
         "fone": "",
         "senha": "1234",
         "funcao": "cliente"
     },
     {
-        "id": 7,
-        "nome": "Zezin",
-        "email": "zezin@",
+        "id": 11,
+        "nome": "Oi",
+        "email": "oi@",
+        "fone": "",
+        "senha": "1234",
+        "funcao": "cliente"
+    },
+    {
+        "id": 12,
+        "nome": "Bruno",
+        "email": "bruno@",
+        "fone": "",
+        "senha": "1234",
+        "funcao": "cliente"
+    },
+    {
+        "id": 13,
+        "nome": "Teste",
+        "email": "teste@",
         "fone": "",
         "senha": "1234",
         "funcao": "cliente"
