@@ -25,36 +25,39 @@ class CheckOut:
 							for produto in produtos:
 								if produto.id == item.idProduto:
 									with st.container(border=True):
-									# Correção da quantidade
-										safe_value = max(1, min(item.qtd, produto.estoque))
-										if item.qtd > produto.estoque:
-											st.warning(f"A quantidade do ({produto.descricao}) excede o estoque disponível, a quantidade sera ajustada para a disponivel.",icon="⚠️")
-											time.sleep(4)
-
 										imagem = base64.b64decode(produto.imagem)
-										col1, col2, col3, col4 = st.columns([2, 1.5, 2, 2])
-
+										col1,col2,col3,col4 = st.columns([2, 2, 2, 1.3])
+										
 										with col1:
 											col1.image(imagem)
-
 										with col2:
 											col2.write(f'**{produto.descricao}**')
+											try:
+												new_qtd = col2.number_input("Quantidade: ", min_value=1, max_value=(produto.estoque), value=item.qtd, key=f"qtd_{item.id}")
+													
+												if new_qtd > item.qtd:
+													View.venda_inserir_item(produto.id,(new_qtd-item.qtd),st.session_state.carrinho.id)
+													st.rerun()
+												elif new_qtd < item.qtd:
+													View.venda_excluir_item(produto.id, (item.qtd-new_qtd), st.session_state.carrinho.id)
+													st.rerun()
+											except Exception as erro:
+												if produto.estoque == 0:
+													col2.warning(f"O produto desejada não está mais disponível.")
+												else:
+													col2.warning(f"Atualmente restam apenas {produto.estoque} unidades em estoque.")
+													View.venda_excluir_item(produto.id, (item.qtd - produto.estoque), st.session_state.carrinho.id)
+													time.sleep(3)
+													st.rerun()
+												
 
-											new_qtd = col2.number_input("Quantidade:",min_value=1,max_value=produto.estoque,value=safe_value,key=f"qtd_{item.id}")
 
-											if new_qtd > item.qtd:
-												View.venda_inserir_item(produto.id, new_qtd - item.qtd, st.session_state.carrinho.id)
-												st.rerun()
-											elif new_qtd < item.qtd:
-												View.venda_excluir_item(produto.id, item.qtd - new_qtd, st.session_state.carrinho.id)
-												st.rerun()
-
-											if col2.button("Excluir", icon=':material/delete:', type='primary', use_container_width=True, key=f'delete_{item.id}'):
+											if col2.button("Excluir", icon=':material/delete:', type='primary', use_container_width=True , key=f'delete_{item.id}'):
 												View.venda_excluir_item(produto.id, item.qtd, st.session_state.carrinho.id)
 												st.rerun()
-
+											
 										with col4:
-											st.subheader(f":small[R$] {item.preco:.2f}".replace('.', ','))
+											st.subheader(f":small[R$] {item.preco:.2f}".replace('.',','))
 
 					st.divider()
 					if st.button("Confirmar Compra", type='primary', icon=':material/shopping_bag:'):

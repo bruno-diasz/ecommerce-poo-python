@@ -1,73 +1,55 @@
 [
     {
         "id": 0,
-        "data": "04/07/2025 21:28:23",
+        "data": "05/07/2025 15:31:54",
         "carrinho": false,
-        "entrega": "enviado",
-        "total": 0.0,
+        "entrega": "pendente",
+        "total": 15.0,
         "idCliente": 12,
-        "idEntregador": 3
+        "idEntregador": null
     },
     {
         "id": 1,
-        "data": "04/07/2025 21:41:25",
+        "data": "05/07/2025 15:55:30",
         "carrinho": false,
-        "entrega": "enviado",
-        "total": 0,
-        "idCliente": 5,
-        "idEntregador": 3
+        "entrega": "pendente",
+        "total": 45.0,
+        "idCliente": 13,
+        "idEntregador": null
     },
     {
         "id": 2,
-        "data": "04/07/2025 21:52:43",
+        "data": "05/07/2025 15:55:38",
         "carrinho": false,
-        "entrega": "entregue",
-        "total": 0.0,
-        "idCliente": 12,
-        "idEntregador": 14
+        "entrega": "pendente",
+        "total": 15.0,
+        "idCliente": 13,
+        "idEntregador": null
     },
     {
         "id": 3,
-        "data": "04/07/2025 21:52:54",
-        "carrinho": true,
+        "data": "05/07/2025 16:13:54",
+        "carrinho": false,
         "entrega": "pendente",
-        "total": 0,
-        "idCliente": 5,
+        "total": 15.0,
+        "idCliente": 13,
         "idEntregador": null
     },
     {
         "id": 4,
-        "data": "05/07/2025 08:44:08",
+        "data": "05/07/2025 16:14:20",
         "carrinho": true,
         "entrega": "pendente",
         "total": 0,
-        "idCliente": 14,
+        "idCliente": 13,
         "idEntregador": null
     },
     {
         "id": 5,
-        "data": "05/07/2025 09:12:15",
-        "carrinho": false,
-        "entrega": "pendente",
-        "total": 0.0,
-        "idCliente": 12,
-        "idEntregador": null
-    },
-    {
-        "id": 6,
-        "data": "05/07/2025 10:15:01",
-        "carrinho": false,
-        "entrega": "pendente",
-        "total": 0.0,
-        "idCliente": 12,
-        "idEntregador": null
-    },
-    {
-        "id": 7,
-        "data": "05/07/2025 10:15:26",
+        "data": "05/07/2025 16:53:44",
         "carrinho": true,
         "entrega": "pendente",
-        "total": 0,
+        "total": 15.0,
         "idCliente": 12,
         "idEntregador": null
     }

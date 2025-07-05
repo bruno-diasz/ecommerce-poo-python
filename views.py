@@ -130,6 +130,10 @@ class View:
         return Produtos.listar()
     
     @staticmethod
+    def produto_listar_id(produto_id) -> Produtos: 
+        return Produtos.listar_id(produto_id)
+    
+    @staticmethod
     def produto_listar_categoria(categoria_id) -> list[Produto]:
         if categoria_id == 0:
             pass
@@ -160,6 +164,21 @@ class View:
          
         if desc.strip() == "":
             raise ValueError("O produto deve ter um nome")
+        
+        #Aumentando o preço dos produtos que estão no carrinho
+      
+        for item in VendaItems.listar():
+            venda = Vendas.listar_id(item.idVenda)
+            if item.idProduto == id:
+                if venda.carrinho:
+                    venda.total -= (item.preco)*item.qtd
+                    venda.total += (preco)*item.qtd
+                    venda.total = round(venda.total,2)
+                    Vendas.atualizar(venda)
+
+                    item.preco = preco
+                    item.preco = round( item.preco,2)
+                    VendaItems.atualizar(item)
 
         #Criando objeto
         x = Produto(id,desc.title(),round(preco,2),estoq, imagem_b64, categoriaID)
@@ -193,12 +212,12 @@ class View:
         for item in VendaItems.listar():
             venda = Vendas.listar_id(item.idVenda)
             if venda.carrinho:
-                item.preco += percentual/100*item.preco
-                item.preco = round( item.preco,2)
-                VendaItems.atualizar(item)
                 venda.total += (percentual/100*item.preco)*item.qtd
                 venda.total = round(venda.total,2)
                 Vendas.atualizar(venda)
+                item.preco += percentual/100*item.preco
+                item.preco = round( item.preco,2)
+                VendaItems.atualizar(item)
 
     @staticmethod
     def produto_vincular_categoria(id_produto:int, id_categoria:int)-> None:

@@ -54,7 +54,6 @@ class ManterProdutoUI:
 
                 st.write('---')
                 if st.button("Cadastrar", type="primary"):
-                    st.write(preco)
                     View.produto_inserir(desc, preco, estoque,imagem,categoria.id)
                     st.success("Cadastrado realizado com sucesso.", icon=":material/check:")
 
